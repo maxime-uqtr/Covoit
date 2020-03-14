@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.exemple.Covoit.models.Covoiturage;
+import com.exemple.Covoit.models.Utilisateur;
+import com.facebook.stetho.common.Util;
+
 import java.util.Arrays;
 import java.util.Date;
 
@@ -19,65 +23,65 @@ public class MainActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
         rv.setAdapter(new ListAdapteur(Arrays.asList(
                 new Covoiturage(
-                        new Date(2020, 06,13),
+                        1, new Date(2020, 06,13),
                         "Dep",
                         "Arr",
-                        1),
+                        1, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 07,14),
+                        2, new Date(2020, 07,14),
                         "Depa",
                         "Arri",
-                        2),
+                        2, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 06,13),
+                        3, new Date(2020, 06,13),
                         "Dep",
                         "Arr",
-                        1),
+                        1, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 07,14),
+                        4, new Date(2020, 07,14),
                         "Depa",
                         "Arri",
-                        2),
+                        2, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 06,13),
+                        5, new Date(2020, 06,13),
                         "Dep",
                         "Arr",
-                        1),
+                        1, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 07,14),
+                        6, new Date(2020, 07,14),
                         "Depa",
                         "Arri",
-                        2),
+                        2, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 06,13),
+                        7, new Date(2020, 06,13),
                         "Dep",
                         "Arr",
-                        1),
+                        1, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 07,14),
+                        8, new Date(2020, 07,14),
                         "Depa",
                         "Arri",
-                        2),
+                        2, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 06,13),
+                        9, new Date(2020, 06,13),
                         "Dep",
                         "Arr",
-                        1),
+                        1, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 07,14),
+                        10, new Date(2020, 07,14),
                         "Depa",
                         "Arri",
-                        2),
+                        2, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 06,13),
+                        11, new Date(2020, 06,13),
                         "Dep",
                         "Arr",
-                        1),
+                        1, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")),
                 new Covoiturage(
-                        new Date(2020, 07,14),
+                        12, new Date(2020, 07,14),
                         "Depa",
                         "Arri",
-                        2))));
+                        2, new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg")))));
     }
 
 }

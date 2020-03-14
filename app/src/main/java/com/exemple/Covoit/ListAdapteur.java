@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.exemple.Covoit.models.Covoiturage;
+
 import java.util.List;
 
 public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
@@ -27,7 +29,7 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.villeDep.setText(mCovoiturage.get(position).getVilleDep());
-        holder.villeArr.setText(mCovoiturage.get(position).getGetVilleArr());
+        holder.villeArr.setText(mCovoiturage.get(position).getVilleArr());
         holder.date.setText(mCovoiturage.get(position).getDate().toString());
         holder.nbPassager.setText(String.valueOf(mCovoiturage.get(position).getNbPassager()));
     }
