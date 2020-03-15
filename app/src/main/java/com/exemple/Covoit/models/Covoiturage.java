@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
+//Clé étrangère = un Utilisateur
 @Entity(foreignKeys = @ForeignKey(entity = Utilisateur.class,
                                   parentColumns = "id",
                                   childColumns = "conducteurId"))

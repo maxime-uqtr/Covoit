@@ -27,7 +27,7 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) { //Maj des données du ViewHolder
         holder.villeDep.setText(mCovoiturage.get(position).getVilleDep());
         holder.villeArr.setText(mCovoiturage.get(position).getVilleArr());
         holder.date.setText(mCovoiturage.get(position).getDate().toString());

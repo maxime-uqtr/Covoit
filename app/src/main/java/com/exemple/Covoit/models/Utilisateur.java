@@ -8,7 +8,7 @@ import java.security.KeyStore;
 @Entity
 public class Utilisateur {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true) //Clé primaire = identifiant unique
     private long id;
     private String nom;
     private String prenom;
