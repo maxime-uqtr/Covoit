@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.exemple.Covoit.models.Covoiturage;
+import com.exemple.Covoit.models.CovoiturageInfo;
 
 import java.util.List;
 
@@ -14,15 +14,15 @@ import java.util.List;
 public interface CovoiturageDao { //Room requiert une interface par DAO
 
     //Actions CRUD
-    @Query("SELECT * FROM Covoiturage WHERE conducteurId = :conducteurId") //@Query pour définir une requête SQL
-    LiveData<List<Covoiturage>> getCovoiturages(long conducteurId);
+    @Query("SELECT * FROM CovoiturageInfo WHERE conducteur_id = :conducteurId") //@Query pour définir une requête SQL
+    LiveData<List<CovoiturageInfo>> getCovoiturages(long conducteurId);
 
     @Insert
-    long insertCovoiturage(Covoiturage covoiturage);
+    long insertCovoiturage(CovoiturageInfo covoiturage);
 
     @Update
-    int updateCovoiturage(Covoiturage covoiturage);
+    int updateCovoiturage(CovoiturageInfo covoiturage);
 
-    @Query("DELETE FROM Covoiturage WHERE id = :covoiturageId")
+    @Query("DELETE FROM CovoiturageInfo WHERE id = :covoiturageId")
     int deleteCovoiturage(long covoiturageId);
 }

@@ -6,15 +6,15 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.exemple.Covoit.models.Utilisateur;
+import com.exemple.Covoit.models.UtilisateurInfo;
 
 @Dao //Data Access Object / objet d'accès aux données
 public interface UtilisateurDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE) //Replace permet d'écraser un utilisateur déjà existant avec le même id
-    void createUtilisateur(Utilisateur utilisateur);
+    void createUtilisateur(UtilisateurInfo utilisateur);
 
-    @Query("SELECT * FROM Utilisateur WHERE id = :userId")
-    LiveData<Utilisateur> getUtilisateur(long userId);
+    @Query("SELECT * FROM UtilisateurInfo WHERE id = :userId")
+    LiveData<UtilisateurInfo> getUtilisateur(long userId);
 
 }

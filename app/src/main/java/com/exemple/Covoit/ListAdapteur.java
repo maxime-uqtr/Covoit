@@ -8,15 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.exemple.Covoit.models.Covoiturage;
+import com.exemple.Covoit.models.CovoiturageInfo;
 
 import java.util.List;
 
 public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
-    private List<Covoiturage> mCovoiturage;
+    private List<CovoiturageInfo> mCovoiturageInfo;
 
-    public ListAdapteur(List<Covoiturage> mCovoiturage) {
-        this.mCovoiturage = mCovoiturage;
+    public ListAdapteur(List<CovoiturageInfo> mCovoiturage) {
+        this.mCovoiturageInfo = mCovoiturage;
     }
 
     @NonNull
@@ -28,15 +28,15 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) { //Maj des données du ViewHolder
-        holder.villeDep.setText(mCovoiturage.get(position).getVilleDep());
-        holder.villeArr.setText(mCovoiturage.get(position).getVilleArr());
-        holder.date.setText(mCovoiturage.get(position).getDate().toString());
-        holder.nbPassager.setText(String.valueOf(mCovoiturage.get(position).getNbPassager()));
+        holder.villeDep.setText(mCovoiturageInfo.get(position).getVilleDep());
+        holder.villeArr.setText(mCovoiturageInfo.get(position).getVilleArr());
+        holder.date.setText(mCovoiturageInfo.get(position).getDate().toString());
+        holder.nbPassager.setText(String.valueOf(mCovoiturageInfo.get(position).getNbPassager()));
     }
 
     @Override
     public int getItemCount() {
-        return mCovoiturage.size();
+        return mCovoiturageInfo.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

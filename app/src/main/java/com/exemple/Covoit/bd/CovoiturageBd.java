@@ -12,34 +12,33 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.exemple.Covoit.bd.dao.CovoiturageDao;
 import com.exemple.Covoit.bd.dao.UtilisateurDao;
-import com.exemple.Covoit.models.Covoiturage;
-import com.exemple.Covoit.models.Utilisateur;
+import com.exemple.Covoit.models.CovoiturageInfo;
+import com.exemple.Covoit.models.UtilisateurInfo;
 
-@Database(entities = {Covoiturage.class, Utilisateur.class}, version = 1, exportSchema = false)
-public abstract class SauvegarderCovoituragesBd extends RoomDatabase {
+@Database(entities = {CovoiturageInfo.class, UtilisateurInfo.class}, version = 1, exportSchema = false) //On exporte pas car pas définit le directory
+public abstract class CovoiturageBd extends RoomDatabase {
 
-    private static volatile SauvegarderCovoituragesBd INSTANCE;
+    private static CovoiturageBd INSTANCE;
 
-    public abstract CovoiturageDao covoiturageDao();
-    public abstract UtilisateurDao utilisateurDao();
+    public abstract CovoiturageDao getCovoiturageDao();
+    public abstract UtilisateurDao getUtilisateurDao();
 
-    public static SauvegarderCovoituragesBd getInstance(Context context){
+    public static synchronized CovoiturageBd getInstance(Context context){
         if(INSTANCE == null){
-            synchronized (SauvegarderCovoituragesBd.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            SauvegarderCovoituragesBd.class, "MyDatabase.db")
-                            .addCallback(preremplirDatabase())
-                            .build();
-                }
-            }
+            INSTANCE = buildDatabase(context);
         }
         return INSTANCE;
     }
 
+    private static CovoiturageBd buildDatabase(final Context context){
+        return Room.databaseBuilder(context, CovoiturageBd.class, "database")
+                .addCallback(preremplirDatabase())
+                .build();
+    }
+
     //Test de la bd
     private static Callback preremplirDatabase(){
-        return new Callback() {
+        return new RoomDatabase.Callback() {
 
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db){
