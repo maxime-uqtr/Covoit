@@ -6,23 +6,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.exemple.Covoit.models.Covoiturage;
 import com.exemple.Covoit.models.Utilisateur;
 import com.facebook.stetho.common.Util;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnListClickListener {
 
     private boolean isRotate = false;
 
+    private CovoiturageBd bd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Stetho.initializeWithDefaults(this); //Ajout de stetho à l'activité
+        bd = CovoiturageBd.getInstance(getApplicationContext());
+        CovoiturageInfo c = new CovoiturageInfo(1, new Date(2020, 06,13),
+                "Dep",
+                "Arr",
+                1, 1);
+        bd.getCovoiturageDao().insertCovoiturage(c);
+        LiveData<List<CovoiturageInfo>> covoiturages = bd.getCovoiturageDao().getCovoiturages(1);
+
         setContentView(R.layout.activity_main);
         RecyclerView rv = findViewById(R.id.recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
@@ -39,27 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                         "Arri",
                         2,
                         new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg", true, true))
-                ), this));
-
-        final FloatingActionButton fabRechercher = findViewById(R.id.FAB_recherche);
-        BouttonAnimation.init(fabRechercher);
-        final FloatingActionButton fabProposer = findViewById(R.id.FAB_propose);
-        BouttonAnimation.init(fabProposer);
-
-        FloatingActionButton fabOuvrir = findViewById(R.id.FAB_ouvrir);
-        fabOuvrir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isRotate = BouttonAnimation.rotateFab(v, !isRotate);
-                if(isRotate){
-                    BouttonAnimation.show(fabProposer);
-                    BouttonAnimation.show(fabRechercher);
-                }else{
-                    BouttonAnimation.hide(fabProposer);
-                    BouttonAnimation.hide(fabRechercher);
-                }
-            }
-        });
+        ), this));
     }
 
     @Override
@@ -67,5 +58,8 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
         Log.i("TAG", "onListClick: ");
     }
 
+    public CovoiturageBd getBd(){
+        return bd;
+    }
 
 }

@@ -1,27 +1,29 @@
 package com.exemple.Covoit.models;
 
-public class Utilisateur {
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.security.KeyStore;
 
+@Entity
+public class UtilisateurInfo {
+
+    @PrimaryKey(autoGenerate = true) //Clé primaire = identifiant unique
     private long id;
     private String nom;
     private String prenom;
     private String mail;
     private String mdp;
     private String urlPhoto;
-    private boolean conducteur;
-    private boolean passager;
 
 
-    public Utilisateur(long id, String nom, String prenom, String mail, String mdp, String urlPhoto, boolean conducteur, boolean passager) {
+    public UtilisateurInfo(long id, String nom, String prenom, String mail, String mdp, String urlPhoto) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.mdp = mdp;
         this.urlPhoto = urlPhoto;
-        this.conducteur = conducteur;
-        this.passager = passager;
     }
 
     public long getId() { return id; }
@@ -35,12 +37,4 @@ public class Utilisateur {
     public String getMdp() { return mdp; }
 
     public String getUrlPhoto() { return urlPhoto; }
-
-    public boolean isConducteur() {
-        return conducteur;
-    }
-
-    public boolean isPassager() {
-        return passager;
-    }
 }
