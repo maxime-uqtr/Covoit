@@ -15,8 +15,11 @@ import java.util.List;
 public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
     private List<Covoiturage> mCovoiturage;
 
-    public ListAdapteur(List<Covoiturage> mCovoiturage) {
+    private OnListClickListener listener;
+
+    public ListAdapteur(List<Covoiturage> mCovoiturage, OnListClickListener listener) {
         this.mCovoiturage = mCovoiturage;
+        this.listener = listener;
     }
 
     @NonNull
@@ -27,11 +30,18 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.villeDep.setText(mCovoiturage.get(position).getVilleDep());
         holder.villeArr.setText(mCovoiturage.get(position).getVilleArr());
         holder.date.setText(mCovoiturage.get(position).getDate().toString());
         holder.nbPassager.setText(String.valueOf(mCovoiturage.get(position).getNbPassager()));
+
+        holder.v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onListClick(mCovoiturage.get(position));
+            }
+        });
     }
 
     @Override
