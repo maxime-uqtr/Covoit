@@ -4,7 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.view.View;
 
-public class BouttonAnimation {
+public class BoutonAnimation {
 
     public static boolean rotateFab(View v, boolean rotate){
         v.animate().setDuration(1000).setListener(new AnimatorListenerAdapter() {

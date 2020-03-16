@@ -3,7 +3,6 @@ package com.exemple.Covoit.models;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.security.KeyStore;
 
 @Entity
 public class UtilisateurInfo {
@@ -15,16 +14,20 @@ public class UtilisateurInfo {
     private String mail;
     private String mdp;
     private String urlPhoto;
+    private boolean conducteur;
+    private boolean passager;
 
-
-    public UtilisateurInfo(long id, String nom, String prenom, String mail, String mdp, String urlPhoto) {
+    public UtilisateurInfo(long id, String nom, String prenom, String mail, String mdp, String urlPhoto, boolean conducteur, boolean passager) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.mdp = mdp;
         this.urlPhoto = urlPhoto;
+        this.conducteur = conducteur;
+        this.passager = passager;
     }
+
 
     public long getId() { return id; }
 
@@ -37,4 +40,8 @@ public class UtilisateurInfo {
     public String getMdp() { return mdp; }
 
     public String getUrlPhoto() { return urlPhoto; }
+
+    public boolean isConducteur() { return conducteur; }
+
+    public boolean isPassager() { return passager; }
 }

@@ -1,15 +1,17 @@
 package com.exemple.Covoit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 
-import com.exemple.Covoit.models.Covoiturage;
-import com.exemple.Covoit.models.Utilisateur;
-import com.facebook.stetho.common.Util;
+import com.exemple.Covoit.bd.CovoiturageBd;
+import com.exemple.Covoit.models.CovoiturageInfo;
+import com.exemple.Covoit.models.UtilisateurInfo;
+import com.facebook.stetho.Stetho;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -38,23 +40,23 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
         RecyclerView rv = findViewById(R.id.recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
         rv.setAdapter(new ListAdapteur(Arrays.asList(
-                new Covoiturage(
+                new CovoiturageInfo(
                         1, new Date(2020, 06,13),
                         "Dep",
                         "Arr",
                         1,
-                        new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg", true, true)),
-                new Covoiturage(
+                        1),
+                new CovoiturageInfo(
                         2, new Date(2020, 07,14),
                         "Depa",
                         "Arri",
                         2,
-                        new Utilisateur(1, "nom", "prénom", "utilisateur@mail.com", "mdp", "http://image.jpg", true, true))
-        ), this));
+                        2)),
+                        this));
     }
 
     @Override
-    public void onListClick(Covoiturage c) {
+    public void onListClick(CovoiturageInfo c) {
         Log.i("TAG", "onListClick: ");
     }
 
