@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 
 @Entity
-public class UtilisateurInfo {
+public class Utilisateur {
 
     @PrimaryKey(autoGenerate = true) //Clé primaire = identifiant unique
     private long id;
@@ -17,7 +17,7 @@ public class UtilisateurInfo {
     private boolean conducteur;
     private boolean passager;
 
-    public UtilisateurInfo(long id, String nom, String prenom, String mail, String mdp, String urlPhoto, boolean conducteur, boolean passager) {
+    public Utilisateur(long id, String nom, String prenom, String mail, String mdp, String urlPhoto, boolean conducteur, boolean passager) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;

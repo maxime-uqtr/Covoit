@@ -8,16 +8,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.exemple.Covoit.models.CovoiturageInfo;
+import com.exemple.Covoit.models.Covoiturage;
 
 import java.util.List;
 
 public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
-    private List<CovoiturageInfo> mCovoiturage;
+    private List<Covoiturage> mCovoiturage;
 
     private OnListClickListener listener;
 
-    public ListAdapteur(List<CovoiturageInfo> mCovoiturage, OnListClickListener listener) {
+    public ListAdapteur(List<Covoiturage> mCovoiturage, OnListClickListener listener) {
         this.mCovoiturage = mCovoiturage;
         this.listener = listener;
     }

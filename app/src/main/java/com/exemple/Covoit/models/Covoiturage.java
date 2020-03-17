@@ -10,24 +10,26 @@ import androidx.room.TypeConverters;
 import java.util.Date;
 
 //Clé étrangère = un Utilisateur
-@Entity(foreignKeys = @ForeignKey(entity = UtilisateurInfo.class,
+@Entity(foreignKeys = @ForeignKey(entity = Utilisateur.class,
         parentColumns = "id",
         childColumns = "conducteur_id"),
         indices = {@Index(value="conducteur_id")}
         )
 
-public class CovoiturageInfo {
+public class Covoiturage {
     @PrimaryKey
     private long id;
     @TypeConverters(DateConverter.class) //Conversion car impossible de sauvegarder le type date dans une BD avec Room
     private Date date;
+    @ColumnInfo(name = "ville_dep")
     private String villeDep;
+    @ColumnInfo(name = "ville_arr")
     private String villeArr;
     private int nbPassager;
     @ColumnInfo(name = "conducteur_id")
     private long conducteurId;
 
-    public CovoiturageInfo(long id, Date date, String villeDep, String villeArr, int nbPassager, long conducteurId) {
+    public Covoiturage(long id, Date date, String villeDep, String villeArr, int nbPassager, long conducteurId) {
         this.id = id;
         this.date = date;
         this.villeDep = villeDep;

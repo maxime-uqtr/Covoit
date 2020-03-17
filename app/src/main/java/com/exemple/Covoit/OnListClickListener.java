@@ -1,7 +1,7 @@
 package com.exemple.Covoit;
 
-import com.exemple.Covoit.models.CovoiturageInfo;
+import com.exemple.Covoit.models.Covoiturage;
 
 public interface OnListClickListener {
-    void onListClick(CovoiturageInfo c);
+    void onListClick(Covoiturage c);
 }

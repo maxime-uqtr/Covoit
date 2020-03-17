@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.exemple.Covoit.models.CovoiturageInfo;
+import com.exemple.Covoit.models.Covoiturage;
 
 import java.util.List;
 
@@ -15,15 +15,15 @@ import java.util.List;
 public interface CovoiturageDao { //Room requiert une interface par DAO
 
     //Actions CRUD
-    @Query("SELECT * FROM CovoiturageInfo WHERE conducteur_id = :conducteurId") //@Query pour définir une requête SQL
-    LiveData<List<CovoiturageInfo>> getCovoiturages(long conducteurId);
+    @Query("SELECT * FROM covoiturage WHERE conducteur_id = :conducteurId") //@Query pour définir une requête SQL
+    LiveData<List<Covoiturage>> getAll(long conducteurId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insertCovoiturage(CovoiturageInfo covoiturage);
+    long insert(Covoiturage covoiturage);
 
     @Update
-    int updateCovoiturage(CovoiturageInfo covoiturage);
+    int update(Covoiturage covoiturage);
 
-    @Query("DELETE FROM CovoiturageInfo WHERE id = :covoiturageId")
-    int deleteCovoiturage(long covoiturageId);
+    @Query("DELETE FROM covoiturage WHERE id = :covoiturageId")
+    int delete(long covoiturageId);
 }
