@@ -35,7 +35,7 @@ public class Utilisateur {
         this.prenom = prenom;
         this.mail = mail;
         this.mdp = mdp;
-        this.urlPhoto = "https://dmigit.uqtr.ca/couetm/Covoit.git/data/img/default.jpg"; //Image par défaut
+        this.urlPhoto = "https://dmigit.uqtr.ca/couetm/Covoit.git/data/img/default.jpg"; //Image par défautK
         this.conducteur = conducteur;
         this.passager = passager;
     }
