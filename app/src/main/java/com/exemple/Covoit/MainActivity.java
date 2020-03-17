@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
         LiveData<List<Covoiturage>> covoiturages = bd.getCovoiturageDao().getAll();
 
         setContentView(R.layout.activity_main);
-        RecyclerView rv = findViewById(R.id.recyclerView);
+        RecyclerView rv = findViewById(R.id.main_recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
         rv.setAdapter(new ListAdapteur(Arrays.asList(
                 bd.getCovoiturageDao().get(1),
