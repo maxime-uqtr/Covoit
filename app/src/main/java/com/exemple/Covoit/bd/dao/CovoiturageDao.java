@@ -15,11 +15,15 @@ import java.util.List;
 public interface CovoiturageDao { //Room requiert une interface par DAO
 
     //Actions CRUD
-    @Query("SELECT * FROM covoiturage WHERE conducteur_id = :conducteurId") //@Query pour définir une requête SQL
-    LiveData<List<Covoiturage>> getAll(long conducteurId);
+
+    @Query("SELECT * FROM covoiturage WHERE conducteur_id = :conducteurId")
+    Covoiturage get(long conducteurId);
+
+    @Query("SELECT * FROM covoiturage")
+    LiveData<List<Covoiturage>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(Covoiturage covoiturage);
+    void insert(Covoiturage... covoiturage);
 
     @Update
     int update(Covoiturage covoiturage);

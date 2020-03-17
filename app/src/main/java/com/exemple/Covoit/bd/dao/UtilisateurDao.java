@@ -16,7 +16,7 @@ import java.util.List;
 public interface UtilisateurDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE) //Replace permet d'écraser un utilisateur déjà existant avec le même id
-    long insert(Utilisateur utilisateur);
+    void insert(Utilisateur... utilisateur);
 
     @Query("SELECT * FROM utilisateur WHERE id = :userId")
     Utilisateur get(long userId);

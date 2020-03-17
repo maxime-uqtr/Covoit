@@ -34,18 +34,13 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                 "Arr",
                 1, 1);
         bd.getCovoiturageDao().insert(c);
-        LiveData<List<Covoiturage>> covoiturages = bd.getCovoiturageDao().getAll(1);
+        LiveData<List<Covoiturage>> covoiturages = bd.getCovoiturageDao().getAll();
 
         setContentView(R.layout.activity_main);
         RecyclerView rv = findViewById(R.id.recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
         rv.setAdapter(new ListAdapteur(Arrays.asList(
-                new Covoiturage(
-                        1, new Date(2020, 06,13),
-                        "Dep",
-                        "Arr",
-                        1,
-                        1),
+                bd.getCovoiturageDao().get(1),
                 new Covoiturage(
                         2, new Date(2020, 07,14),
                         "Depa",
