@@ -28,19 +28,6 @@ public class Utilisateur {
         this.passager = passager;
     }
 
-    //Constructeur sans photo de profil
-    public Utilisateur(long id, String nom, String prenom, String mail, String mdp, boolean conducteur, boolean passager) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.mail = mail;
-        this.mdp = mdp;
-        this.urlPhoto = "https://dmigit.uqtr.ca/couetm/Covoit.git/data/img/default.jpg"; //Image par défautK
-        this.conducteur = conducteur;
-        this.passager = passager;
-    }
-
-
     public long getId() { return id; }
 
     public String getNom() { return nom; }
