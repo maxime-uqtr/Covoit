@@ -1,4 +1,4 @@
-package com.exemple.Covoit;
+package com.exemple.Covoit.vue;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.exemple.Covoit.ListAdapteur;
+import com.exemple.Covoit.OnListClickListener;
+import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.models.Covoiturage;
 import com.exemple.Covoit.models.Utilisateur;
