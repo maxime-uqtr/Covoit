@@ -24,19 +24,20 @@ public class Covoiturage {
     @ColumnInfo(name = "ville_dep")
     private String villeDep;
     private String villeArr;
+    private float prix;
     private int nbPassager;
     @ColumnInfo(name = "conducteur_id")
     private long conducteurId;
 
-    public Covoiturage(long id, Date date, String villeDep, String villeArr, int nbPassager, long conducteurId) {
+    public Covoiturage(long id, Date date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
         this.id = id;
         this.date = date;
         this.villeDep = villeDep;
         this.villeArr = villeArr;
+        this.prix = prix;
         this.nbPassager = nbPassager;
         this.conducteurId = conducteurId;
     }
-
 
     public long getId() { return id; }
 
@@ -51,6 +52,8 @@ public class Covoiturage {
     public String getVilleArr() {
         return villeArr;
     }
+
+    public float getPrix() { return prix; }
 
     public int getNbPassager() { return nbPassager; }
 

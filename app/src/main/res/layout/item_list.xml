@@ -4,26 +4,37 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/item_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/villeDep"
+        android:id="@+id/item_nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/villeArr"
+        android:id="@+id/item_itineraire"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/nbPassager"
+        android:id="@+id/item_prix"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/item_nbPassager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:text="TextView" />
 </LinearLayout>

@@ -15,6 +15,7 @@ import com.exemple.Covoit.OnListClickListener;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.models.Covoiturage;
+import com.exemple.Covoit.models.Recherche;
 import com.exemple.Covoit.models.Utilisateur;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,8 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
         bd = CovoiturageBd.getInstance(getApplicationContext());
         Covoiturage c = new Covoiturage(1, new Date(2020, 06,13),
                 "Dep",
-                "Arr",
-                1, 1);
+                "Arr", (float) 10, 1, 1);
         bd.getCovoiturageDao().insert(c);
         LiveData<List<Covoiturage>> covoiturages = bd.getCovoiturageDao().getAll();
 
@@ -61,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                 new Covoiturage(
                         2, new Date(2020, 07,14),
                         "Depa",
-                        "Arri",
-                        2,
+                        "Arri", (float) 5, 2,
                         2)),
                         this));
     }
