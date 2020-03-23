@@ -61,8 +61,6 @@ public abstract class CovoiturageBd extends RoomDatabase {
                 "url2", false, true));
         INSTANCE.getUtilisateurDao().insert(listC.toArray(new Utilisateur[]{}));
 
-
-
     }
 
 }

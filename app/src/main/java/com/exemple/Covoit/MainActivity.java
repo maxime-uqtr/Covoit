@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.models.Covoiturage;
+import com.exemple.Covoit.models.Recherche;
 import com.exemple.Covoit.models.Utilisateur;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,18 +36,18 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
 
         Stetho.initializeWithDefaults(this); //Ajout de stetho à l'activité
 
-        /*FABproposeCovoiturage = findViewById(R.id.main_FAB_propose);
+        FABproposeCovoiturage = findViewById(R.id.main_FAB_propose);
         FABrechercheCovoiturage = findViewById(R.id.main_FAB_recherche);
         FABproposeCovoiturage.setOnClickListener(v -> {
             Intent rechercheIntent = new Intent(this, Recherche.class);
             startActivity(rechercheIntent);
-        });*/
+        });
 
 
         bd = CovoiturageBd.getInstance(getApplicationContext());
         Covoiturage c = new Covoiturage(1, new Date(2020, 06,13),
                 "Dep",
-                "Arr", 10, 1, 1);
+                "Arr", (float) 10, 1, 1);
         bd.getCovoiturageDao().insert(c);
         LiveData<List<Covoiturage>> covoiturages = bd.getCovoiturageDao().getAll();
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                 new Covoiturage(
                         2, new Date(2020, 07,14),
                         "Depa",
-                        "Arri", 5, 2,
+                        "Arri", (float) 5, 2,
                         2)),
                         this));
     }
