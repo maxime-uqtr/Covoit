@@ -9,7 +9,7 @@ import android.os.Bundle;
 import com.exemple.Covoit.OnListClickListener;
 import com.exemple.Covoit.R;
 
-public class Recherche extends AppCompatActivity implements OnListClickListener {
+public class Recherche extends Autoco implements OnListClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

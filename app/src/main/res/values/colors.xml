@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#2f2f2f</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="rechercheBackground">#f7c297</color>
+    <color name="rechercheBouton">#6F6867</color>
+    <color name="white">#FFFFFF</color>
+</resources>
