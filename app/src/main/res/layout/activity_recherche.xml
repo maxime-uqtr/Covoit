@@ -40,12 +40,14 @@
         </androidx.cardview.widget.CardView>
 
         <CalendarView
+            android:id="@+id/recherche_Calendrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="9dp"/>
 
         <Button
+            android:id="@+id/recherche_bouton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
