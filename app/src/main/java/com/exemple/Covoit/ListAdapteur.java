@@ -31,10 +31,13 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.villeDep.setText(mCovoiturage.get(position).getVilleDep());
-        holder.villeArr.setText(mCovoiturage.get(position).getVilleArr());
-        holder.date.setText(mCovoiturage.get(position).getDate().toString());
-        holder.nbPassager.setText(String.valueOf(mCovoiturage.get(position).getNbPassager()));
+
+        Covoiturage c = mCovoiturage.get(position);
+        holder.itineraire.setText(c.getVilleDep());
+        holder.nom.setText(c.getVilleArr());
+        holder.date.setText(c.getDate().toString());
+        holder.prix.setText(String.valueOf(c.getPrix()));
+        holder.nbPassager.setText(String.valueOf(c.getNbPassager()));
 
         holder.v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,16 +53,17 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView date, villeDep, villeArr, nbPassager;
+        private TextView date, nom, itineraire, prix, nbPassager;
         private View v;
 
         public ViewHolder(View v){
             super(v);
             this.v = v;
-            this.date = v.findViewById(R.id.date);
-            this.villeDep = v.findViewById(R.id.villeDep);
-            this.villeArr = v.findViewById(R.id.villeArr);
-            this.nbPassager = v.findViewById(R.id.nbPassager);
+            this.date = v.findViewById(R.id.item_date);
+            this.nom = v.findViewById(R.id.item_nom);
+            this.itineraire = v.findViewById(R.id.item_itineraire);
+            this.prix = v.findViewById(R.id.item_prix);
+            this.nbPassager = v.findViewById(R.id.item_nbPassager);
         }
     }
 }
