@@ -7,7 +7,7 @@ import android.view.View;
 public class BoutonAnimation {
 
     public static boolean rotateFab(View v, boolean rotate){
-        v.animate().setDuration(1000).setListener(new AnimatorListenerAdapter() {
+        v.animate().setDuration(250).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
@@ -21,24 +21,26 @@ public class BoutonAnimation {
         v.setVisibility(View.VISIBLE);
         v.setAlpha(0f); //Cache au debut de l'animation
         v.setTranslationY(v.getHeight()); //Tout en bas dans le bouton avant
-        v.animate().setDuration(1000).translationY(0).setListener(new AnimatorListenerAdapter() {
+        v.animate().setDuration(250).translationY(0).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
             }
         }).alpha(1f).start(); //permet le fondu
+        v.setClickable(true);
     }
 
     public  static void hide(View v){ //Cache
         v.setVisibility(View.VISIBLE);
         v.setAlpha(1f);
         v.setTranslationY(0);
-        v.animate().setDuration(1000).translationY(v.getHeight()).setListener(new AnimatorListenerAdapter() {
+        v.animate().setDuration(250).translationY(v.getHeight()).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
             }
         }).alpha(0f).start(); //permet le fondu
+        v.setClickable(false);
     }
 
     public static void init(View v){

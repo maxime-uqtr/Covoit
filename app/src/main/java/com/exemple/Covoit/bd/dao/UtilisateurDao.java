@@ -35,5 +35,4 @@ public interface UtilisateurDao {
 
     @Delete
     int delete(Utilisateur utilisateur);
-
 }

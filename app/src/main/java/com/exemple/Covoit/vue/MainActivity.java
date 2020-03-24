@@ -58,14 +58,10 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                 isRotate = BoutonAnimation.rotateFab(v, !isRotate);
                 if(isRotate){
                     BoutonAnimation.show(FABproposeCovoiturage);
-                    FABproposeCovoiturage.setClickable(true);
                     BoutonAnimation.show(FABrechercheCovoiturage);
-                    FABrechercheCovoiturage.setClickable(true);
                 }else{
                     BoutonAnimation.hide(FABproposeCovoiturage);
-                    FABproposeCovoiturage.setClickable(false);
                     BoutonAnimation.hide(FABrechercheCovoiturage);
-                    FABrechercheCovoiturage.setClickable(false);
                 }
             }
         });
