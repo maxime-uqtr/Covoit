@@ -7,30 +7,38 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.exemple.Covoit.BoutonAnimation;
 import com.exemple.Covoit.ListAdapteur;
 import com.exemple.Covoit.OnListClickListener;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
+import com.exemple.Covoit.controleur.TelechargerImage;
 import com.exemple.Covoit.models.Covoiturage;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity implements OnListClickListener {
 
     private boolean isRotate = false;
 
     private CovoiturageBd bd;
+    private ImageView pp;
     private FloatingActionButton FABrechercheCovoiturage;
     private FloatingActionButton FABproposeCovoiturage;
     private FloatingActionButton FABouvrir;
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +47,11 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
 
         Stetho.initializeWithDefaults(this); //Ajout de stetho à l'activité
 
-
-
+        pp = findViewById(R.id.main_pp);
         FABproposeCovoiturage = findViewById(R.id.main_FAB_propose);
         BoutonAnimation.hide(FABproposeCovoiturage);
         FABrechercheCovoiturage = findViewById(R.id.main_FAB_recherche);
         BoutonAnimation.hide(FABrechercheCovoiturage);
-        FABproposeCovoiturage.setOnClickListener(v -> {
-                Intent rechercheIntent = new Intent(this, RechercheActivity.class);
-                startActivity(rechercheIntent);
-        });
 
         FABouvrir = findViewById(R.id.main_FAB_ouvrir);
         FABouvrir.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +75,12 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
         bd.getCovoiturageDao().insert(c);
         LiveData<List<Covoiturage>> covoiturages = bd.getCovoiturageDao().getAll();
 
-        RecyclerView rv = findViewById(R.id.main_recyclerView);
+        FABproposeCovoiturage.setOnClickListener(v -> {
+            Intent rechercheIntent = new Intent(this, RechercheActivity.class);
+            startActivity(rechercheIntent);
+        });
+
+        rv = findViewById(R.id.main_recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
         rv.setAdapter(new ListAdapteur(Arrays.asList(
                 bd.getCovoiturageDao().get(1),
@@ -82,6 +90,15 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                         "Arri", (float) 5, 2,
                         2)),
                         this));
+
+        String urlLogo = "https://covoituragebd-7356.restdb.io/media/5e78b9ebcf927e3e00017785";
+        try {
+            pp.setImageBitmap(new TelechargerImage().execute(urlLogo).get());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
