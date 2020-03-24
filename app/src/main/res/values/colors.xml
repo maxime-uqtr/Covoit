@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#2f2f2f</color>
+    <color name="colorPrimary">#FF0F78</color>
+    <color name="colorPrimaryDark">#2F2F2F</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="rechercheBackground">#f7c297</color>
+    <color name="appBackground">#FFB3D4</color>
+    <color name="rechercheBackground">#F7C297</color>
     <color name="rechercheBouton">#6F6867</color>
     <color name="white">#FFFFFF</color>
-    <color name="itemRv">#ddd6da</color>
+    <color name="itemRv">#DDD6DA</color>
 </resources>

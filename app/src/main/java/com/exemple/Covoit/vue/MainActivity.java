@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                         2)),
                         this));
 
-        String urlLogo = "https://covoituragebd-7356.restdb.io/media/5e78b9ebcf927e3e00017785";
+        String urlLogo = "https://covoituragebd-7356.restdb.io/media/5e7a8375cf927e3e0001bc30";
         try {
             pp.setImageBitmap(new TelechargerImage().execute(urlLogo).get());
         } catch (ExecutionException e) {
