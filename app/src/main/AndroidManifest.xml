@@ -21,12 +21,6 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".models.Recherche">
 
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
-
         </activity>
 
         <!--
@@ -50,15 +44,11 @@
         </activity>
 
         <activity android:name=".vue.Inscription">
-            <intent-filter>
 
-            </intent-filter>
         </activity>
 
         <activity android:name=".vue.Connection">
-            <intent-filter>
 
-            </intent-filter>
         </activity>
     </application>
 
