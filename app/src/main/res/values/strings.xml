@@ -7,4 +7,7 @@
     <string name="urlBd">https://covoituragebd-7356.restdb.io/rest</string>
     <string name="départ">Point de départ</string>
     <string name="arrivée">Destination</string>
+    <string name="recherche_depart">Entrer point de départ</string>
+    <string name="recherche_destination">Destination</string>
+    <string name="recherche_date">Sélectionner date</string>
 </resources>

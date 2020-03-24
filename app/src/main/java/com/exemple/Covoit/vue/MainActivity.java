@@ -73,8 +73,6 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                 "Dep",
                 "Arr", (float) 10, 1, 1);
         bd.getCovoiturageDao().insert(c);
-        LiveData<List<Covoiturage>> covoiturages = bd.getCovoiturageDao().getAll();
-
         FABproposeCovoiturage.setOnClickListener(v -> {
             Intent rechercheIntent = new Intent(this, RechercheActivity.class);
             startActivity(rechercheIntent);

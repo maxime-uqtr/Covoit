@@ -6,4 +6,5 @@
     <color name="rechercheBackground">#f7c297</color>
     <color name="rechercheBouton">#6F6867</color>
     <color name="white">#FFFFFF</color>
+    <color name="itemRv">#ddd6da</color>
 </resources>
