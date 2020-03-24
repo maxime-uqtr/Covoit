@@ -48,6 +48,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".vue.Inscription">
+            <intent-filter>
+
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".vue.Connection">
+            <intent-filter>
+
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
