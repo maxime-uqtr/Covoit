@@ -16,7 +16,6 @@ import com.exemple.Covoit.OnListClickListener;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.models.Covoiturage;
-import com.exemple.Covoit.models.Recherche;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
         FABrechercheCovoiturage = findViewById(R.id.main_FAB_recherche);
         BoutonAnimation.hide(FABrechercheCovoiturage);
         FABproposeCovoiturage.setOnClickListener(v -> {
-                Intent rechercheIntent = new Intent(this, Recherche.class);
+                Intent rechercheIntent = new Intent(this, RechercheActivity.class);
                 startActivity(rechercheIntent);
         });
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".models.Recherche"
+    tools:context=".vue.RechercheActivity"
     android:background="@color/rechercheBackground">
 
     <LinearLayout
@@ -39,11 +39,14 @@
 
         </androidx.cardview.widget.CardView>
 
-        <CalendarView
+
+        <EditText
             android:id="@+id/recherche_Calendrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:inputType="date"
+            android:hint="@string/et_date"
             android:layout_marginBottom="9dp"/>
 
         <Button

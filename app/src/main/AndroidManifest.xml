@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".models.Recherche">
+        <activity android:name=".vue.RechercheActivity">
 
         </activity>
 
