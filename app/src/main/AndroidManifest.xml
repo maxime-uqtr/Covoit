@@ -19,6 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".vue.RechercheActivity">
+
+        </activity>
+
+
         <activity android:name=".vue.PopActivity"
             android:theme="@style/AppTheme.PopMe"
             ></activity>
@@ -35,15 +40,21 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".vue.MainActivity" />
-        <activity android:name=".vue.Inscription">
+        <activity android:name=".vue.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.Connection" />
+
+        <activity android:name=".vue.Inscription">
+
+        </activity>
+
+        <activity android:name=".vue.Connection">
+
+        </activity>
     </application>
 
 </manifest>

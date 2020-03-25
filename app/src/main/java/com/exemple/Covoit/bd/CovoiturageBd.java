@@ -36,25 +36,25 @@ public abstract class CovoiturageBd extends RoomDatabase {
     private static CovoiturageBd buildDatabase(final Context context){
         return Room.databaseBuilder(context, CovoiturageBd.class, "database")
                 .addCallback(new RoomDatabase.Callback() {
-                            public void onCreate (SupportSQLiteDatabase db) {
-                                super.onCreate(db);
-                                Executors.newSingleThreadScheduledExecutor().execute(() -> iniSchema(db, INSTANCE,context));
-                            }})
-                                .allowMainThreadQueries()
-                                .build();
+                    public void onCreate (SupportSQLiteDatabase db) {
+                        super.onCreate(db);
+                        Executors.newSingleThreadScheduledExecutor().execute(() -> iniSchema(db, INSTANCE,context));
+                    }})
+                .allowMainThreadQueries()
+                .build();
     }
 
     private static void iniSchema(SupportSQLiteDatabase db, CovoiturageBd instance, Context context) {
 
         List<Utilisateur> listC = new ArrayList<>();
         listC.add(new Utilisateur(
-                        1, "nom",
-                        "prenom",
-                        "mail",
-                        "mdp",
-                        "url", true, false));
+                1, "nom",
+                "prenom",
+                "mail",
+                "mdp",
+                "url", true, false));
         listC.add(new Utilisateur(
-                        2,  "nom2",
+                2,  "nom2",
                 "prenom2",
                 "mail2",
                 "mdp2",

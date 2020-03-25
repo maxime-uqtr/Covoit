@@ -1,6 +1,7 @@
 package com.exemple.Covoit.models;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
@@ -17,8 +18,22 @@ public class Utilisateur {
     private boolean conducteur;
     private boolean passager;
 
+    public Utilisateur(){}
+
+    @Ignore
     public Utilisateur(long id, String nom, String prenom, String mail, String mdp, String urlPhoto, boolean conducteur, boolean passager) {
         this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.mdp = mdp;
+        this.urlPhoto = urlPhoto;
+        this.conducteur = conducteur;
+        this.passager = passager;
+    }
+
+    @Ignore
+    public Utilisateur(String nom, String prenom, String mail, String mdp, String urlPhoto, boolean conducteur, boolean passager) {
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
