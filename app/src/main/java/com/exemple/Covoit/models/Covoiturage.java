@@ -14,7 +14,7 @@ import java.util.Date;
         parentColumns = "id",
         childColumns = "conducteur_id")},
         indices = {@Index(value="conducteur_id")}
-        )
+)
 
 public class Covoiturage {
     @PrimaryKey
@@ -23,7 +23,6 @@ public class Covoiturage {
     private Date date;
     @ColumnInfo(name = "ville_dep")
     private String villeDep;
-    @ColumnInfo(name = "ville_arr")
     private String villeArr;
     private float prix;
     private int nbPassager;
