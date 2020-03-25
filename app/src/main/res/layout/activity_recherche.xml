@@ -47,8 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="2dp"
-            android:textSize="18sp"
             android:hint="@string/recherche_date"
+            android:textSize="18sp"
+            android:textColor="@color/white"
             android:background="@color/quantum_grey"
             android:layout_marginBottom="9dp"/>
 
@@ -59,7 +60,7 @@
             android:textSize="16sp"
             android:background="@color/rechercheBouton"
             android:textColor="@color/white"
-            android:text="Rechercher"
+            android:text="@string/recherche_btn"
             android:padding="2dp"
             android:layout_gravity="right"/>
 

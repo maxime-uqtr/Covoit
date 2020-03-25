@@ -22,6 +22,12 @@ public interface CovoiturageDao { //Room requiert une interface par DAO
     @Query("SELECT * FROM covoiturage")
     LiveData<List<Covoiturage>> getAll();
 
+    @Query("SELECT * FROM covoiturage")
+    List<Covoiturage> getAllList();
+
+    @Query("SELECT * FROM covoiturage")
+    LiveData<List<Covoiturage>> getLike();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Covoiturage... covoiturage);
 

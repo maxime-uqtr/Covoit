@@ -69,10 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
         });
 
         bd = CovoiturageBd.getInstance(getApplicationContext());
-        Covoiturage c = new Covoiturage(1, new Date(2020, 06,13),
-                "Dep",
-                "Arr", (float) 10, 1, 1);
-        bd.getCovoiturageDao().insert(c);
+
         FABproposeCovoiturage.setOnClickListener(v -> {
             Intent rechercheIntent = new Intent(this, RechercheActivity.class);
             startActivity(rechercheIntent);
@@ -80,14 +77,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
 
         rv = findViewById(R.id.main_recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
-        rv.setAdapter(new ListAdapteur(Arrays.asList(
-                bd.getCovoiturageDao().get(1),
-                new Covoiturage(
-                        2, new Date(2020, 07,14),
-                        "Depa",
-                        "Arri", (float) 5, 2,
-                        2)),
-                        this));
+        rv.setAdapter(new ListAdapteur(bd.getCovoiturageDao().getAllList(), this));
 
         String urlLogo = "https://covoituragebd-7356.restdb.io/media/5e7a8375cf927e3e0001bc30";
         try {

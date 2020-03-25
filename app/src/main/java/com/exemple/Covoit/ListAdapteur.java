@@ -66,4 +66,8 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
             this.nbPassager = v.findViewById(R.id.item_nbPassager);
         }
     }
+
+    public void setCovoiturages(List<Covoiturage> c){
+        mCovoiturage = c;
+    }
 }
