@@ -1,19 +1,10 @@
 package com.exemple.Covoit.vue;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.icu.text.UnicodeSetSpanner;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -22,17 +13,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.exemple.Covoit.ListAdapteur;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.OnListClickListener;
 import com.exemple.Covoit.models.Covoiturage;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class RechercheActivity extends AppCompatActivity implements OnListClickListener {
 
@@ -94,9 +87,13 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
                 else if(dateSelectionnee.before(Calendar.getInstance().getTime()))
                         Toast.makeText(getApplicationContext(), "Date sélectionée est passée.", Toast.LENGTH_LONG).show();
                 else{ //Tous les champs sont renseignés
-                    String depart = "%" + rechercheDepart.getText().toString() + "%";
-                    String destination = "%" + rechercheDestination.getText().toString() + "%";
-                    rvAdapteur = new ListAdapteur(bd.getCovoiturageDao().getLike(depart, destination), RechercheActivity.this::onListClick);
+                    String depart = rechercheDepart.getText().toString();
+                    String destination = rechercheDestination.getText().toString();
+                    Date date = dateSelectionnee;
+                    rvAdapteur = new ListAdapteur(bd.getCovoiturageDao().getLike(depart, destination, date), RechercheActivity.this::onListClick);
+                    if(rvAdapteur.getItemCount()==0){//Message d'erreur
+                        //TODO
+                    }
                     rvCovoiturages.setAdapter(rvAdapteur);
                 }
             }

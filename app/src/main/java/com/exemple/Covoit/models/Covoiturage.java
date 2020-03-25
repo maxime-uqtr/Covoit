@@ -21,7 +21,7 @@ public class Covoiturage {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
-    @TypeConverters(DateConverter.class) //Conversion car impossible de sauvegarder le type date dans une BD avec Room
+    @TypeConverters(ConversionDate.class) //Conversion car impossible de sauvegarder le type date dans une BD avec Room
     private Date date;
     @ColumnInfo(name = "ville_dep")
     private String villeDep;

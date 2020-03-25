@@ -4,10 +4,13 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.TypeConverters;
 import androidx.room.Update;
 
+import com.exemple.Covoit.models.ConversionDate;
 import com.exemple.Covoit.models.Covoiturage;
 
+import java.util.Date;
 import java.util.List;
 
 @Dao //Data Access Object / objet d'accès aux données
@@ -24,8 +27,9 @@ public interface CovoiturageDao { //Room requiert une interface par DAO
     @Query("SELECT * FROM covoiturage")
     List<Covoiturage> getListAll();
 
-    @Query("SELECT * FROM covoiturage WHERE ville_dep LIKE :depart AND ville_arr LIKE :destination ORDER BY date")
-    List<Covoiturage> getLike(String depart, String destination);
+    @TypeConverters(ConversionDate.class)
+    @Query("SELECT * FROM covoiturage WHERE ville_dep LIKE '%' || :depart || '%' AND ville_arr LIKE '%' || :destination || '%' AND date > :d ORDER BY date")
+    List<Covoiturage> getLike(String depart, String destination, Date d);
 
     @Insert
     void insert(Covoiturage... covoiturage);
