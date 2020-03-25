@@ -1,5 +1,6 @@
 package com.exemple.Covoit;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,15 +31,15 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         Covoiturage c = mCovoiturage.get(position);
-        holder.itineraire.setText(c.getVilleDep());
-        holder.nom.setText(c.getVilleArr());
-        holder.date.setText(c.getDate().toString());
-        holder.prix.setText(String.valueOf(c.getPrix()));
-        holder.nbPassager.setText(String.valueOf(c.getNbPassager()));
+        holder.itineraire.setText(c.getVilleDep() + " - " + c.getVilleArr());
+        holder.date.setText(c.getDate().getDay() + "/" + c.getDate().getMonth() + "/" + c.getDate().getYear());
+        holder.prix.setText("Prix : $" + String.valueOf(c.getPrix()));
+        holder.nbPassager.setText("Place(s) : " + String.valueOf(c.getNbPassager()));
 
         holder.v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,14 +55,13 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView date, nom, itineraire, prix, nbPassager;
+        private TextView date, itineraire, prix, nbPassager;
         private View v;
 
         public ViewHolder(View v){
             super(v);
             this.v = v;
             this.date = v.findViewById(R.id.item_date);
-            this.nom = v.findViewById(R.id.item_nom);
             this.itineraire = v.findViewById(R.id.item_itineraire);
             this.prix = v.findViewById(R.id.item_prix);
             this.nbPassager = v.findViewById(R.id.item_nbPassager);

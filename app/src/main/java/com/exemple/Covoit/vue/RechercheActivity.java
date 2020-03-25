@@ -1,21 +1,22 @@
 package com.exemple.Covoit.vue;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.exemple.Covoit.ListAdapteur;
 import com.exemple.Covoit.R;
@@ -32,13 +33,12 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
 
     private EditText rechercheDepart;
     private EditText rechercheDestination;
-    private String selectionDepart;
-    private String selectionDestination;
     private TextView dateRecherchee;
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private Date dateSelectionnee;
     private Button btnRechercher;
     private RecyclerView rvCovoiturages;
+    private ListAdapteur rvAdapteur;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,39 +52,6 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
 
         //Initialisation BD
         bd = CovoiturageBd.getInstance(getApplicationContext());
-
-
-        rechercheDepart.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                selectionDepart = s.toString();
-            }
-        });
-
-        rechercheDestination.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                selectionDestination = s.toString();
-            }
-        });
 
         //Bouton sélectionner une date
         dateRecherchee.setOnClickListener(v -> {
@@ -114,10 +81,20 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
         btnRechercher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(rechercheDepart.getText().length() == 0 || rechercheDestination.getText().length() == 0 || dateSelectionnee.toString().length() == 0)
+                cacherClavier();
+                if(rechercheDepart.getText().length() == 0 || rechercheDestination.getText().length() == 0 || dateSelectionnee == null)
                     Toast.makeText(getApplicationContext(), "Veuillez renseigner tous les champs.", Toast.LENGTH_LONG).show();
+                else if(dateSelectionnee.before(Calendar.getInstance().getTime()))
+                        Toast.makeText(getApplicationContext(), "Date sélectionée est passée.", Toast.LENGTH_LONG).show();
                 else{ //Tous les champs sont renseignés
-                    //ListAdapteur adapteurRecherche = new ListAdapteur();
+                    String depart = rechercheDepart.getText().toString();
+                    String destination = rechercheDestination.getText().toString();
+                    Date date = dateSelectionnee;
+                    rvAdapteur = new ListAdapteur(bd.getCovoiturageDao().getLike(depart, destination, date), RechercheActivity.this::onListClick);
+                    if(rvAdapteur.getItemCount()==0){//Message d'erreur
+                        //TODO
+                    }
+                    rvCovoiturages.setAdapter(rvAdapteur);
                 }
             }
         });
@@ -125,7 +102,17 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
         //Inflation rv
         rvCovoiturages = findViewById(R.id.recherche_rv);
         rvCovoiturages.setLayoutManager(new LinearLayoutManager(rvCovoiturages.getContext()));
+        rvCovoiturages.setAdapter(null);
+        rvCovoiturages.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
+
+    }
+
+    //Méthode pour fermer clavier
+    public void cacherClavier(){
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(rechercheDepart.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(rechercheDestination.getWindowToken(), 0);
     }
 
     @Override

@@ -27,7 +27,9 @@ public abstract class CovoiturageBd extends RoomDatabase {
     public abstract UtilisateurDao getUtilisateurDao();
 
     public static synchronized CovoiturageBd getInstance(final Context context){
+
         if(INSTANCE == null){
+            context.deleteDatabase("database");
             INSTANCE = buildDatabase(context);
         }
         return INSTANCE;
