@@ -3,7 +3,6 @@ package com.exemple.Covoit.bd.dao;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -23,10 +22,10 @@ public interface CovoiturageDao { //Room requiert une interface par DAO
     LiveData<List<Covoiturage>> getAll();
 
     @Query("SELECT * FROM covoiturage")
-    List<Covoiturage> getAllList();
+    List<Covoiturage> getListAll();
 
-    @Query("SELECT * FROM covoiturage")
-    LiveData<List<Covoiturage>> getLike();
+    @Query("SELECT * FROM covoiturage WHERE ville_dep LIKE :depart AND ville_arr LIKE :destination ORDER BY date")
+    List<Covoiturage> getLike(String depart, String destination);
 
     @Insert
     void insert(Covoiturage... covoiturage);

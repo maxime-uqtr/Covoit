@@ -1,7 +1,6 @@
 package com.exemple.Covoit;
 
 import android.annotation.SuppressLint;
-import android.nfc.FormatException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.exemple.Covoit.controleur.OnListClickListener;
 import com.exemple.Covoit.models.Covoiturage;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
@@ -40,8 +37,7 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
 
         Covoiturage c = mCovoiturage.get(position);
         holder.itineraire.setText(c.getVilleDep() + " - " + c.getVilleArr());
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        holder.date.setText(formatter.format(c.getDate()));
+        holder.date.setText(c.getDate().getDay() + "/" + c.getDate().getMonth() + "/" + c.getDate().getYear());
         holder.prix.setText("Prix : $" + String.valueOf(c.getPrix()));
         holder.nbPassager.setText("Place(s) : " + String.valueOf(c.getNbPassager()));
 
