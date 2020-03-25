@@ -3,6 +3,7 @@ package com.exemple.Covoit.models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
@@ -24,13 +25,18 @@ public class Covoiturage {
     private Date date;
     @ColumnInfo(name = "ville_dep")
     private String villeDep;
+    @ColumnInfo(name = "ville_arr")
     private String villeArr;
     private float prix;
     private int nbPassager;
     @ColumnInfo(name = "conducteur_id")
     private long conducteurId;
 
-    public Covoiturage(long Date date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
+    public Covoiturage(){}
+
+    @Ignore
+    public Covoiturage(long id, Date date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
+        this.id = id;
         this.date = date;
         this.villeDep = villeDep;
         this.villeArr = villeArr;
@@ -39,6 +45,7 @@ public class Covoiturage {
         this.conducteurId = conducteurId;
     }
 
+    @Ignore
     public Covoiturage(Date date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
         this.date = date;
         this.villeDep = villeDep;
@@ -70,4 +77,27 @@ public class Covoiturage {
 
     public long getConducteurId() { return conducteurId; }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setVilleDep(String villeDep) {
+        this.villeDep = villeDep;
+    }
+
+    public void setVilleArr(String villeArr) {
+        this.villeArr = villeArr;
+    }
+
+    public void setPrix(float prix) {
+        this.prix = prix;
+    }
+
+    public void setNbPassager(int nbPassager) {
+        this.nbPassager = nbPassager;
+    }
+
+    public void setConducteurId(long conducteurId) {
+        this.conducteurId = conducteurId;
+    }
 }
