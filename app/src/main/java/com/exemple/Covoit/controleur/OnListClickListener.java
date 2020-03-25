@@ -1,4 +1,4 @@
-package com.exemple.Covoit;
+package com.exemple.Covoit.controleur;
 
 import com.exemple.Covoit.models.Covoiturage;
 

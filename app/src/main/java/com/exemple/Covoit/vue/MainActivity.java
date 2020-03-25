@@ -14,7 +14,7 @@ import android.widget.ImageView;
 
 import com.exemple.Covoit.BoutonAnimation;
 import com.exemple.Covoit.ListAdapteur;
-import com.exemple.Covoit.OnListClickListener;
+import com.exemple.Covoit.controleur.OnListClickListener;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.TelechargerImage;

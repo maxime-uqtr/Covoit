@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonRetour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Retour"
@@ -15,17 +15,17 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonValider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
         android:text="Valider"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxConducteur" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -33,11 +33,11 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrenom"
         android:hint="Adresse mail"/>
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editTextMdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -45,11 +45,11 @@
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMail"
         android:hint="Mot de passe"/>
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/editTextVerifMdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -57,11 +57,11 @@
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMdp"
         android:hint="Verification mot de passe"/>
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editTextNom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -74,7 +74,7 @@
         android:hint="Nom"/>
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/editTextPrenom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -83,25 +83,26 @@
         android:inputType="textPersonName"
         android:hint="Prenom"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNom" />
 
-    <RadioButton
-        android:id="@+id/radioButton"
+    <CheckBox
+        android:id="@+id/checkBoxPassager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
         android:text="Passager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextVerifMdp" />
 
-    <RadioButton
-        android:id="@+id/radioButton2"
+    <CheckBox
+        android:id="@+id/checkBoxConducteur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
         android:text="Conducteur"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxPassager" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
