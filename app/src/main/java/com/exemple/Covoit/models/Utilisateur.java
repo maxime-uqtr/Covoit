@@ -58,4 +58,36 @@ public class Utilisateur {
     public boolean isConducteur() { return conducteur; }
 
     public boolean isPassager() { return passager; }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+
+    public void setUrlPhoto(String urlPhoto) {
+        this.urlPhoto = urlPhoto;
+    }
+
+    public void setConducteur(boolean conducteur) {
+        this.conducteur = conducteur;
+    }
+
+    public void setPassager(boolean passager) {
+        this.passager = passager;
+    }
 }

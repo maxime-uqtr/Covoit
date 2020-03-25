@@ -30,14 +30,15 @@ public class Covoiturage {
     @ColumnInfo(name = "conducteur_id")
     private long conducteurId;
 
-    public Covoiturage(long Date date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
+    /*public Covoiturage(long id, Date date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
+        this.id = id;
         this.date = date;
         this.villeDep = villeDep;
         this.villeArr = villeArr;
         this.prix = prix;
         this.nbPassager = nbPassager;
         this.conducteurId = conducteurId;
-    }
+    }*/
 
     public Covoiturage(Date date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
         this.date = date;

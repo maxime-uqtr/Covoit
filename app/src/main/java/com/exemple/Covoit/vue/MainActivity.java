@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
         bd = CovoiturageBd.getInstance(getApplicationContext());
         initBD();
 
-        FABproposeCovoiturage.setOnClickListener(v -> {
+        FABrechercheCovoiturage.setOnClickListener(v -> {
             Intent rechercheIntent = new Intent(this, RechercheActivity.class);
             startActivity(rechercheIntent);
         });
