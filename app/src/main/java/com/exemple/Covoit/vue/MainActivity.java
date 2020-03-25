@@ -19,7 +19,7 @@ import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.TelechargerImage;
 import com.exemple.Covoit.models.Covoiturage;
-import com.exemple.Covoit.models.Recherche;
+import com.exemple.Covoit.models.Utilisateur;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
