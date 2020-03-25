@@ -23,6 +23,7 @@ public class Covoiturage {
     private Date date;
     @ColumnInfo(name = "ville_dep")
     private String villeDep;
+    @ColumnInfo(name = "ville_arr")
     private String villeArr;
     private float prix;
     private int nbPassager;

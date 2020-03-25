@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Covoiturage.class, Utilisateur.class}, version = 1, exportSchema = false) //On exporte pas car pas définit le directory
+@Database(entities = {Covoiturage.class, Utilisateur.class}, version = 2, exportSchema = false) //On exporte pas car pas définit le directory
 public abstract class CovoiturageBd extends RoomDatabase {
 
     private static CovoiturageBd INSTANCE;
