@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.exemple.Covoit.controleur.OnListClickListener;
 import com.exemple.Covoit.models.Covoiturage;
 
 import java.util.List;

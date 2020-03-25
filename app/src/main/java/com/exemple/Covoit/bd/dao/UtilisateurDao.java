@@ -28,7 +28,7 @@ public interface UtilisateurDao {
     LiveData<List<Utilisateur>> getLiveAll();
 
     @Query("SELECT id FROM utilisateur WHERE mail = :mail AND mdp = :mdp")
-    Long getIdConnection(String mail, String mdp);
+    long getIdConnection(String mail, String mdp);
 
     @Update
     int update(Utilisateur utilisateur);

@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.exemple.Covoit.BoutonAnimation;
 import com.exemple.Covoit.ListAdapteur;
-import com.exemple.Covoit.OnListClickListener;
+import com.exemple.Covoit.controleur.OnListClickListener;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.models.Covoiturage;
@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                         "Arri", (float) 5, 2,
                         2)),
                         this));
+        bd.getUtilisateurDao().getIdConnection("mail", "mdp");
     }
 
     @Override
