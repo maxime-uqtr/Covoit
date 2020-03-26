@@ -49,7 +49,7 @@ public class Inscription extends AppCompatActivity implements controleurInscript
                 if (test){
                     utilisateur = new Utilisateur(etNom.getText().toString(), etPrenom.getText().toString(), etMail.getText().toString(), etMdp.getText().toString(), "null" ,cbPassager.isChecked(), cbConducteur.isChecked());
                     bd.getUtilisateurDao().insert(utilisateur);
-                    Intent i = new Intent(getApplicationContext(), Connection.class);
+                    Intent i = new Intent(getApplicationContext(), Connexion.class);
                     startActivity(i);
                 }else{
                     Intent i = new Intent(getApplicationContext(), PopActivity.class);
@@ -62,7 +62,7 @@ public class Inscription extends AppCompatActivity implements controleurInscript
         bRetour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Connection.class);
+                Intent i = new Intent(getApplicationContext(), Connexion.class);
                 startActivity(i);
             }
         });

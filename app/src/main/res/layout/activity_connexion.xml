@@ -2,51 +2,61 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editTextMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/connexion_logo"
+        android:layout_width="124dp"
+        android:layout_height="124dp"
         android:layout_marginTop="128dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
-        android:id="@+id/editTextMdp"
+        android:id="@+id/connexion_editTextMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/connexion_mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connexion_logo"/>
+
+    <EditText
+        android:id="@+id/connexion_editTextMdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:hint="@string/connexion_mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMail" />
+        app:layout_constraintTop_toBottomOf="@+id/connexion_editTextMail" />
 
     <Button
-        android:id="@+id/buttonConnection"
+        android:id="@+id/connexion_btnConnexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Connection"
-        app:layout_constraintEnd_toStartOf="@+id/buttonInscription"
+        android:text="@string/connexion_btnConnexion"
+        app:layout_constraintEnd_toStartOf="@+id/connexion_btnInscription"
         app:layout_constraintHorizontal_bias="0.871"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMdp" />
+        app:layout_constraintTop_toBottomOf="@+id/connexion_editTextMdp" />
 
     <Button
-        android:id="@+id/buttonInscription"
+        android:id="@+id/connexion_btnInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="88dp"
         android:layout_marginRight="88dp"
-        android:text="Inscription"
+        android:text="@string/connexion_btnInscription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMdp" />
+        app:layout_constraintTop_toBottomOf="@+id/connexion_editTextMdp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 package com.exemple.Covoit.controleur;
 
 public interface controleurConnexion {
-    boolean connection(String mail, String mdp);
+    boolean connexion(String mail, String mdp);
 }

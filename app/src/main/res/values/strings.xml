@@ -11,4 +11,8 @@
     <string name="recherche_destination">Destination</string>
     <string name="recherche_date">Sélectionner date</string>
     <string name="recherche_btn">Rechercher</string>
+    <string name="connexion_btnConnexion">Connexion</string>
+    <string name="connexion_btnInscription">Inscription</string>
+    <string name="connexion_mail">mail</string>
+    <string name="connexion_mdp">mot de passe</string>
 </resources>

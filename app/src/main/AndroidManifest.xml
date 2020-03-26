@@ -47,7 +47,7 @@
 
         </activity>
 
-        <activity android:name=".vue.Connection">
+        <activity android:name=".vue.Connexion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
