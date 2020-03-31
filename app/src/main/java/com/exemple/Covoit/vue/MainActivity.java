@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                 bd.getUtilisateurDao().getAll().get(1).getId()));
         listeC.add(new Covoiturage(new Date(2020, 5,15),
                 "Louiseville",
-                "-Rivières", (float) 5, 2,
+                "Trois-Rivières", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
         listeC.add(new Covoiturage(new Date(2020, 5,14),
                 "Québec",
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                 "Montréal",
                 "Québec", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 07,14),
+        listeC.add(new Covoiturage(new Date(2020, 7,14),
                 "Québec",
                 "Trois-Rivières", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
@@ -131,28 +131,28 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
                 "Louiseville",
                 "Montréal", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 06,24),
+        listeC.add(new Covoiturage(new Date(2020, 6,24),
                 "Québec",
                 "Trois-Rivières", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 05,4),
+        listeC.add(new Covoiturage(new Date(2020, 5,4),
                 "Louiseville",
                 "Québec", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 05,30),
-                "-Rivières",
+        listeC.add(new Covoiturage(new Date(2020, 5,30),
+                "Trois-Rivières",
                 "Montréal", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 07,4),
+        listeC.add(new Covoiturage(new Date(2020, 7,4),
                 "Montréal",
                 "Québec", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 07,1),
+        listeC.add(new Covoiturage(new Date(2020, 7,1),
                 "Québec",
-                "-Rivières", (float) 5, 2,
+                "Trois-Rivières", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 06,16),
-                "-Rivières",
+        listeC.add(new Covoiturage(new Date(2020, 6,16),
+                "Trois-Rivières",
                 "Québec", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
         for(Covoiturage c : listeC){

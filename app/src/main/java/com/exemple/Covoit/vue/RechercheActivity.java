@@ -23,6 +23,7 @@ import com.exemple.Covoit.ListAdapteur;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.OnListClickListener;
+import com.exemple.Covoit.controleur.PlaceAutocompleteAdapter;
 import com.exemple.Covoit.models.Covoiturage;
 
 import java.util.Calendar;
@@ -55,7 +56,7 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
         //Adapter AutoCompleteTextView
         ArrayAdapter<String> adressesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, adresses);
 
-        rechercheDepart.setAdapter(adressesAdapter);
+        rechercheDepart.setAdapter(new PlaceAutocompleteAdapter(this, android.R.layout.simple_list_item_1));
         rechercheDestination.setAdapter(adressesAdapter);
 
         //Initialisation BD
@@ -85,9 +86,6 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
                 dateSelectionnee = new Date(year, month, dayOfMonth);
                 String dateTexte = dayOfMonth + "/" + month + "/" + year;
                 dateRecherchee.setText(dateTexte);
-                adressesAdapter.clear();
-                adressesAdapter.addAll("test", "test");
-                rechercheDepart.setAdapter(adressesAdapter);
             }
         };
 
