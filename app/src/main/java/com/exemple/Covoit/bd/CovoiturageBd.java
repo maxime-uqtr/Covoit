@@ -1,7 +1,6 @@
 package com.exemple.Covoit.bd;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.room.Database;
 import androidx.room.Room;
@@ -14,7 +13,6 @@ import com.exemple.Covoit.models.Covoiturage;
 import com.exemple.Covoit.models.Utilisateur;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -31,6 +29,9 @@ public abstract class CovoiturageBd extends RoomDatabase {
         if(INSTANCE == null){
             context.deleteDatabase("database");
             INSTANCE = buildDatabase(context);
+        }
+        else{
+            INSTANCE.clearAllTables();
         }
         return INSTANCE;
     }

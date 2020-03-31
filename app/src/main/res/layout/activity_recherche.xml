@@ -20,11 +20,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="9dp">
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/recherche_depart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/recherche_depart"/>
+                    android:hint="@string/recherche_depart"
+                    android:completionThreshold="1"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -33,11 +34,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="9dp">
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/recherche_destination"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/recherche_destination"/>
+                    android:hint="@string/recherche_destination"
+                    android:completionThreshold="1"/>
 
             </androidx.cardview.widget.CardView>
 

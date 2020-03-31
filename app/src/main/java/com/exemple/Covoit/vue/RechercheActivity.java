@@ -7,9 +7,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +32,9 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
 
     private CovoiturageBd bd;
 
-    private EditText rechercheDepart;
-    private EditText rechercheDestination;
+    private AutoCompleteTextView rechercheDepart;
+    private AutoCompleteTextView rechercheDestination;
+    private String[] adresses = new String[]{"Québec", "Trois-Rivières", "Montréal", "Louiseville"};
     private TextView dateRecherchee;
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private Date dateSelectionnee;
@@ -50,8 +52,16 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
         dateRecherchee = findViewById(R.id.recherche_Calendrier);
         btnRechercher = findViewById(R.id.recherche_bouton);
 
+        //Adapter AutoCompleteTextView
+        ArrayAdapter<String> adressesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, adresses);
+
+        rechercheDepart.setAdapter(adressesAdapter);
+        rechercheDestination.setAdapter(adressesAdapter);
+
         //Initialisation BD
         bd = CovoiturageBd.getInstance(getApplicationContext());
+
+        //Listener pour modifier les choix d'autocomplétion
 
         //Bouton sélectionner une date
         dateRecherchee.setOnClickListener(v -> {
@@ -75,6 +85,9 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
                 dateSelectionnee = new Date(year, month, dayOfMonth);
                 String dateTexte = dayOfMonth + "/" + month + "/" + year;
                 dateRecherchee.setText(dateTexte);
+                adressesAdapter.clear();
+                adressesAdapter.addAll("test", "test");
+                rechercheDepart.setAdapter(adressesAdapter);
             }
         };
 
