@@ -1,5 +1,7 @@
 package com.exemple.Covoit.controleur;
 
+import android.util.Log;
+
 import com.exemple.Covoit.R;
 
 import org.json.JSONArray;
@@ -13,24 +15,26 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class PlaceApi {
+public interface PlaceApi {
 
-    public ArrayList<String> autoComplete(String input){
-        ArrayList arrayList = null;
+    static ArrayList<String> autoComplete(String input){
+        ArrayList<String> arrayList = new ArrayList<String>();
         HttpURLConnection connexion = null;
-        StringBuilder json = null;
+        StringBuilder json = new StringBuilder();
         try{
             StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/autocomplete/json?");
             sb.append("input="+input);
-            sb.append("$key=AIzaSyAvAft3BV6eE_TTVvZiChAbxBj2i6Drgp0"/*+ R.string.google_maps_key*/);
-            URL url = new URL(sb.toString());
+            sb.append("&key=" + R.string.google_maps_key);
+            URL url = new URL(sb.toString()); //On crée l'URL avec la chaine de caractère passée en paramètre
+            connexion = (HttpURLConnection) url.openConnection();
             InputStreamReader inputStreamReader = new InputStreamReader(connexion.getInputStream());
-
-            int read;
+            Log.i("test", "inpu");
+            int ligne;
 
             char[] buff = new char[1024];
-            while((read=inputStreamReader.read(buff)) !=0){
-                json.append(buff, 0, read);
+            //lecture du fichier json
+            while((ligne=inputStreamReader.read(buff)) !=0){
+                json.append(buff, 0, ligne);
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -44,10 +48,11 @@ public class PlaceApi {
         }
 
         try{
-            JSONObject jsonObject=new JSONObject(json.toString());
-            JSONArray prediction = jsonObject.getJSONArray("predictions");
-            for(int i=0;i<prediction.length(); i++){
-                arrayList.add((prediction.getJSONObject(i).getString("description")));
+            JSONObject jsonObject = new JSONObject(json.toString());
+            JSONArray predictions = jsonObject.getJSONArray("predictions"); //On veut savoir les prédictions transmises dans le fichier .json
+            for(int i=0;i<predictions.length(); i++){
+                String desc = predictions.getJSONObject(i).getString("description");
+                arrayList.add(desc); //On ajoute la description destinée à la liste de l'adapter
             }
         } catch (JSONException e) {
             e.printStackTrace();

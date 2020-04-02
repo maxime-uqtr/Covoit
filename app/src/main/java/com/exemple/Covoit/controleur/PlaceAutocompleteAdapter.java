@@ -8,19 +8,15 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.libraries.places.api.model.Place;
-
 import java.util.ArrayList;
 
 public class PlaceAutocompleteAdapter extends ArrayAdapter implements Filterable {
 
     ArrayList<String> results;
 
-    PlaceApi placeApi = new PlaceApi();
-
     public PlaceAutocompleteAdapter(@NonNull Context context, int resource) {
         super(context, resource);
-    }
+     }
 
     @Override
     public int getCount() {
@@ -41,8 +37,7 @@ public class PlaceAutocompleteAdapter extends ArrayAdapter implements Filterable
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults filterResults = new FilterResults();
                 if(constraint!=null){
-                    results = placeApi.autoComplete(constraint.toString());
-
+                    results = PlaceApi.autoComplete(constraint.toString());
                     filterResults.values=results;
                     filterResults.count=results.size();
                 }
@@ -51,7 +46,7 @@ public class PlaceAutocompleteAdapter extends ArrayAdapter implements Filterable
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                if(results!=null && results.count!=0){
+                if(results!=null && results.count>0){
                     notifyDataSetChanged();
                 }
                 else{
