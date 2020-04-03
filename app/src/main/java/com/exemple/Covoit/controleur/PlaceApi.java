@@ -1,7 +1,5 @@
 package com.exemple.Covoit.controleur;
 
-import android.util.Log;
-
 import com.exemple.Covoit.R;
 
 import org.json.JSONArray;
@@ -23,17 +21,16 @@ public interface PlaceApi {
         StringBuilder json = new StringBuilder();
         try{
             StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/autocomplete/json?");
-            sb.append("input="+input);
+            sb.append("input=" + input);
             sb.append("&key=" + R.string.google_maps_key);
             URL url = new URL(sb.toString()); //On crée l'URL avec la chaine de caractère passée en paramètre
             connexion = (HttpURLConnection) url.openConnection();
             InputStreamReader inputStreamReader = new InputStreamReader(connexion.getInputStream());
-            Log.i("test", "inpu");
-            int ligne;
 
+            int ligne;
             char[] buff = new char[1024];
             //lecture du fichier json
-            while((ligne=inputStreamReader.read(buff)) !=0){
+            while((ligne=inputStreamReader.read(buff))!=-1){
                 json.append(buff, 0, ligne);
             }
         } catch (MalformedURLException e) {
@@ -54,6 +51,7 @@ public interface PlaceApi {
                 String desc = predictions.getJSONObject(i).getString("description");
                 arrayList.add(desc); //On ajoute la description destinée à la liste de l'adapter
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
