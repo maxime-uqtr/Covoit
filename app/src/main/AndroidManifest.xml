@@ -3,8 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.exemple.Covoit">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,14 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".vue.RechercheActivity">
 
-        </activity>
-
-
-        <activity android:name=".vue.PopActivity"
-            android:theme="@style/AppTheme.PopMe"
-            ></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -34,6 +33,17 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".vue.CarteActivity"
+            android:label="@string/title_activity_carte"
+            android:parentActivityName=".vue.MainActivity"></activity>
+        <activity android:name=".vue.RechercheActivity"
+            android:label="@string/title_activity_recherche"
+            android:parentActivityName=".vue.MainActivity">
+        </activity>
+        <activity
+            android:name=".vue.PopActivity"
+            android:theme="@style/AppTheme.PopMe" />
         <activity android:name=".vue.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,14 +51,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".vue.Inscription">
-
-        </activity>
-
-        <activity android:name=".vue.Connexion">
-
-        </activity>
+        <activity android:name=".vue.InscriptionActivity"></activity>
+        <activity android:name=".vue.ConnexionActivity"></activity>
     </application>
 
 </manifest>

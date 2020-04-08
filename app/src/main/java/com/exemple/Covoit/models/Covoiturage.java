@@ -8,6 +8,8 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.exemple.Covoit.controleur.ConversionDate;
+
 import java.util.Date;
 
 //Clé étrangère = un Utilisateur

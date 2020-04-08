@@ -1,5 +1,7 @@
 package com.exemple.Covoit.controleur;
 
+import android.util.Log;
+
 import com.exemple.Covoit.R;
 
 import org.json.JSONArray;
@@ -22,7 +24,7 @@ public interface PlaceApi {
         try{
             StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/autocomplete/json?");
             sb.append("input=" + input);
-            sb.append("&key=" + R.string.google_maps_key);
+            sb.append("&key=AIzaSyAvAft3BV6eE_TTVvZiChAbxBj2i6Drgp0"); //On ajoute la clé d'API à l'URL
             URL url = new URL(sb.toString()); //On crée l'URL avec la chaine de caractère passée en paramètre
             connexion = (HttpURLConnection) url.openConnection();
             InputStreamReader inputStreamReader = new InputStreamReader(connexion.getInputStream());
@@ -47,13 +49,25 @@ public interface PlaceApi {
         try{
             JSONObject jsonObject = new JSONObject(json.toString());
             JSONArray predictions = jsonObject.getJSONArray("predictions"); //On veut savoir les prédictions transmises dans le fichier .json
-            for(int i=0;i<predictions.length(); i++){
-                String desc = predictions.getJSONObject(i).getString("description");
-                arrayList.add(desc); //On ajoute la description destinée à la liste de l'adapter
+            if(predictions.length()!=0) {
+                Log.i("test", "no json error");
+                for (int i = 0; i < predictions.length(); i++) {
+                    String desc = predictions.getJSONObject(i).getString("description");
+                    arrayList.add(desc); //On ajoute la description destinée à la liste de l'adapter
+                }
+            }
+            else{
+                Log.i("test", "error");
+                String erro = jsonObject.getString("error_message");
+                arrayList.add(erro);
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+
+        for(int i=0; i<arrayList.size(); i++){
+            Log.i("test", arrayList.get(i));
         }
 
         return arrayList;

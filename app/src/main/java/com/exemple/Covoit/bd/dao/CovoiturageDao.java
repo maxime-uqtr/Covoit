@@ -7,7 +7,7 @@ import androidx.room.Query;
 import androidx.room.TypeConverters;
 import androidx.room.Update;
 
-import com.exemple.Covoit.models.ConversionDate;
+import com.exemple.Covoit.controleur.ConversionDate;
 import com.exemple.Covoit.models.Covoiturage;
 
 import java.util.Date;

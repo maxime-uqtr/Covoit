@@ -2,7 +2,6 @@ package com.exemple.Covoit.vue;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,7 +13,7 @@ import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.controleurInscription;
 import com.exemple.Covoit.models.Utilisateur;
 
-public class Inscription extends AppCompatActivity implements controleurInscription {
+public class InscriptionActivity extends AppCompatActivity implements controleurInscription {
 
     //  Boutton : b; EditText : et; CheckBox : cb;
     private Button bValider, bRetour;
@@ -49,7 +48,7 @@ public class Inscription extends AppCompatActivity implements controleurInscript
                 if (test){
                     utilisateur = new Utilisateur(etNom.getText().toString(), etPrenom.getText().toString(), etMail.getText().toString(), etMdp.getText().toString(), "null" ,cbPassager.isChecked(), cbConducteur.isChecked());
                     bd.getUtilisateurDao().insert(utilisateur);
-                    Intent i = new Intent(getApplicationContext(), Connexion.class);
+                    Intent i = new Intent(getApplicationContext(), ConnexionActivity.class);
                     startActivity(i);
                 }else{
                     Intent i = new Intent(getApplicationContext(), PopActivity.class);
@@ -62,7 +61,7 @@ public class Inscription extends AppCompatActivity implements controleurInscript
         bRetour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Connexion.class);
+                Intent i = new Intent(getApplicationContext(), ConnexionActivity.class);
                 startActivity(i);
             }
         });

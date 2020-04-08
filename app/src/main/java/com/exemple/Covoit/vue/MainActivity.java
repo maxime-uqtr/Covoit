@@ -74,6 +74,14 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
             startActivity(rechercheIntent);
         });
 
+        FABproposeCovoiturage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent carteIntent = new Intent(getApplicationContext(), CarteActivity.class);
+                startActivity(carteIntent);
+            }
+        });
+
         rv = findViewById(R.id.main_recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
         rv.setAdapter(new ListAdapteur(bd.getCovoiturageDao().getListAll(), this));

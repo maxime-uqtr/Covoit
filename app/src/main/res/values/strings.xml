@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Covoit</string>
+    <string name="apiKey">AIzaSyAvAft3BV6eE_TTVvZiChAbxBj2i6Drgp0</string>
     <string name="activity_recherche">Recherche</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="urlBd">https://covoituragebd-7356.restdb.io/rest</string>
     <string name="départ">Point de départ</string>
@@ -15,4 +15,6 @@
     <string name="connexion_btnInscription">Inscription</string>
     <string name="connexion_mail">mail</string>
     <string name="connexion_mdp">mot de passe</string>
+    <string name="title_activity_recherche">Recherche</string>
+    <string name="title_activity_carte">Carte</string>
 </resources>

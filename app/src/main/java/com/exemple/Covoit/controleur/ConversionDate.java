@@ -1,4 +1,4 @@
-package com.exemple.Covoit.models;
+package com.exemple.Covoit.controleur;
 
 import androidx.room.TypeConverter;
 

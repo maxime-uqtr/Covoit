@@ -16,7 +16,7 @@ import com.exemple.Covoit.controleur.controleurConnexion;
 
 import java.util.concurrent.ExecutionException;
 
-public class Connexion extends AppCompatActivity implements controleurConnexion {
+public class ConnexionActivity extends AppCompatActivity implements controleurConnexion {
 
     //  Boutton : b; EditText : et;
     private Button bConnection, bInscription;
@@ -53,7 +53,7 @@ public class Connexion extends AppCompatActivity implements controleurConnexion 
         bInscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Inscription.class);
+                Intent i = new Intent(getApplicationContext(), InscriptionActivity.class);
                 startActivity(i);
             }
         });
