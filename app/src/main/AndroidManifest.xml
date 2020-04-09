@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.exemple.Covoit">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -20,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity android:name=".vue.PopupCovoiturageActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -36,11 +35,11 @@
         <activity
             android:name=".vue.CarteActivity"
             android:label="@string/title_activity_carte"
-            android:parentActivityName=".vue.MainActivity"></activity>
-        <activity android:name=".vue.RechercheActivity"
+            android:parentActivityName=".vue.MainActivity" />
+        <activity
+            android:name=".vue.RechercheActivity"
             android:label="@string/title_activity_recherche"
-            android:parentActivityName=".vue.MainActivity">
-        </activity>
+            android:parentActivityName=".vue.MainActivity"></activity>
         <activity
             android:name=".vue.PopActivity"
             android:theme="@style/AppTheme.PopMe" />
@@ -51,8 +50,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.InscriptionActivity"></activity>
-        <activity android:name=".vue.ConnexionActivity"></activity>
+        <activity android:name=".vue.InscriptionActivity" />
+        <activity android:name=".vue.ConnexionActivity" />
     </application>
 
 </manifest>

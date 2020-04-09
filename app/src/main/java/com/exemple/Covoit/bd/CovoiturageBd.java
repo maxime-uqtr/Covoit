@@ -30,9 +30,6 @@ public abstract class CovoiturageBd extends RoomDatabase {
             context.deleteDatabase("database");
             INSTANCE = buildDatabase(context);
         }
-        else{
-            INSTANCE.clearAllTables();
-        }
         return INSTANCE;
     }
 

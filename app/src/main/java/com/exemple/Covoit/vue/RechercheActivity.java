@@ -23,7 +23,6 @@ import com.exemple.Covoit.ListAdapteur;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.OnListClickListener;
-import com.exemple.Covoit.controleur.PlaceAutocompleteAdapter;
 import com.exemple.Covoit.models.Covoiturage;
 
 import java.util.Calendar;
@@ -50,19 +49,16 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
 
         rechercheDepart = findViewById(R.id.recherche_depart);
         rechercheDestination = findViewById(R.id.recherche_destination);
-        dateRecherchee = findViewById(R.id.recherche_Calendrier);
+        dateRecherchee = findViewById(R.id.recherche_calendrier);
         btnRechercher = findViewById(R.id.recherche_bouton);
 
         //Adapter AutoCompleteTextView
         ArrayAdapter<String> adressesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, adresses);
-
-        rechercheDepart.setAdapter(new PlaceAutocompleteAdapter(this, android.R.layout.simple_list_item_1));
+        rechercheDepart.setAdapter(adressesAdapter);
         rechercheDestination.setAdapter(adressesAdapter);
 
-        //Initialisation BD
+        //Instance bd
         bd = CovoiturageBd.getInstance(getApplicationContext());
-
-        //Listener pour modifier les choix d'autocomplétion
 
         //Bouton sélectionner une date
         dateRecherchee.setOnClickListener(v -> {
@@ -96,7 +92,7 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
                 if(rechercheDepart.getText().length() == 0 || rechercheDestination.getText().length() == 0 || dateSelectionnee == null)
                     Toast.makeText(getApplicationContext(), "Veuillez renseigner tous les champs.", Toast.LENGTH_LONG).show();
                 else if(dateSelectionnee.before(Calendar.getInstance().getTime()))
-                        Toast.makeText(getApplicationContext(), "Date sélectionée est passée.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Date sélectionée est passée.", Toast.LENGTH_LONG).show();
                 else{ //Tous les champs sont renseignés
                     String depart = rechercheDepart.getText().toString();
                     String destination = rechercheDestination.getText().toString();
@@ -115,8 +111,6 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
         rvCovoiturages.setLayoutManager(new LinearLayoutManager(rvCovoiturages.getContext()));
         rvCovoiturages.setAdapter(null);
         rvCovoiturages.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-
     }
 
     //Méthode pour fermer clavier
@@ -128,7 +122,9 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
 
     @Override
     public void onListClick(Covoiturage c) {
-
+        PopupCovoiturage popupCovoiturage = new PopupCovoiturage(this);
+        popupCovoiturage.setData(c, bd); //On initialise les données
+        popupCovoiturage.build();
     }
 
 }
