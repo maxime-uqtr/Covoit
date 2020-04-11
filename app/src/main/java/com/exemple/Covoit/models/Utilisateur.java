@@ -14,6 +14,7 @@ public class Utilisateur {
     private String prenom;
     private String mail;
     private String mdp;
+    private String telephone;
     private String urlPhoto;
     private boolean conducteur;
     private boolean passager;
@@ -21,24 +22,26 @@ public class Utilisateur {
     public Utilisateur(){}
 
     @Ignore
-    public Utilisateur(long id, String nom, String prenom, String mail, String mdp, String urlPhoto, boolean conducteur, boolean passager) {
+    public Utilisateur(long id, String nom, String prenom, String mail, String mdp, String urlPhoto, String telephone, boolean conducteur, boolean passager) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.mdp = mdp;
         this.urlPhoto = urlPhoto;
+        this.telephone = telephone;
         this.conducteur = conducteur;
         this.passager = passager;
     }
 
     @Ignore
-    public Utilisateur(String nom, String prenom, String mail, String mdp, String urlPhoto, boolean conducteur, boolean passager) {
+    public Utilisateur(String nom, String prenom, String mail, String mdp, String urlPhoto, String telephone, boolean conducteur, boolean passager) {
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.mdp = mdp;
         this.urlPhoto = urlPhoto;
+        this.telephone = telephone;
         this.conducteur = conducteur;
         this.passager = passager;
     }
@@ -52,6 +55,8 @@ public class Utilisateur {
     public String getMail() { return mail; }
 
     public String getMdp() { return mdp; }
+
+    public String getTelephone() { return telephone; }
 
     public String getUrlPhoto() { return urlPhoto; }
 
@@ -79,6 +84,8 @@ public class Utilisateur {
         this.mdp = mdp;
     }
 
+    public void setTelephone(String telephone) { this.telephone = telephone; }
+
     public void setUrlPhoto(String urlPhoto) {
         this.urlPhoto = urlPhoto;
     }
@@ -90,4 +97,5 @@ public class Utilisateur {
     public void setPassager(boolean passager) {
         this.passager = passager;
     }
+
 }

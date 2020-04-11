@@ -171,6 +171,9 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
     @Override
     public void onListClick(Covoiturage c) {
         Log.i("TAG", "onListClick: ");
+        PopupCovoiturage popupCovoiturage = new PopupCovoiturage(this);
+        popupCovoiturage.setData(c, bd); //On initialise les données
+        popupCovoiturage.build();
     }
 
     public CovoiturageBd getBd(){

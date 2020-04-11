@@ -1,9 +1,13 @@
 package com.exemple.Covoit.vue;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -15,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -125,6 +130,16 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
         PopupCovoiturage popupCovoiturage = new PopupCovoiturage(this);
         popupCovoiturage.setData(c, bd); //On initialise les données
         popupCovoiturage.build();
+    }
+
+    public void appelerConducteur(String numero){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+            //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        }
+        else{
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", numero, null));
+            startActivity(intent);
+        }
     }
 
 }
