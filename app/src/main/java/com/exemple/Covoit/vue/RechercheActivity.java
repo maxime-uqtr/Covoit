@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -46,6 +47,7 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
     private Button btnRechercher;
     private RecyclerView rvCovoiturages;
     private ListAdapteur rvAdapteur;
+    private TextView tvErreur;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,12 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
         rechercheDestination = findViewById(R.id.recherche_destination);
         dateRecherchee = findViewById(R.id.recherche_calendrier);
         btnRechercher = findViewById(R.id.recherche_bouton);
+        //Inflation rv
+        rvCovoiturages = findViewById(R.id.recherche_rv);
+        rvCovoiturages.setLayoutManager(new LinearLayoutManager(rvCovoiturages.getContext()));
+        rvCovoiturages.setAdapter(null);
+        rvCovoiturages.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        tvErreur = findViewById(R.id.recherche_vide);
 
         //Adapter AutoCompleteTextView
         ArrayAdapter<String> adressesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, adresses);
@@ -66,19 +74,11 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
         bd = CovoiturageBd.getInstance(getApplicationContext());
 
         //Bouton sélectionner une date
-        dateRecherchee.setOnClickListener(v -> {
-            Calendar calendrier = Calendar.getInstance();
-            int year = calendrier.get(Calendar.YEAR);
-            int month = calendrier.get(Calendar.MONTH);
-            int day = calendrier.get(Calendar.DAY_OF_MONTH);
-
-            DatePickerDialog dialog = new DatePickerDialog(
-                    RechercheActivity.this,
-                    android.R.style.Theme_Holo_Dialog_NoActionBar_MinWidth,
-                    dateSetListener,
-                    year, month, day);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-            dialog.show();
+        dateRecherchee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                afficherCalendrier();
+            }
         });
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -104,18 +104,32 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
                     Date date = dateSelectionnee;
                     rvAdapteur = new ListAdapteur(bd.getCovoiturageDao().getLike(depart, destination, date), RechercheActivity.this::onListClick);
                     if(rvAdapteur.getItemCount()==0){//Message d'erreur
-                        //TODO
+                        rvCovoiturages.setVisibility(View.GONE);
+                        tvErreur.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        rvCovoiturages.setVisibility(View.VISIBLE);
+                        tvErreur.setVisibility(View.GONE);
                     }
                     rvCovoiturages.setAdapter(rvAdapteur);
                 }
             }
         });
+    }
 
-        //Inflation rv
-        rvCovoiturages = findViewById(R.id.recherche_rv);
-        rvCovoiturages.setLayoutManager(new LinearLayoutManager(rvCovoiturages.getContext()));
-        rvCovoiturages.setAdapter(null);
-        rvCovoiturages.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+    public void afficherCalendrier(){
+        Calendar calendrier = Calendar.getInstance();
+        int year = calendrier.get(Calendar.YEAR);
+        int month = calendrier.get(Calendar.MONTH);
+        int day = calendrier.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                RechercheActivity.this,
+                android.R.style.Theme_Holo_Dialog_NoActionBar_MinWidth,
+                dateSetListener,
+                year, month, day);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+        dialog.show();
     }
 
     //Méthode pour fermer clavier

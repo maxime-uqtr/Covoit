@@ -22,7 +22,7 @@ public class Utilisateur {
     public Utilisateur(){}
 
     @Ignore
-    public Utilisateur(long id, String nom, String prenom, String mail, String mdp, String urlPhoto, String telephone, boolean conducteur, boolean passager) {
+    public Utilisateur(long id, String nom, String prenom, String mail, String mdp, String telephone, String urlPhoto, boolean conducteur, boolean passager) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -35,7 +35,7 @@ public class Utilisateur {
     }
 
     @Ignore
-    public Utilisateur(String nom, String prenom, String mail, String mdp, String urlPhoto, String telephone, boolean conducteur, boolean passager) {
+    public Utilisateur(String nom, String prenom, String mail, String mdp, String telephone, String urlPhoto, boolean conducteur, boolean passager) {
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;

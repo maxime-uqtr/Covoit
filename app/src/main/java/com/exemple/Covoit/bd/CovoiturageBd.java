@@ -51,13 +51,13 @@ public abstract class CovoiturageBd extends RoomDatabase {
                 1, "nom",
                 "prenom",
                 "mail",
-                "mdp",
+                "mdp","0708099080",
                 "url", true, false));
         listC.add(new Utilisateur(
                 2,  "nom2",
                 "prenom2",
                 "mail2",
-                "mdp2",
+                "mdp2", "0102087020",
                 "url2", false, true));
         INSTANCE.getUtilisateurDao().insert(listC.toArray(new Utilisateur[]{}));
 

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -107,13 +108,14 @@ public class PopupCovoiturage extends Dialog implements OnMapReadyCallback {
         tvPNom.setText(conducteur.getPrenom() + " " + initialeNom + ".");
         tvTrajet.setText(c.getVilleDep() + " - " + c.getVilleArr());
         tvPrix.setText("$" + c.getPrix());
-        numeroConducteur = "555"; //conducteur.get
+        numeroConducteur = conducteur.getTelephone();
     }
 
     public void appeler(){
         if(numeroConducteur.length()>0){
             if(activity instanceof RechercheActivity){
                 ((RechercheActivity) activity).appelerConducteur(numeroConducteur);
+                Log.i("test", "test appel " + numeroConducteur);
             }
         }
     }

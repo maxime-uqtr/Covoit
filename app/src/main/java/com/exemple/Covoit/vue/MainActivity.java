@@ -101,16 +101,16 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
 
         List<Utilisateur> listeU = new ArrayList<>();
         listeU.add(new Utilisateur(
-                1, "nom",
-                "prenom",
+                1, "Matt",
+                "Dromont",
                 "mail",
-                "mdp",
+                "mdp", "0708099080",
                 "url", true, false));
         listeU.add(new Utilisateur(
-                2,  "nom2",
-                "prenom2",
+                2,  "Angele",
+                "Dion",
                 "mail2",
-                "mdp2",
+                "mdp2", "0102087020",
                 "url2", false, true));
         bd.getUtilisateurDao().insert(listeU.toArray(new Utilisateur[]{}));
 

@@ -46,7 +46,7 @@ public class InscriptionActivity extends AppCompatActivity implements controleur
             public void onClick(View v) {
                 boolean test = inscription(etNom.getText().toString(), etPrenom.getText().toString(), etMail.getText().toString(), etMdp.getText().toString(), etVerifMdp.getText().toString(), cbPassager.isChecked(), cbConducteur.isChecked());
                 if (test){
-                    utilisateur = new Utilisateur(etNom.getText().toString(), etPrenom.getText().toString(), etMail.getText().toString(), etMdp.getText().toString(), "null" ,cbPassager.isChecked(), cbConducteur.isChecked());
+                    utilisateur = new Utilisateur(etNom.getText().toString(), etPrenom.getText().toString(), etMail.getText().toString(), etMdp.getText().toString(), "0110101100", "null" ,cbPassager.isChecked(), cbConducteur.isChecked());
                     bd.getUtilisateurDao().insert(utilisateur);
                     Intent i = new Intent(getApplicationContext(), ConnexionActivity.class);
                     startActivity(i);

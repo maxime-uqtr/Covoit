@@ -76,6 +76,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <TextView
+                android:id="@+id/recherche_vide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/recherche_vide"
+                android:textSize="23sp" />
+
+
         </LinearLayout>
 
 </LinearLayout>
