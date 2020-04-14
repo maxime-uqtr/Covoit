@@ -39,7 +39,7 @@
         <activity
             android:name=".vue.RechercheActivity"
             android:label="@string/title_activity_recherche"
-            android:parentActivityName=".vue.MainActivity"></activity>
+            android:parentActivityName=".vue.MainActivity" />
         <activity
             android:name=".vue.PopActivity"
             android:theme="@style/AppTheme.PopMe" />

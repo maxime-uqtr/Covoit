@@ -1,11 +1,15 @@
 package com.exemple.Covoit.vue;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -170,10 +174,8 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
 
     @Override
     public void onListClick(Covoiturage c) {
-        Log.i("TAG", "onListClick: ");
-        PopupCovoiturage popupCovoiturage = new PopupCovoiturage(this);
-        popupCovoiturage.setData(c, bd); //On initialise les données
-        popupCovoiturage.build();
+        PopupCovoiturage popupCovoiturage = new PopupCovoiturage(c);
+        popupCovoiturage.show(getSupportFragmentManager(), null);
     }
 
     public CovoiturageBd getBd(){

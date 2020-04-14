@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -141,9 +140,8 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
 
     @Override
     public void onListClick(Covoiturage c) {
-        PopupCovoiturage popupCovoiturage = new PopupCovoiturage(this);
-        popupCovoiturage.setData(c, bd); //On initialise les données
-        popupCovoiturage.build();
+            PopupCovoiturage popupCovoiturage = new PopupCovoiturage(c);
+            popupCovoiturage.show(getSupportFragmentManager(), null);
     }
 
     public void appelerConducteur(String numero){
