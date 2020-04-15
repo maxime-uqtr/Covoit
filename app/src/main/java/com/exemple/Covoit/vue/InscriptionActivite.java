@@ -74,8 +74,6 @@ public class InscriptionActivite extends AppCompatActivity implements controleur
             return false;
         if (!mdp.equals(verifMdp) || mdp.isEmpty())
             return false;
-        if(nom.isEmpty() || prenom.isEmpty() || mail.isEmpty() || verifMdp.isEmpty())
-            return false;
-        return true;
+        return !nom.isEmpty() && !prenom.isEmpty() && !mail.isEmpty() && !verifMdp.isEmpty();
     }
 }

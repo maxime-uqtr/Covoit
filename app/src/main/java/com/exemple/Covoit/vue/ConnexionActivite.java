@@ -74,9 +74,6 @@ public class ConnexionActivite extends AppCompatActivity implements controleurCo
     public boolean connexion(String mail, String mdp) {
         long test = -1;
         test = bd.getUtilisateurDao().getIdConnection(mail, mdp);
-        if(test <= 0){
-            return false;
-        }
-        return true;
+        return test > 0;
     }
 }

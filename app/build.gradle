@@ -16,6 +16,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
     compileOptions {
         targetCompatibility = 1.8
         sourceCompatibility = 1.8

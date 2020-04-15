@@ -6,7 +6,7 @@ import android.view.View;
 
 public interface AnimationBouton {
 
-    public static boolean rotateFab(View v, boolean rotate){
+    static boolean rotateFab(View v, boolean rotate){
         v.animate().setDuration(250).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -17,7 +17,7 @@ public interface AnimationBouton {
         return rotate;
     }
 
-    public static void show(View v){ //Rend visible
+    static void show(View v){ //Rend visible
         v.setVisibility(View.VISIBLE);
         v.setAlpha(0f); //Cache au debut de l'animation
         v.setTranslationY(v.getHeight()); //Tout en bas dans le bouton avant
@@ -30,7 +30,7 @@ public interface AnimationBouton {
         v.setClickable(true);
     }
 
-    public  static void hide(View v){ //Cache
+    static void hide(View v){ //Cache
         v.setVisibility(View.VISIBLE);
         v.setAlpha(1f);
         v.setTranslationY(0);
@@ -43,7 +43,7 @@ public interface AnimationBouton {
         v.setClickable(false);
     }
 
-    public static void init(View v){
+    static void init(View v){
         v.setVisibility(View.GONE);
         v.setTranslationY(v.getHeight());
         v.setAlpha(0f);
