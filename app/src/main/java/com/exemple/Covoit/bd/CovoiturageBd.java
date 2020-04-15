@@ -19,18 +19,18 @@ import java.util.concurrent.Executors;
 @Database(entities = {Covoiturage.class, Utilisateur.class}, version = 1, exportSchema = false) //On exporte pas car pas définit le directory
 public abstract class CovoiturageBd extends RoomDatabase {
 
-    private static CovoiturageBd INSTANCE;
+    private static CovoiturageBd Instance;
 
     public abstract CovoiturageDao getCovoiturageDao();
     public abstract UtilisateurDao getUtilisateurDao();
 
     public static synchronized CovoiturageBd getInstance(final Context context){
 
-        if(INSTANCE == null){
+        if(Instance == null){
             context.deleteDatabase("database");
-            INSTANCE = buildDatabase(context);
+            Instance = buildDatabase(context);
         }
-        return INSTANCE;
+        return Instance;
     }
 
     private static CovoiturageBd buildDatabase(final Context context){
@@ -38,7 +38,7 @@ public abstract class CovoiturageBd extends RoomDatabase {
                 .addCallback(new RoomDatabase.Callback() {
                     public void onCreate (SupportSQLiteDatabase db) {
                         super.onCreate(db);
-                        Executors.newSingleThreadScheduledExecutor().execute(() -> iniSchema(db, INSTANCE,context));
+                        Executors.newSingleThreadScheduledExecutor().execute(() -> iniSchema(db, Instance ,context));
                     }})
                 .allowMainThreadQueries()
                 .build();
@@ -59,7 +59,7 @@ public abstract class CovoiturageBd extends RoomDatabase {
                 "mail2",
                 "mdp2", "0102087020",
                 "url2", false, true));
-        INSTANCE.getUtilisateurDao().insert(listC.toArray(new Utilisateur[]{}));
+        Instance.getUtilisateurDao().insert(listC.toArray(new Utilisateur[]{}));
 
     }
 
