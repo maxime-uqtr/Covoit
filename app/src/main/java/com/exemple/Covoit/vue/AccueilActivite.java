@@ -173,8 +173,4 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
         popupCovoiturage.show(getSupportFragmentManager(), null);
     }
 
-    public CovoiturageBd getBd(){
-        return bd;
-    }
-
 }

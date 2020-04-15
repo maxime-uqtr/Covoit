@@ -12,15 +12,15 @@ import com.exemple.Covoit.R;
 
 public class PopUpConnexion extends Activity {
 
-    Button btnClose;
+    Button btnFermer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop);
 
-        btnClose = findViewById(R.id.buttonClose);
-        btnClose.setOnClickListener(new View.OnClickListener() {
+        btnFermer = findViewById(R.id.buttonClose);
+        btnFermer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
