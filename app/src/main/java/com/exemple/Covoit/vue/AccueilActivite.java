@@ -1,22 +1,17 @@
 package com.exemple.Covoit.vue;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.exemple.Covoit.BoutonAnimation;
-import com.exemple.Covoit.ListAdapteur;
+import com.exemple.Covoit.controleur.AnimationBouton;
+import com.exemple.Covoit.controleur.ListAdapteur;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.OnListClickListener;
@@ -31,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity implements OnListClickListener {
+public class AccueilActivite extends AppCompatActivity implements OnListClickListener {
 
     private boolean isRotate = false;
 
@@ -51,21 +46,21 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
 
         pp = findViewById(R.id.main_pp);
         FABproposeCovoiturage = findViewById(R.id.main_FAB_propose);
-        BoutonAnimation.hide(FABproposeCovoiturage);
+        AnimationBouton.hide(FABproposeCovoiturage);
         FABrechercheCovoiturage = findViewById(R.id.main_FAB_recherche);
-        BoutonAnimation.hide(FABrechercheCovoiturage);
+        AnimationBouton.hide(FABrechercheCovoiturage);
 
         FABouvrir = findViewById(R.id.main_FAB_ouvrir);
         FABouvrir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isRotate = BoutonAnimation.rotateFab(v, !isRotate);
+                isRotate = AnimationBouton.rotateFab(v, !isRotate);
                 if(isRotate){
-                    BoutonAnimation.show(FABproposeCovoiturage);
-                    BoutonAnimation.show(FABrechercheCovoiturage);
+                    AnimationBouton.show(FABproposeCovoiturage);
+                    AnimationBouton.show(FABrechercheCovoiturage);
                 }else{
-                    BoutonAnimation.hide(FABproposeCovoiturage);
-                    BoutonAnimation.hide(FABrechercheCovoiturage);
+                    AnimationBouton.hide(FABproposeCovoiturage);
+                    AnimationBouton.hide(FABrechercheCovoiturage);
                 }
             }
         });
@@ -74,14 +69,14 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
         initBD();
 
         FABrechercheCovoiturage.setOnClickListener(v -> {
-            Intent rechercheIntent = new Intent(this, RechercheActivity.class);
+            Intent rechercheIntent = new Intent(this, RechercheActivite.class);
             startActivity(rechercheIntent);
         });
 
         FABproposeCovoiturage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent carteIntent = new Intent(getApplicationContext(), CarteActivity.class);
+                Intent carteIntent = new Intent(getApplicationContext(), CarteActivite.class);
                 startActivity(carteIntent);
             }
         });
@@ -174,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements OnListClickListen
 
     @Override
     public void onListClick(Covoiturage c) {
-        PopupCovoiturage popupCovoiturage = new PopupCovoiturage(c);
+        PopUpCovoiturage popupCovoiturage = new PopUpCovoiturage(c);
         popupCovoiturage.show(getSupportFragmentManager(), null);
     }
 

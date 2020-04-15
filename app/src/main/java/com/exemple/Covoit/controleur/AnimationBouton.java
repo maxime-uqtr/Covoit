@@ -1,10 +1,10 @@
-package com.exemple.Covoit;
+package com.exemple.Covoit.controleur;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.view.View;
 
-public class BoutonAnimation {
+public interface AnimationBouton {
 
     public static boolean rotateFab(View v, boolean rotate){
         v.animate().setDuration(250).setListener(new AnimatorListenerAdapter() {

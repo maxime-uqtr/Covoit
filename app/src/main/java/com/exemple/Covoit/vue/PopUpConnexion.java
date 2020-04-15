@@ -12,7 +12,7 @@ import android.widget.Button;
 
 import com.exemple.Covoit.R;
 
-public class PopActivity extends Activity {
+public class PopUpConnexion extends Activity {
 
     Button btnClose;
 

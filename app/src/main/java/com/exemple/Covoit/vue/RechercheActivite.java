@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.exemple.Covoit.ListAdapteur;
+import com.exemple.Covoit.controleur.ListAdapteur;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.OnListClickListener;
@@ -33,7 +33,7 @@ import com.exemple.Covoit.models.Covoiturage;
 import java.util.Calendar;
 import java.util.Date;
 
-public class RechercheActivity extends AppCompatActivity implements OnListClickListener {
+public class RechercheActivite extends AppCompatActivity implements OnListClickListener {
 
     private CovoiturageBd bd;
 
@@ -101,7 +101,7 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
                     String depart = rechercheDepart.getText().toString();
                     String destination = rechercheDestination.getText().toString();
                     Date date = dateSelectionnee;
-                    rvAdapteur = new ListAdapteur(bd.getCovoiturageDao().getLike(depart, destination, date), RechercheActivity.this::onListClick);
+                    rvAdapteur = new ListAdapteur(bd.getCovoiturageDao().getLike(depart, destination, date), RechercheActivite.this::onListClick);
                     if(rvAdapteur.getItemCount()==0){//Message d'erreur
                         rvCovoiturages.setVisibility(View.GONE);
                         tvErreur.setVisibility(View.VISIBLE);
@@ -123,7 +123,7 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
         int day = calendrier.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog dialog = new DatePickerDialog(
-                RechercheActivity.this,
+                RechercheActivite.this,
                 android.R.style.Theme_Holo_Dialog_NoActionBar_MinWidth,
                 dateSetListener,
                 year, month, day);
@@ -140,7 +140,7 @@ public class RechercheActivity extends AppCompatActivity implements OnListClickL
 
     @Override
     public void onListClick(Covoiturage c) {
-            PopupCovoiturage popupCovoiturage = new PopupCovoiturage(c);
+            PopUpCovoiturage popupCovoiturage = new PopUpCovoiturage(c);
             popupCovoiturage.show(getSupportFragmentManager(), null);
     }
 

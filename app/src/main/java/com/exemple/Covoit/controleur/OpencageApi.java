@@ -2,7 +2,11 @@ package com.exemple.Covoit.controleur;
 
 import android.util.Log;
 
-import com.exemple.Covoit.R;
+import com.byteowls.jopencage.JOpenCageGeocoder;
+import com.byteowls.jopencage.model.JOpenCageForwardRequest;
+import com.byteowls.jopencage.model.JOpenCageLatLng;
+import com.byteowls.jopencage.model.JOpenCageResponse;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public interface PlaceApi {
+public interface OpencageApi {
 
     static ArrayList<String> autoComplete(String input){
         ArrayList<String> arrayList = new ArrayList<String>();
@@ -71,5 +75,26 @@ public interface PlaceApi {
         }
 
         return arrayList;
+    }
+
+    static LatLng getLatLng(String ville){
+        LatLng minQuebec = new LatLng(-79.76, 44.99);
+        LatLng maxQuebec = new LatLng(-57.10, 62.59);
+        JOpenCageGeocoder jOpenCageGeocoder = new JOpenCageGeocoder("b854379cfdb949a7b169f24e581f9f6f");
+
+        //request
+        JOpenCageForwardRequest request = new JOpenCageForwardRequest(ville);
+        //optional parameters
+        request.setRestrictToCountryCode("ca"); //resultats du Canada uniquement
+        request.setBounds(minQuebec.latitude, minQuebec.longitude, maxQuebec.latitude, maxQuebec.longitude); //resultats dans bounding box
+        request.setMinConfidence(1);
+        request.setNoAnnotations(true);
+        request.setNoDedupe(true); //resultats sont non dupliqués
+        //response
+        JOpenCageResponse response = jOpenCageGeocoder.forward(request);
+        //result
+        JOpenCageLatLng result = response.getFirstPosition();
+
+        return new LatLng(result.getLat(), result.getLng());
     }
 }

@@ -1,4 +1,4 @@
-package com.exemple.Covoit;
+package com.exemple.Covoit.controleur;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.exemple.Covoit.controleur.OnListClickListener;
+import com.exemple.Covoit.R;
 import com.exemple.Covoit.models.Covoiturage;
 
 import java.util.List;

@@ -13,7 +13,7 @@ import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.controleurInscription;
 import com.exemple.Covoit.models.Utilisateur;
 
-public class InscriptionActivity extends AppCompatActivity implements controleurInscription {
+public class InscriptionActivite extends AppCompatActivity implements controleurInscription {
 
     //  Boutton : b; EditText : et; CheckBox : cb;
     private Button bValider, bRetour;
@@ -48,10 +48,10 @@ public class InscriptionActivity extends AppCompatActivity implements controleur
                 if (test){
                     utilisateur = new Utilisateur(etNom.getText().toString(), etPrenom.getText().toString(), etMail.getText().toString(), etMdp.getText().toString(), "0110101100", "null" ,cbPassager.isChecked(), cbConducteur.isChecked());
                     bd.getUtilisateurDao().insert(utilisateur);
-                    Intent i = new Intent(getApplicationContext(), ConnexionActivity.class);
+                    Intent i = new Intent(getApplicationContext(), ConnexionActivite.class);
                     startActivity(i);
                 }else{
-                    Intent i = new Intent(getApplicationContext(), PopActivity.class);
+                    Intent i = new Intent(getApplicationContext(), PopUpConnexion.class);
                     startActivity(i);
                 }
             }
@@ -61,7 +61,7 @@ public class InscriptionActivity extends AppCompatActivity implements controleur
         bRetour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ConnexionActivity.class);
+                Intent i = new Intent(getApplicationContext(), ConnexionActivite.class);
                 startActivity(i);
             }
         });

@@ -37,7 +37,7 @@ public class PlaceAutocompleteAdapter extends ArrayAdapter implements Filterable
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults filterResults = new FilterResults();
                 if(constraint!=null){
-                    results = PlaceApi.autoComplete(constraint.toString());
+                    results = OpencageApi.autoComplete(constraint.toString());
                     filterResults.values=results;
                     filterResults.count=results.size();
                 }

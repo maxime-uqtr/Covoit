@@ -3,15 +3,12 @@ package com.exemple.Covoit.vue;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,29 +27,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
+import com.exemple.Covoit.controleur.OpencageApi;
 import com.exemple.Covoit.models.Covoiturage;
 import com.exemple.Covoit.models.Utilisateur;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Result;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import static android.app.Activity.RESULT_OK;
-
-public class PopupCovoiturage extends DialogFragment implements OnMapReadyCallback{
+public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallback{
     private static View view;
 
     private TextView tvDate;
@@ -66,11 +52,11 @@ public class PopupCovoiturage extends DialogFragment implements OnMapReadyCallba
     String numeroConducteur;
     private Covoiturage covoiturage;
 
-    public PopupCovoiturage() {
+    public PopUpCovoiturage() {
         // Required empty public constructor
     }
 
-    public PopupCovoiturage(Covoiturage c) {
+    public PopUpCovoiturage(Covoiturage c) {
         covoiturage = c;
     }
 
@@ -154,21 +140,21 @@ public class PopupCovoiturage extends DialogFragment implements OnMapReadyCallba
         mMap = googleMap;
         Activity activity = getActivity();
         LocationManager lm = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-        /*if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            LocationRequest locationRequest = LocationRequest.create();
-            locationRequest.setInterval(25000);
-            locationRequest.setFastestInterval(20000);
-            locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                    .addLocationRequest(locationRequest);
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
-        }*/
-        /*Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(location != null) {
             LatLng pos = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(pos).title("Marker in device location"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
-        }*/
+            placerCurseur(pos);
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(pos).zoom(9).build();
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
+        else{
+            tvPNom.setText("posi");
+        }
+        placerCurseur(OpencageApi.getLatLng(covoiturage.getVilleDep()));
+        placerCurseur(OpencageApi.getLatLng(covoiturage.getVilleArr()));
     }
 
     public void setData(Covoiturage c){
@@ -190,9 +176,16 @@ public class PopupCovoiturage extends DialogFragment implements OnMapReadyCallba
     public void appeler(){
         if(numeroConducteur.length()>0){
             Activity activity = getActivity();
-            if(activity instanceof RechercheActivity){
-                ((RechercheActivity) activity).appelerConducteur(numeroConducteur);
+            if(activity instanceof RechercheActivite){
+                ((RechercheActivite) activity).appelerConducteur(numeroConducteur);
             }
+        }
+    }
+
+    public void placerCurseur(LatLng position) {
+        if (mMap != null) {
+            MarkerOptions marker = new MarkerOptions().position(position);
+            mMap.addMarker(marker);
         }
     }
 

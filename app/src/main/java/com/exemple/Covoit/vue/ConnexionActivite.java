@@ -16,7 +16,7 @@ import com.exemple.Covoit.controleur.controleurConnexion;
 
 import java.util.concurrent.ExecutionException;
 
-public class ConnexionActivity extends AppCompatActivity implements controleurConnexion {
+public class ConnexionActivite extends AppCompatActivity implements controleurConnexion {
 
     //  Boutton : b; EditText : et;
     private Button bConnection, bInscription;
@@ -40,10 +40,10 @@ public class ConnexionActivity extends AppCompatActivity implements controleurCo
             @Override
             public void onClick(View v) {
                 if(connexion(etMail.getText().toString(), etMdp.getText().toString())){
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent i = new Intent(getApplicationContext(), AccueilActivite.class);
                     startActivity(i);
                 }else{
-                    Intent i = new Intent(getApplicationContext(), PopActivity.class);
+                    Intent i = new Intent(getApplicationContext(), PopUpConnexion.class);
                     startActivity(i);
                 }
             }
@@ -53,7 +53,7 @@ public class ConnexionActivity extends AppCompatActivity implements controleurCo
         bInscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), InscriptionActivity.class);
+                Intent i = new Intent(getApplicationContext(), InscriptionActivite.class);
                 startActivity(i);
             }
         });
