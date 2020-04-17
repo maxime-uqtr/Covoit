@@ -52,7 +52,7 @@ public abstract class CovoiturageBd extends RoomDatabase {
                 "prenom",
                 "mail",
                 "mdp","0708099080",
-                "url", true, false));
+                "url", true, true));
         listC.add(new Utilisateur(
                 2,  "nom2",
                 "prenom2",
@@ -60,7 +60,6 @@ public abstract class CovoiturageBd extends RoomDatabase {
                 "mdp2", "0102087020",
                 "url2", false, true));
         Instance.getUtilisateurDao().insert(listC.toArray(new Utilisateur[]{}));
-
     }
 
 }

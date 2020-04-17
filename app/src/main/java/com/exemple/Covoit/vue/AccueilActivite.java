@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -40,17 +41,20 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_accueil);
 
         Stetho.initializeWithDefaults(this); //Ajout de stetho à l'activité
 
-        pp = findViewById(R.id.main_pp);
-        FABproposeCovoiturage = findViewById(R.id.main_FAB_propose);
+        pp = findViewById(R.id.accueil_pp);
+        TextView tvNom = findViewById(R.id.accueil_prenomNom);
+        TextView tvRole = findViewById(R.id.accueil_conducteurPassager);
+
+        FABproposeCovoiturage = findViewById(R.id.accueil_FAB_propose);
         AnimationBouton.hide(FABproposeCovoiturage);
-        FABrechercheCovoiturage = findViewById(R.id.main_FAB_recherche);
+        FABrechercheCovoiturage = findViewById(R.id.accueil_FAB_recherche);
         AnimationBouton.hide(FABrechercheCovoiturage);
 
-        FABouvrir = findViewById(R.id.main_FAB_ouvrir);
+        FABouvrir = findViewById(R.id.accueil_FAB_ouvrir);
         FABouvrir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +70,7 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
         });
 
         bd = CovoiturageBd.getInstance(getApplicationContext());
-        initBD();
+        initBd();
 
         FABrechercheCovoiturage.setOnClickListener(v -> {
             Intent rechercheIntent = new Intent(this, RechercheActivite.class);
@@ -81,10 +85,21 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
             }
         });
 
-        rv = findViewById(R.id.main_recyclerView);
+        rv = findViewById(R.id.accueil_recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
         rv.setAdapter(new ListAdapteur(bd.getCovoiturageDao().getListAll(), this));
         rv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        //Essai de l'affichage
+        Utilisateur util = bd.getUtilisateurDao().getAll().get(0);
+        String nom = util.getPrenom() + " " + util.getNom();
+        tvNom.setText(nom);
+        if(util.isConducteur() && util.isPassager())
+            tvRole.setText(R.string.conducteurPassager);
+        else if(util.isConducteur())
+            tvRole.setText("conducteur");
+        else if(util.isPassager())
+            tvRole.setText("passager");
 
         String urlLogo = "https://covoituragebd-7356.restdb.io/media/5e7a8375cf927e3e0001bc30";
         try {
@@ -94,20 +109,20 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 
-    public void initBD(){
-
+    public void initBd(){
         List<Utilisateur> listeU = new ArrayList<>();
-        listeU.add(new Utilisateur(
-                1, "Matt",
+        listeU.add(new Utilisateur(3,
                 "Dromont",
+                "Matt",
                 "mail",
                 "mdp", "0708099080",
                 "url", true, false));
-        listeU.add(new Utilisateur(
-                2,  "Angele",
-                "Dion",
+        listeU.add(new Utilisateur(4,
+                 "Dion",
+                "Angele",
                 "mail2",
                 "mdp2", "0102087020",
                 "url2", false, true));
@@ -126,10 +141,6 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
                 "Québec",
                 "Montréal", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,20),
-                "Montréal",
-                "Québec", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
         listeC.add(new Covoiturage(new Date(2020, 7,14),
                 "Québec",
                 "Trois-Rivières", (float) 5, 2,
@@ -137,6 +148,10 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
         listeC.add(new Covoiturage(new Date(2020, 7,14),
                 "Louiseville",
                 "Montréal", (float) 5, 2,
+                bd.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 5,20),
+                "Montréal",
+                "Québec", (float) 5, 2,
                 bd.getUtilisateurDao().getAll().get(1).getId()));
         listeC.add(new Covoiturage(new Date(2020, 6,24),
                 "Québec",

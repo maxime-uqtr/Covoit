@@ -20,24 +20,27 @@
             android:id="@+id/accueil_pp"
             android:layout_width="85dp"
             android:layout_height="85dp"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="start"
+            android:paddingTop="2dp"
+            android:paddingLeft="20dp">
 
             <TextView
-                android:id="@+id/accueil_nomPrenom"
+                android:id="@+id/accueil_prenomNom"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textSize="27sp"/>
 
             <TextView
                 android:id="@+id/accueil_conducteurPassager"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textSize="19sp"/>
 
             <TextView
                 android:id="@+id/accueil_nbCovoiturages"

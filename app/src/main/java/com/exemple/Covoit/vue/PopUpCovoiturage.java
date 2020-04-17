@@ -153,8 +153,8 @@ public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallba
         else{
             tvPNom.setText("posi");
         }
-        placerCurseur(OpencageApi.getLatLng(covoiturage.getVilleDep()));
-        placerCurseur(OpencageApi.getLatLng(covoiturage.getVilleArr()));
+        //placerCurseur(OpencageApi.getLatLng(covoiturage.getVilleDep()));
+        //placerCurseur(OpencageApi.getLatLng(covoiturage.getVilleArr()));
     }
 
     public void setData(Covoiturage c){

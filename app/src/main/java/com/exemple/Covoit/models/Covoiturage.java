@@ -30,6 +30,7 @@ public class Covoiturage {
     @ColumnInfo(name = "ville_arr")
     private String villeArr;
     private float prix;
+    @ColumnInfo(name = "nb_passager")
     private int nbPassager;
     @ColumnInfo(name = "conducteur_id")
     private long conducteurId;
@@ -61,17 +62,11 @@ public class Covoiturage {
 
     public long getId() { return id; }
 
-    public Date getDate() {
-        return date;
-    }
+    public Date getDate() { return date; }
 
-    public String getVilleDep() {
-        return villeDep;
-    }
+    public String getVilleDep() { return villeDep; }
 
-    public String getVilleArr() {
-        return villeArr;
-    }
+    public String getVilleArr() { return villeArr; }
 
     public float getPrix() { return prix; }
 
@@ -79,27 +74,16 @@ public class Covoiturage {
 
     public long getConducteurId() { return conducteurId; }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    public void setDate(Date date) { this.date = date; }
 
-    public void setVilleDep(String villeDep) {
-        this.villeDep = villeDep;
-    }
+    public void setVilleDep(String villeDep) { this.villeDep = villeDep; }
 
-    public void setVilleArr(String villeArr) {
-        this.villeArr = villeArr;
-    }
+    public void setVilleArr(String villeArr) { this.villeArr = villeArr; }
 
-    public void setPrix(float prix) {
-        this.prix = prix;
-    }
+    public void setPrix(float prix) { this.prix = prix; }
 
-    public void setNbPassager(int nbPassager) {
-        this.nbPassager = nbPassager;
-    }
+    public void setNbPassager(int nbPassager) { this.nbPassager = nbPassager; }
 
-    public void setConducteurId(long conducteurId) {
-        this.conducteurId = conducteurId;
-    }
+    public void setConducteurId(long conducteurId) { this.conducteurId = conducteurId; }
+
 }
