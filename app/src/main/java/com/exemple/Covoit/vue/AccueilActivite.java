@@ -18,6 +18,7 @@ import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.OnListClickListener;
 import com.exemple.Covoit.controleur.TelechargerImage;
 import com.exemple.Covoit.models.Covoiturage;
+import com.exemple.Covoit.models.Trajet;
 import com.exemple.Covoit.models.Utilisateur;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -87,7 +88,7 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
 
         rv = findViewById(R.id.accueil_recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
-        rv.setAdapter(new ListAdapteur(bd.getCovoiturageDao().getListAll(), this));
+        rv.setAdapter(new ListAdapteur(bd.getUtilisateurDao().getCovoiturages(2), this));
         rv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         //Essai de l'affichage
@@ -180,6 +181,16 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
         for(Covoiturage c : listeC){
             bd.getCovoiturageDao().insert(c);
         }
+
+        ArrayList<Trajet> listeT = new ArrayList<>();
+        listeT.add(new Trajet(1,1));
+        listeT.add(new Trajet(1, 3));
+        listeT.add(new Trajet(2, 2));
+        listeT.add(new Trajet(3, 1));
+        for(Trajet t : listeT){
+            bd.getTrajetDao().insert(t);
+        }
+
     }
 
     @Override
