@@ -16,8 +16,8 @@ import java.util.Date;
 @Entity(foreignKeys = {@ForeignKey(entity = Utilisateur.class,
         parentColumns = "id",
         childColumns = "conducteur_id")},
-        indices = {@Index(value="conducteur_id")}
-)
+        indices = {@Index(value = "conducteur_id")}
+       )
 
 public class Covoiturage {
 

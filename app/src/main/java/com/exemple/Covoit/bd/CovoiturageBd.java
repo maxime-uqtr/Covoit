@@ -8,21 +8,24 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.exemple.Covoit.bd.dao.CovoiturageDao;
+import com.exemple.Covoit.bd.dao.TrajetDao;
 import com.exemple.Covoit.bd.dao.UtilisateurDao;
 import com.exemple.Covoit.models.Covoiturage;
+import com.exemple.Covoit.models.Trajet;
 import com.exemple.Covoit.models.Utilisateur;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Covoiturage.class, Utilisateur.class}, version = 1, exportSchema = false) //On exporte pas car pas définit le directory
+@Database(entities = {Covoiturage.class, Utilisateur.class, Trajet.class}, version = 1, exportSchema = false) //On exporte pas car pas définit le directory
 public abstract class CovoiturageBd extends RoomDatabase {
 
     private static CovoiturageBd Instance;
 
     public abstract CovoiturageDao getCovoiturageDao();
     public abstract UtilisateurDao getUtilisateurDao();
+    public abstract TrajetDao getTrajetDao();
 
     public static synchronized CovoiturageBd getInstance(final Context context){
 
