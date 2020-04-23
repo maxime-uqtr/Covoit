@@ -19,4 +19,8 @@
     <string name="title_activity_carte">Carte</string>
     <string name="recherche_vide">Aucun resultat, réessayez plus tard !</string>
     <string name="conducteurPassager">conducteur/passager</string>
+    <string name="telephone">telephone</string>
+    <string name="fermer">fermer</string>
+    <string name="conducteur">conducteur</string>
+    <string name="passager">passager</string>
 </resources>

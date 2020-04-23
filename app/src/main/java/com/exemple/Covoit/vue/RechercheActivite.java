@@ -47,6 +47,7 @@ public class RechercheActivite extends AppCompatActivity implements OnListClickL
     private RecyclerView rvCovoiturages;
     private ListAdapteur rvAdapteur;
     private TextView tvErreur;
+    private PopUpCovoiturage popupCovoiturage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -140,8 +141,17 @@ public class RechercheActivite extends AppCompatActivity implements OnListClickL
 
     @Override
     public void onListClick(Covoiturage c) {
-            PopUpCovoiturage popupCovoiturage = new PopUpCovoiturage(c);
+        if(popupCovoiturage == null) { //Première instance du popup
+            popupCovoiturage = new PopUpCovoiturage(c);
             popupCovoiturage.show(getSupportFragmentManager(), null);
+        }
+        else if(!popupCovoiturage.isVisible()){ //Si dialog non visible
+            popupCovoiturage.setCovoiturage(c);
+            popupCovoiturage.show(getSupportFragmentManager(), null);
+        }
+        else{
+            //Affichage dialog en cours
+        }
     }
 
     public void appelerConducteur(String numero){

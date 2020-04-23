@@ -9,7 +9,6 @@
     android:theme="@android:style/Widget.PopupWindow">
 
     <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".vue.PopUpCovoiturage"
@@ -24,22 +23,24 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left">
+                android:layout_gravity="left"
+                tools:ignore="RtlHardcoded">
 
             <TextView
                 android:id="@+id/popupCovoiturage_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/quantum_black_100"/>
+                android:textColor="@color/quantum_black_100"
+                android:layout_marginEnd="8dp" />
 
             <TextView
                 android:id="@+id/popupCovoiturage_nbPassager"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="italic"
                 android:textColor="@color/quantum_black_100"/>
 
@@ -48,13 +49,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="right">
+                android:gravity="right"
+                tools:ignore="RtlHardcoded">
 
             <ImageView
                 android:id="@+id/popupCovoiturage_fermer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_close"/>
+                app:srcCompat="@drawable/ic_close"
+                android:contentDescription="@string/fermer" />
 
             </LinearLayout>
 
@@ -63,20 +66,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <TextView
                 android:id="@+id/popupCovoiturage_P.Nom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22dp"
+                android:textSize="22sp"
                 android:textColor="@color/quantum_black_100"/>
 
             <ImageView
                 android:id="@+id/popupCovoiturage_tel"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_phone"/>
+                app:srcCompat="@drawable/ic_phone"
+                android:contentDescription="@string/telephone" />
 
         </LinearLayout>
 
@@ -90,14 +95,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:textSize="18dp"
-                android:textColor="@color/quantum_black_100"/>
+                android:textSize="18sp"
+                android:textColor="@color/quantum_black_100"
+                android:layout_marginEnd="10dp" />
 
             <TextView
                 android:id="@+id/popupCovoiturage_prix"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textColor="@color/quantum_black_100"/>
 
         </LinearLayout>

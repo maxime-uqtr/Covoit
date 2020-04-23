@@ -49,7 +49,7 @@ public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallba
     private TextView tvTrajet;
     private TextView tvPrix;
     private GoogleMap mMap;
-    String numeroConducteur;
+    private String numeroConducteur;
     private Covoiturage covoiturage;
 
     public PopUpCovoiturage() {
@@ -131,7 +131,8 @@ public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallba
             fm.executePendingTransactions();
         }
         mapFragment.getMapAsync(this);
-        setData(covoiturage);
+        if(covoiturage != null)
+            setData();
 
     }
 
@@ -151,24 +152,29 @@ public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallba
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
         else{
-            tvPNom.setText("posi");
+            //Localisation appareil non disponible
         }
         //placerCurseur(OpencageApi.getLatLng(covoiturage.getVilleDep()));
         //placerCurseur(OpencageApi.getLatLng(covoiturage.getVilleArr()));
     }
 
-    public void setData(Covoiturage c){
-        String contenu = c.getDate().getDay() + "/" + c.getDate().getMonth() + "/" + c.getDate().getYear();
+    public void setCovoiturage(Covoiturage covoiturage) {
+        this.covoiturage = covoiturage;
+        setData(); //On maj les datas
+    }
+
+    public void setData(){
+        String contenu = covoiturage.getDate().getDay() + "/" + covoiturage.getDate().getMonth() + "/" + covoiturage.getDate().getYear();
         tvDate.setText(contenu);
-        contenu = c.getNbPassager() + " places";
+        contenu = covoiturage.getNbPassager() + " places";
         tvNbPassager.setText(contenu);
-        Utilisateur conducteur = CovoiturageBd.getInstance(getContext()).getUtilisateurDao().get(c.getConducteurId()); //On prend les renseignements sur le conducteur
+        Utilisateur conducteur = CovoiturageBd.getInstance(getContext()).getUtilisateurDao().get(covoiturage.getConducteurId()); //On prend les renseignements sur le conducteur
         char initialeNom = conducteur.getNom().charAt(0); //On garde la première lettre du nom de famille
         contenu = conducteur.getPrenom() + " " + initialeNom + ".";
         tvPNom.setText(contenu);
-        contenu = c.getVilleDep() + " - " + c.getVilleArr();
+        contenu = covoiturage.getVilleDep() + " - " + covoiturage.getVilleArr();
         tvTrajet.setText(contenu);
-        contenu = "$" + c.getPrix();
+        contenu = "$" + covoiturage.getPrix();
         tvPrix.setText(contenu);
         numeroConducteur = conducteur.getTelephone();
     }

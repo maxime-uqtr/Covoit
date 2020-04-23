@@ -38,6 +38,7 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
     private FloatingActionButton FABproposeCovoiturage;
     private FloatingActionButton FABouvrir;
     private RecyclerView rv;
+    private PopUpCovoiturage popupCovoiturage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,15 +93,15 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
         rv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         //Essai de l'affichage
-        Utilisateur util = bd.getUtilisateurDao().getAll().get(0);
+        Utilisateur util = bd.getUtilisateurDao().getAll().get(2);
         String nom = util.getPrenom() + " " + util.getNom();
         tvNom.setText(nom);
         if(util.isConducteur() && util.isPassager())
             tvRole.setText(R.string.conducteurPassager);
         else if(util.isConducteur())
-            tvRole.setText("conducteur");
+            tvRole.setText(R.string.conducteur);
         else if(util.isPassager())
-            tvRole.setText("passager");
+            tvRole.setText(R.string.passager);
 
         String urlLogo = "https://covoituragebd-7356.restdb.io/media/5e7a8375cf927e3e0001bc30";
         try {
@@ -195,8 +196,16 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
 
     @Override
     public void onListClick(Covoiturage c) {
-        PopUpCovoiturage popupCovoiturage = new PopUpCovoiturage(c);
-        popupCovoiturage.show(getSupportFragmentManager(), null);
+        if(popupCovoiturage == null) { //Première instance du popup
+            popupCovoiturage = new PopUpCovoiturage(c);
+            popupCovoiturage.show(getSupportFragmentManager(), null);
+        }
+        else if(!popupCovoiturage.isVisible()){ //Si dialog non visible
+            popupCovoiturage.setCovoiturage(c);
+            popupCovoiturage.show(getSupportFragmentManager(), null);
+        }
+        else{
+            //Affichage dialog en cours
+        }
     }
-
 }
