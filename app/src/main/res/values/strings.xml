@@ -23,4 +23,5 @@
     <string name="fermer">fermer</string>
     <string name="conducteur">conducteur</string>
     <string name="passager">passager</string>
+    <string name="demander_covoiturage">demander covoiturage</string>
 </resources>
