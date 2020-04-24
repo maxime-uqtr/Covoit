@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_trajets">
+
+    <fragment
+        android:id="@+id/navigation_trajets"
+        android:name="com.exemple.Covoit.vue.ui.trajets.TrajetsFragment"
+        android:label="@string/title_covoiturages"
+        tools:layout="@layout/fragment_trajets" />
+
+    <fragment
+        android:id="@+id/navigation_propositions"
+        android:name="com.exemple.Covoit.vue.ui.propositions.PropositionsFragment"
+        android:label="@string/title_propositions"
+        tools:layout="@layout/fragment_propositions" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.exemple.Covoit.vue.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>
