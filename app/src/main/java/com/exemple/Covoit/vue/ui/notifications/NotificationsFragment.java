@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.exemple.Covoit.vue.R;
+import com.exemple.Covoit.R;
 
 public class NotificationsFragment extends Fragment {
 

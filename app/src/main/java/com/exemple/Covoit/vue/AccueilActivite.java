@@ -4,23 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.exemple.Covoit.controleur.AnimationBouton;
-import com.exemple.Covoit.controleur.ListAdapteur;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
-import com.exemple.Covoit.controleur.OnListClickListener;
-import com.exemple.Covoit.controleur.TelechargerImage;
+import com.exemple.Covoit.controleur.AnimationBouton;
 import com.exemple.Covoit.models.Covoiturage;
 import com.exemple.Covoit.models.Trajet;
 import com.exemple.Covoit.models.Utilisateur;
@@ -31,9 +25,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-public class AccueilActivite extends AppCompatActivity implements OnListClickListener {
+public class AccueilActivite extends AppCompatActivity {
 
     private boolean isRotate = false;
 
@@ -62,10 +55,6 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        pp = findViewById(R.id.accueil_pp);
-        TextView tvNom = findViewById(R.id.accueil_prenomNom);
-        TextView tvRole = findViewById(R.id.accueil_conducteurPassager);
-
         FABproposeCovoiturage = findViewById(R.id.accueil_FAB_propose);
         AnimationBouton.hide(FABproposeCovoiturage);
         FABrechercheCovoiturage = findViewById(R.id.accueil_FAB_recherche);
@@ -86,9 +75,6 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
             }
         });
 
-        bd = CovoiturageBd.getInstance(getApplicationContext());
-        initBd();
-
         FABrechercheCovoiturage.setOnClickListener(v -> {
             Intent rechercheIntent = new Intent(this, RechercheActivite.class);
             startActivity(rechercheIntent);
@@ -101,31 +87,6 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
                 startActivity(propositionIntent);
             }
         });
-
-        rv = findViewById(R.id.accueil_recyclerView);
-        rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
-        rv.setAdapter(new ListAdapteur(bd.getUtilisateurDao().getCovoiturages(2), this));
-        rv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-        //Essai de l'affichage
-        Utilisateur util = bd.getUtilisateurDao().getAll().get(2);
-        String nom = util.getPrenom() + " " + util.getNom();
-        tvNom.setText(nom);
-        if(util.isConducteur() && util.isPassager())
-            tvRole.setText(R.string.conducteurPassager);
-        else if(util.isConducteur())
-            tvRole.setText(R.string.conducteur);
-        else if(util.isPassager())
-            tvRole.setText(R.string.passager);
-
-        String urlLogo = "https://covoituragebd-7356.restdb.io/media/5e7a8375cf927e3e0001bc30";
-        try {
-            pp.setImageBitmap(new TelechargerImage().execute(urlLogo).get());
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -209,7 +170,7 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
 
     }
 
-    @Override
+    /*@Override
     public void onListClick(Covoiturage c) {
         if(popupCovoiturage == null) { //Première instance du popup
             popupCovoiturage = new PopUpCovoiturage(c);
@@ -222,5 +183,5 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
         else{
             //Affichage dialog en cours
         }
-    }
+    }*/
 }
