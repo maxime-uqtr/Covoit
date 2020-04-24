@@ -82,8 +82,8 @@ public class AccueilActivite extends AppCompatActivity implements OnListClickLis
         FABproposeCovoiturage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent carteIntent = new Intent(getApplicationContext(), CarteActivite.class);
-                startActivity(carteIntent);
+                Intent propositionIntent = new Intent(getApplicationContext(), PropositionActivite.class);
+                startActivity(propositionIntent);
             }
         });
 

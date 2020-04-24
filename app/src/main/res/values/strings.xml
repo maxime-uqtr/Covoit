@@ -7,8 +7,8 @@
     <string name="urlBd">https://covoituragebd-7356.restdb.io/rest</string>
     <string name="départ">Point de départ</string>
     <string name="arrivée">Destination</string>
-    <string name="recherche_depart">Entrer point de départ</string>
-    <string name="recherche_destination">Destination</string>
+    <string name="actv_depart">Point de départ</string>
+    <string name="actv_destination">Destination</string>
     <string name="recherche_date">Sélectionner date</string>
     <string name="recherche_btn">Rechercher</string>
     <string name="connexion_btnConnexion">Connexion</string>
@@ -24,4 +24,22 @@
     <string name="conducteur">conducteur</string>
     <string name="passager">passager</string>
     <string name="demander_covoiturage">demander covoiturage</string>
+    <string name="date">Date</string>
+    <string name="d_part">Départ :</string>
+    <string name="destination">Destination :</string>
+    <string name="prix">Prix :</string>
+    <string name="nombre_de_places">Nombre de places :</string>
+    <string name="title_activity_test">testActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
 </resources>

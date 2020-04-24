@@ -23,7 +23,7 @@
                     android:id="@+id/recherche_depart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/recherche_depart"
+                    android:hint="@string/actv_depart"
                     android:completionThreshold="1"/>
 
             </androidx.cardview.widget.CardView>
@@ -37,7 +37,7 @@
                     android:id="@+id/recherche_destination"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/recherche_destination"
+                    android:hint="@string/actv_destination"
                     android:completionThreshold="1"/>
 
             </androidx.cardview.widget.CardView>
