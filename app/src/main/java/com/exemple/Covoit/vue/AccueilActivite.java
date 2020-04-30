@@ -4,17 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.AnimationBouton;
+import com.exemple.Covoit.controleur.TelechargerImage;
 import com.exemple.Covoit.models.Covoiturage;
 import com.exemple.Covoit.models.Trajet;
 import com.exemple.Covoit.models.Utilisateur;
@@ -25,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class AccueilActivite extends AppCompatActivity {
 
@@ -32,11 +34,11 @@ public class AccueilActivite extends AppCompatActivity {
 
     private CovoiturageBd bd;
     private ImageView pp;
+    private TextView tvNoms;
+    private TextView tvRole;
     private FloatingActionButton FABrechercheCovoiturage;
     private FloatingActionButton FABproposeCovoiturage;
     private FloatingActionButton FABouvrir;
-    private RecyclerView rv;
-    private PopUpCovoiturage popupCovoiturage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class AccueilActivite extends AppCompatActivity {
 
         Stetho.initializeWithDefaults(this); //Ajout de stetho à l'activité
 
+        pp = findViewById(R.id.accueil_pp);
+        tvNoms = findViewById(R.id.accueil_prenomNom);
+        tvRole = findViewById(R.id.accueil_conducteurPassager);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -61,6 +66,29 @@ public class AccueilActivite extends AppCompatActivity {
         AnimationBouton.hide(FABrechercheCovoiturage);
 
         FABouvrir = findViewById(R.id.accueil_FAB_ouvrir);
+
+        bd = CovoiturageBd.getInstance(this);
+        initBd();
+        //Essai de l'affichage
+        Utilisateur util = bd.getUtilisateurDao().getAll().get(2);
+        String nom = util.getPrenom() + " " + util.getNom();
+        tvNoms.setText(nom);
+        if(util.isConducteur() && util.isPassager())
+            tvRole.setText(R.string.conducteurPassager);
+        else if(util.isConducteur())
+            tvRole.setText(R.string.conducteur);
+        else if(util.isPassager())
+            tvRole.setText(R.string.passager);
+
+        String urlLogo = "https://covoituragebd-7356.restdb.io/media/5e7a8375cf927e3e0001bc30";
+        try {
+            pp.setImageBitmap(new TelechargerImage().execute(urlLogo).get());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         FABouvrir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,19 +197,4 @@ public class AccueilActivite extends AppCompatActivity {
         }
 
     }
-
-    /*@Override
-    public void onListClick(Covoiturage c) {
-        if(popupCovoiturage == null) { //Première instance du popup
-            popupCovoiturage = new PopUpCovoiturage(c);
-            popupCovoiturage.show(getSupportFragmentManager(), null);
-        }
-        else if(!popupCovoiturage.isVisible()){ //Si dialog non visible
-            popupCovoiturage.setCovoiturage(c);
-            popupCovoiturage.show(getSupportFragmentManager(), null);
-        }
-        else{
-            //Affichage dialog en cours
-        }
-    }*/
 }

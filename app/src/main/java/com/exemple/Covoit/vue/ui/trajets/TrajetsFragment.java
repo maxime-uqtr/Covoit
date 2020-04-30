@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,28 +18,20 @@ import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.ListAdapteur;
 import com.exemple.Covoit.controleur.OnListClickListener;
-import com.exemple.Covoit.controleur.TelechargerImage;
 import com.exemple.Covoit.models.Covoiturage;
 import com.exemple.Covoit.models.Trajet;
 import com.exemple.Covoit.models.Utilisateur;
 import com.exemple.Covoit.vue.PopUpCovoiturage;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class TrajetsFragment extends Fragment implements OnListClickListener {
 
     private TrajetsViewModel homeViewModel;
     private boolean isRotate = false;
-
     private CovoiturageBd bd;
-    private ImageView pp;
-    private FloatingActionButton FABrechercheCovoiturage;
-    private FloatingActionButton FABproposeCovoiturage;
-    private FloatingActionButton FABouvrir;
     private RecyclerView rv;
     private PopUpCovoiturage popupCovoiturage;
 
@@ -58,37 +48,13 @@ public class TrajetsFragment extends Fragment implements OnListClickListener {
             }
         });
 
-        pp = view.findViewById(R.id.accueil_pp);
-        TextView tvNom = view.findViewById(R.id.accueil_prenomNom);
-        TextView tvRole = view.findViewById(R.id.accueil_conducteurPassager);
-
         bd = CovoiturageBd.getInstance(getContext());
         initBd();
 
         rv = view.findViewById(R.id.accueil_recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
-        rv.setAdapter(new ListAdapteur(bd.getUtilisateurDao().getCovoiturages(2), this::onListClick));
+        rv.setAdapter(new ListAdapteur(bd.getUtilisateurDao().getTrajetsConfirmes(1), this::onListClick));
         rv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-
-        //Essai de l'affichage
-        Utilisateur util = bd.getUtilisateurDao().getAll().get(2);
-        String nom = util.getPrenom() + " " + util.getNom();
-        tvNom.setText(nom);
-        if(util.isConducteur() && util.isPassager())
-            tvRole.setText(R.string.conducteurPassager);
-        else if(util.isConducteur())
-            tvRole.setText(R.string.conducteur);
-        else if(util.isPassager())
-            tvRole.setText(R.string.passager);
-
-        String urlLogo = "https://covoituragebd-7356.restdb.io/media/5e7a8375cf927e3e0001bc30";
-        try {
-            pp.setImageBitmap(new TelechargerImage().execute(urlLogo).get());
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         return view;
 
@@ -178,11 +144,11 @@ public class TrajetsFragment extends Fragment implements OnListClickListener {
     public void onListClick(Covoiturage c) {
         if(popupCovoiturage == null) { //Première instance du popup
             popupCovoiturage = new PopUpCovoiturage(c);
-            //popupCovoiturage.show(getFragmentManager(), null);
+            popupCovoiturage.show(getFragmentManager(), null);
         }
         else if(!popupCovoiturage.isVisible()){ //Si dialog non visible
             popupCovoiturage.setCovoiturage(c);
-            //popupCovoiturage.show(getFragmentManager(), null);
+            popupCovoiturage.show(getFragmentManager(), null);
         }
         else{
             //Affichage dialog en cours
