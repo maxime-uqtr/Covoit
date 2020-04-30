@@ -45,4 +45,6 @@
     <string name="title_covoiturages">Covoiturages</string>
     <string name="title_propositions">Propositions</string>
     <string name="title_notifications">Notifications</string>
+    <string name="proposer">proposer</string>
+    <string name="title_activity_proposition">Proposition</string>
 </resources>

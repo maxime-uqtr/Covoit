@@ -6,11 +6,6 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-
-import com.exemple.Covoit.controleur.ConversionDate;
-
-import java.util.Date;
 
 //Clé étrangère = un Utilisateur
 @Entity(foreignKeys = {@ForeignKey(entity = Covoiturage.class,
@@ -31,6 +26,9 @@ public class Trajet {
     private long covoiturageId;
     @ColumnInfo(name = "passagers_id")
     private long passagersId;
+    @ColumnInfo(name = "en_attente")
+    private boolean enAttente = true;
+    private boolean confirme = false;
 
     public Trajet(){}
 
@@ -70,4 +68,13 @@ public class Trajet {
     public void setPassagersId(long passagersId) {
         this.passagersId = passagersId;
     }
+
+    public boolean isEnAttente() { return enAttente; }
+
+    public void setEnAttente(boolean enAttente) { this.enAttente = enAttente; }
+
+    public boolean isConfirme() { return confirme; }
+
+    public void setConfirme(boolean confirme) { enAttente = false; this.confirme = confirme; }
+
 }

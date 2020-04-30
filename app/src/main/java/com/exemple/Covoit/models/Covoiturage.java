@@ -64,6 +64,8 @@ public class Covoiturage {
 
     public Date getDate() { return date; }
 
+    public String getDateString() { return ConversionDate.dateToString(date); }
+
     public String getVilleDep() { return villeDep; }
 
     public String getVilleArr() { return villeArr; }

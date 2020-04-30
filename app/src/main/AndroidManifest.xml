@@ -40,11 +40,14 @@
             android:name=".vue.CarteActivite"
             android:label="@string/title_activity_carte"
             android:parentActivityName=".vue.AccueilActivite" />
-        <activity android:name=".vue.PropositionActivite" />
+        <activity android:name=".vue.PropositionActivite"
+            android:label="@string/title_activity_proposition"
+            android:parentActivityName=".vue.AccueilActivite" />
         <activity
             android:name=".vue.RechercheActivite"
             android:label="@string/title_activity_recherche"
             android:parentActivityName=".vue.AccueilActivite" />
+
         <activity
             android:name=".vue.PopUpConnexion"
             android:theme="@style/AppTheme.PopMe" />

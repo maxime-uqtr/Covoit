@@ -37,7 +37,7 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
 
         Covoiturage c = mCovoiturage.get(position);
         holder.itineraire.setText(c.getVilleDep() + " - " + c.getVilleArr());
-        holder.date.setText(c.getDate().getDay() + "/" + c.getDate().getMonth() + "/" + c.getDate().getYear());
+        holder.date.setText(c.getDateString());
         holder.prix.setText("Prix : $" + c.getPrix());
         holder.nbPassager.setText("Place(s) : " + c.getNbPassager());
 

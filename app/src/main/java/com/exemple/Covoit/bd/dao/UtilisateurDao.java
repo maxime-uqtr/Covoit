@@ -31,8 +31,11 @@ public interface UtilisateurDao {
     @Query("SELECT id FROM utilisateur WHERE mail = :mail AND mdp = :mdp")
     long getIdConnection(String mail, String mdp);
 
-    @Query("SELECT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE passagers_id = :userId) ORDER BY date")
-    List<Covoiturage> getCovoiturages(long userId);
+    @Query("SELECT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE passagers_id = :userId OR conducteur_id = :userId AND confirme) ORDER BY date")
+    List<Covoiturage> getTrajetsConfirmes(long userId);
+
+    @Query("SELECT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE passagers_id = :userId OR conducteur_id = :userId AND en_attente) ORDER BY date")
+    long getDemandes(long userId);
 
     @Update
     int update(Utilisateur utilisateur);

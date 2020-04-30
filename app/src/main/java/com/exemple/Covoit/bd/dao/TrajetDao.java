@@ -9,7 +9,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.exemple.Covoit.models.Trajet;
-import com.exemple.Covoit.models.Utilisateur;
 
 import java.util.List;
 
