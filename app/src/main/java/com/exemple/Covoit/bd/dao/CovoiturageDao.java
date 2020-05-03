@@ -22,10 +22,10 @@ public interface CovoiturageDao { //Room requiert une interface par DAO
     Covoiturage get(long conducteurId);
 
     @Query("SELECT * FROM covoiturage")
-    LiveData<List<Covoiturage>> getAll();
+    List<Covoiturage> getAll();
 
     @Query("SELECT * FROM covoiturage")
-    List<Covoiturage> getListAll();
+    LiveData<List<Covoiturage>> getLiveAll();
 
     @TypeConverters(ConversionDate.class)
     @Query("SELECT * FROM covoiturage WHERE ville_dep LIKE '%' || :depart || '%' AND ville_arr LIKE '%' || :destination || '%' AND date > :d ORDER BY date")

@@ -1,5 +1,6 @@
 package com.exemple.Covoit.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -56,6 +57,12 @@ public class Covoiturage {
         this.prix = prix;
         this.nbPassager = nbPassager;
         this.conducteurId = conducteurId;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "id : " + id + ", " + date + " départ : " + villeDep + " destination : " + villeArr + " conducteur : " + conducteurId + " nbPlaces : " + nbPassager;
     }
 
     public void setId(long id) { this.id = id; }

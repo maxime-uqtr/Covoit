@@ -15,6 +15,7 @@ import com.exemple.Covoit.models.Trajet;
 import com.exemple.Covoit.models.Utilisateur;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -30,7 +31,7 @@ public abstract class CovoiturageBd extends RoomDatabase {
     public static synchronized CovoiturageBd getInstance(final Context context){
 
         if(Instance == null){
-            context.deleteDatabase("database");
+            //context.deleteDatabase("database");
             Instance = buildDatabase(context);
         }
         return Instance;
@@ -63,6 +64,84 @@ public abstract class CovoiturageBd extends RoomDatabase {
                 "mdp2", "0102087020",
                 "url2", false, true));
         Instance.getUtilisateurDao().insert(listC.toArray(new Utilisateur[]{}));
+
+        List<Utilisateur> listeU = new ArrayList<>();
+        listeU.add(new Utilisateur(3,
+                "Dromont",
+                "Matt",
+                "mail",
+                "mdp", "0708099080",
+                "url", true, false));
+        listeU.add(new Utilisateur(4,
+                "Dion",
+                "Angele",
+                "mail2",
+                "mdp2", "0102087020",
+                "url2", false, true));
+        Instance.getUtilisateurDao().insert(listeU.toArray(new Utilisateur[]{}));
+
+        List<Covoiturage> listeC = new ArrayList<>();
+        listeC.add(new Covoiturage(new Date(2020, 4,14),
+                "Québec",
+                "Louiseville", 6, 2,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 5,15),
+                "Louiseville",
+                "Trois-Rivières", (float) 5, 4,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 5,14),
+                "Québec",
+                "Montréal", (float) 5, 4,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 7,14),
+                "Québec",
+                "Trois-Rivières", (float) 5, 2,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 7,14),
+                "Louiseville",
+                "Montréal", (float) 5, 2,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 5,20),
+                "Montréal",
+                "Québec", (float) 5, 2,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 6,24),
+                "Québec",
+                "Trois-Rivières", (float) 5, 2,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 5,4),
+                "Louiseville",
+                "Québec", (float) 5, 2,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 5,30),
+                "Trois-Rivières",
+                "Montréal", (float) 5, 2,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 7,4),
+                "Montréal",
+                "Québec", (float) 5, 2,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 7,1),
+                "Québec",
+                "Trois-Rivières", (float) 5, 2,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        listeC.add(new Covoiturage(new Date(2020, 6,16),
+                "Trois-Rivières",
+                "Québec", (float) 5, 2,
+                Instance.getUtilisateurDao().getAll().get(1).getId()));
+        for(Covoiturage c : listeC){
+            Instance.getCovoiturageDao().insert(c);
+        }
+
+        List<Trajet> listeT = new ArrayList<>();
+        listeT.add(new Trajet(1,1));
+        listeT.add(new Trajet(1, 3));
+        listeT.add(new Trajet(2, 2));
+        listeT.add(new Trajet(3, 1));
+        for(Trajet t : listeT){
+            Instance.getTrajetDao().insert(t);
+        }
+
     }
 
 }

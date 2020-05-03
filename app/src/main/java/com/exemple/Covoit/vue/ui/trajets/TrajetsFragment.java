@@ -1,6 +1,7 @@
 package com.exemple.Covoit.vue.ui.trajets;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,8 @@ import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.ListAdapteur;
 import com.exemple.Covoit.controleur.OnListClickListener;
 import com.exemple.Covoit.models.Covoiturage;
-import com.exemple.Covoit.models.Trajet;
-import com.exemple.Covoit.models.Utilisateur;
 import com.exemple.Covoit.vue.PopUpCovoiturage;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TrajetsFragment extends Fragment implements OnListClickListener, SwipeRefreshLayout.OnRefreshListener {
@@ -52,11 +49,15 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
         });
 
         bd = CovoiturageBd.getInstance(getContext());
-        initBd();
 
         rv = view.findViewById(R.id.trajets_recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
-        adapteur = new ListAdapteur(getTrajetsData(), this);
+        List<Covoiturage> covs = bd.getCovoiturageDao().getAll();
+        adapteur = new ListAdapteur(covs, this);
+        for(Covoiturage c : covs){
+            Log.i("TAG1", c.toString());
+        }
+
         rv.setAdapter(adapteur);
         rv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
@@ -74,87 +75,7 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
     @Override
     public void onResume() {
         super.onResume();
-        rv.setAdapter(new ListAdapteur(bd.getUtilisateurDao().getTrajetsConfirmes(1), this));
-    }
-
-    public void initBd(){
-        List<Utilisateur> listeU = new ArrayList<>();
-        listeU.add(new Utilisateur(3,
-                "Dromont",
-                "Matt",
-                "mail",
-                "mdp", "0708099080",
-                "url", true, false));
-        listeU.add(new Utilisateur(4,
-                "Dion",
-                "Angele",
-                "mail2",
-                "mdp2", "0102087020",
-                "url2", false, true));
-        bd.getUtilisateurDao().insert(listeU.toArray(new Utilisateur[]{}));
-
-        List<Covoiturage> listeC = new ArrayList<>();
-        listeC.add(new Covoiturage(new Date(2020, 4,14),
-                "Québec",
-                "Louiseville", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,15),
-                "Louiseville",
-                "Trois-Rivières", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,14),
-                "Québec",
-                "Montréal", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 7,14),
-                "Québec",
-                "Trois-Rivières", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 7,14),
-                "Louiseville",
-                "Montréal", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,20),
-                "Montréal",
-                "Québec", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 6,24),
-                "Québec",
-                "Trois-Rivières", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,4),
-                "Louiseville",
-                "Québec", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,30),
-                "Trois-Rivières",
-                "Montréal", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 7,4),
-                "Montréal",
-                "Québec", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 7,1),
-                "Québec",
-                "Trois-Rivières", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 6,16),
-                "Trois-Rivières",
-                "Québec", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        for(Covoiturage c : listeC){
-            bd.getCovoiturageDao().insert(c);
-        }
-
-        ArrayList<Trajet> listeT = new ArrayList<>();
-        listeT.add(new Trajet(1,1));
-        listeT.add(new Trajet(1, 3));
-        listeT.add(new Trajet(2, 2));
-        listeT.add(new Trajet(3, 1));
-        for(Trajet t : listeT){
-            bd.getTrajetDao().insert(t);
-        }
-
+        adapteur.setCovoiturages(bd.getUtilisateurDao().getCovoituragesConfirmes(1));
     }
 
     @Override
@@ -173,7 +94,7 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
     }
 
     private List<Covoiturage> getTrajetsData() {
-        return bd.getUtilisateurDao().getTrajetsConfirmes(1);
+        return bd.getUtilisateurDao().getCovoituragesConfirmes(1);
     }
 
     @Override

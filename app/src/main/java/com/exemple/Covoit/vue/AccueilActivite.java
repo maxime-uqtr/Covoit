@@ -16,16 +16,11 @@ import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.AnimationBouton;
 import com.exemple.Covoit.controleur.TelechargerImage;
-import com.exemple.Covoit.models.Covoiturage;
-import com.exemple.Covoit.models.Trajet;
 import com.exemple.Covoit.models.Utilisateur;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class AccueilActivite extends AppCompatActivity {
@@ -68,9 +63,8 @@ public class AccueilActivite extends AppCompatActivity {
         FABouvrir = findViewById(R.id.accueil_FAB_ouvrir);
 
         bd = CovoiturageBd.getInstance(this);
-        initBd();
         //Essai de l'affichage
-        Utilisateur util = bd.getUtilisateurDao().getAll().get(2);
+        Utilisateur util = bd.getUtilisateurDao().get(3);
         String nom = util.getPrenom() + " " + util.getNom();
         tvNoms.setText(nom);
         if(util.isConducteur() && util.isPassager())
@@ -115,86 +109,6 @@ public class AccueilActivite extends AppCompatActivity {
                 startActivity(propositionIntent);
             }
         });
-
-    }
-
-    public void initBd(){
-        List<Utilisateur> listeU = new ArrayList<>();
-        listeU.add(new Utilisateur(3,
-                "Dromont",
-                "Matt",
-                "mail",
-                "mdp", "0708099080",
-                "url", true, false));
-        listeU.add(new Utilisateur(4,
-                 "Dion",
-                "Angele",
-                "mail2",
-                "mdp2", "0102087020",
-                "url2", false, true));
-        bd.getUtilisateurDao().insert(listeU.toArray(new Utilisateur[]{}));
-
-        List<Covoiturage> listeC = new ArrayList<>();
-        listeC.add(new Covoiturage(new Date(2020, 4,14),
-                "Québec",
-                "Louiseville", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,15),
-                "Louiseville",
-                "Trois-Rivières", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,14),
-                "Québec",
-                "Montréal", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 7,14),
-                "Québec",
-                "Trois-Rivières", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 7,14),
-                "Louiseville",
-                "Montréal", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,20),
-                "Montréal",
-                "Québec", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 6,24),
-                "Québec",
-                "Trois-Rivières", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,4),
-                "Louiseville",
-                "Québec", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 5,30),
-                "Trois-Rivières",
-                "Montréal", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 7,4),
-                "Montréal",
-                "Québec", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 7,1),
-                "Québec",
-                "Trois-Rivières", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        listeC.add(new Covoiturage(new Date(2020, 6,16),
-                "Trois-Rivières",
-                "Québec", (float) 5, 2,
-                bd.getUtilisateurDao().getAll().get(1).getId()));
-        for(Covoiturage c : listeC){
-            bd.getCovoiturageDao().insert(c);
-        }
-
-        ArrayList<Trajet> listeT = new ArrayList<>();
-        listeT.add(new Trajet(1,1));
-        listeT.add(new Trajet(1, 3));
-        listeT.add(new Trajet(2, 2));
-        listeT.add(new Trajet(3, 1));
-        for(Trajet t : listeT){
-            bd.getTrajetDao().insert(t);
-        }
 
     }
 }
