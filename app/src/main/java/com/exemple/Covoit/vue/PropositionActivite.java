@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.models.Covoiturage;
+import com.exemple.Covoit.models.Trajet;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -33,6 +34,9 @@ public class PropositionActivite extends AppCompatActivity implements DatePicker
     private int places;
     private Button btnProposer;
 
+    public PropositionActivite() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,20 +46,22 @@ public class PropositionActivite extends AppCompatActivity implements DatePicker
         tvDate = findViewById(R.id.proposition_dateSelectionnee);
         depart = findViewById(R.id.proposition_depart);
         destination = findViewById(R.id.proposition_destination);
+        
         npPrix = findViewById(R.id.proposition_prix);
         npPrix.setMinValue(5); //On initialise paramètres prix
-        npPrix.setMaxValue(100);
-        npPrix.setValue(5);
+        npPrix.setMaxValue(50);
+
         npPlaces = findViewById(R.id.proposition_places);
         npPlaces.setMinValue(1); //On initialise paramètres places
         npPlaces.setMaxValue(4);
-        npPlaces.setValue(3);
+
         btnProposer = findViewById(R.id.proposition_btn_proposer);
         btnProposer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CovoiturageBd bd = CovoiturageBd.getInstance(getApplicationContext());
-                bd.getCovoiturageDao().insert(new Covoiturage(dateSelectionnee, depart.getText().toString(), destination.getText().toString(), prix, places, 1));
+                bd.getCovoiturageDao().insert(new Covoiturage(10, dateSelectionnee, depart.getText().toString(), destination.getText().toString(), prix, places, 1));
+                bd.getTrajetDao().insert(new Trajet(10, 1));
                 Intent accueilIntent = new Intent(v.getContext(), AccueilActivite.class);
                 startActivity(accueilIntent);
             }
