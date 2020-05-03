@@ -9,7 +9,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -69,6 +71,17 @@ public class RechercheActivite extends AppCompatActivity implements OnListClickL
         ArrayAdapter<String> adressesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, adresses);
         rechercheDepart.setAdapter(adressesAdapter);
         rechercheDestination.setAdapter(adressesAdapter);
+        rechercheDepart.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    rechercheDestination.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+        //rechercheDestination.setOnEditorActionListener();
 
         //Instance bd
         bd = CovoiturageBd.getInstance(getApplicationContext());
