@@ -1,7 +1,6 @@
 package com.exemple.Covoit.controleur;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +20,6 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
     private OnListClickListener listener;
 
     public ListAdapteur(List<Covoiturage> mCovoiturage, OnListClickListener listener) {
-        for(Covoiturage c : mCovoiturage){
-            Log.i("TAG1", c.toString());
-        }
         this.mCovoiturage = mCovoiturage;
         this.listener = listener;
     }

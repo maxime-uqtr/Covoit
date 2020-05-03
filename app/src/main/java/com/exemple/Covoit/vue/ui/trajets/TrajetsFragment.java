@@ -1,7 +1,6 @@
 package com.exemple.Covoit.vue.ui.trajets;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +53,6 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
         List<Covoiturage> covs = bd.getCovoiturageDao().getAll();
         adapteur = new ListAdapteur(covs, this);
-        for(Covoiturage c : covs){
-            Log.i("TAG1", c.toString());
-        }
 
         rv.setAdapter(adapteur);
         rv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
@@ -75,7 +71,7 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
     @Override
     public void onResume() {
         super.onResume();
-        adapteur.setCovoiturages(bd.getUtilisateurDao().getCovoituragesConfirmes(1));
+        adapteur.setCovoiturages(getTrajetsData());
     }
 
     @Override
@@ -94,7 +90,7 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
     }
 
     private List<Covoiturage> getTrajetsData() {
-        return bd.getUtilisateurDao().getCovoituragesConfirmes(1);
+        return bd.getCovoiturageDao().getCovoituragesConfirmes(1);
     }
 
     @Override

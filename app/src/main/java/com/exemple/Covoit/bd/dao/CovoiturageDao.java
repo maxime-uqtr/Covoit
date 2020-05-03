@@ -27,6 +27,12 @@ public interface CovoiturageDao { //Room requiert une interface par DAO
     @Query("SELECT * FROM covoiturage")
     LiveData<List<Covoiturage>> getLiveAll();
 
+    @Query("SELECT DISTINCT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE (passagers_id = :userId OR conducteur_id = :userId) AND confirme = 1) ORDER BY date")
+    List<Covoiturage> getCovoituragesConfirmes(long userId);
+
+    @Query("SELECT DISTINCT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE (passagers_id = :userId OR conducteur_id = :userId) AND en_attente = 1) ORDER BY date")
+    long getDemandes(long userId);
+
     @TypeConverters(ConversionDate.class)
     @Query("SELECT * FROM covoiturage WHERE ville_dep LIKE '%' || :depart || '%' AND ville_arr LIKE '%' || :destination || '%' AND date > :d ORDER BY date")
     List<Covoiturage> getLike(String depart, String destination, Date d);

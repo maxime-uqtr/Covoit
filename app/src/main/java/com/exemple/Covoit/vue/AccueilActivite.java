@@ -63,8 +63,9 @@ public class AccueilActivite extends AppCompatActivity {
         FABouvrir = findViewById(R.id.accueil_FAB_ouvrir);
 
         bd = CovoiturageBd.getInstance(this);
+
         //Essai de l'affichage
-        Utilisateur util = bd.getUtilisateurDao().get(3);
+        Utilisateur util = bd.getUtilisateurDao().get(1);
         String nom = util.getPrenom() + " " + util.getNom();
         tvNoms.setText(nom);
         if(util.isConducteur() && util.isPassager())
@@ -74,7 +75,7 @@ public class AccueilActivite extends AppCompatActivity {
         else if(util.isPassager())
             tvRole.setText(R.string.passager);
 
-        String urlLogo = "https://covoituragebd-7356.restdb.io/media/5e7a8375cf927e3e0001bc30";
+        String urlLogo = util.getUrlPhoto();
         try {
             pp.setImageBitmap(new TelechargerImage().execute(urlLogo).get());
         } catch (ExecutionException e) {
