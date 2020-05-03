@@ -1,15 +1,21 @@
 package com.exemple.Covoit.vue;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.exemple.Covoit.R;
@@ -37,15 +43,36 @@ public class PropositionActivite extends AppCompatActivity implements DatePicker
     public PropositionActivite() {
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposition);
 
+        depart = findViewById(R.id.proposition_depart);
+        depart.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    destination.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+        destination = findViewById(R.id.proposition_destination);
+        destination.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    date.callOnClick(); //On sélectionne ensuite la date
+                    return true;
+                }
+                return false;
+            }
+        });
         date = findViewById(R.id.proposition_date);
         tvDate = findViewById(R.id.proposition_dateSelectionnee);
-        depart = findViewById(R.id.proposition_depart);
-        destination = findViewById(R.id.proposition_destination);
         
         npPrix = findViewById(R.id.proposition_prix);
         npPrix.setMinValue(5); //On initialise paramètres prix
@@ -72,6 +99,7 @@ public class PropositionActivite extends AppCompatActivity implements DatePicker
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cacherClavier();
                 datePickerDialog.show();
             }
         });
@@ -83,5 +111,12 @@ public class PropositionActivite extends AppCompatActivity implements DatePicker
         tvDate.setText(String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year));
         tvDate.setVisibility(View.VISIBLE);
         dateSelectionnee = new Date(dayOfMonth, month, year);
+    }
+
+    //Méthode pour fermer clavier
+    public void cacherClavier(){
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(depart.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(destination.getWindowToken(), 0);
     }
 }
