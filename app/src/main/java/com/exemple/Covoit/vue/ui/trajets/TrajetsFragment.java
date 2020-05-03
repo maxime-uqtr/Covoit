@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
@@ -27,12 +28,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TrajetsFragment extends Fragment implements OnListClickListener {
+public class TrajetsFragment extends Fragment implements OnListClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private TrajetsViewModel homeViewModel;
     private boolean isRotate = false;
     private CovoiturageBd bd;
     private RecyclerView rv;
+    private ListAdapteur adapteur;
+    private SwipeRefreshLayout swipeContainer;
     private PopUpCovoiturage popupCovoiturage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -51,13 +54,27 @@ public class TrajetsFragment extends Fragment implements OnListClickListener {
         bd = CovoiturageBd.getInstance(getContext());
         initBd();
 
-        rv = view.findViewById(R.id.accueil_recyclerView);
+        rv = view.findViewById(R.id.trajets_recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
-        rv.setAdapter(new ListAdapteur(bd.getUtilisateurDao().getTrajetsConfirmes(1), this::onListClick));
+        adapteur = new ListAdapteur(getTrajetsData(), this);
+        rv.setAdapter(adapteur);
         rv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+
+        swipeContainer = view.findViewById(R.id.trajets_swipeContainer);
+        swipeContainer.setOnRefreshListener(this);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         return view;
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        rv.setAdapter(new ListAdapteur(bd.getUtilisateurDao().getTrajetsConfirmes(1), this));
     }
 
     public void initBd(){
@@ -152,6 +169,20 @@ public class TrajetsFragment extends Fragment implements OnListClickListener {
         }
         else{
             //Affichage dialog en cours
+        }
+    }
+
+    private List<Covoiturage> getTrajetsData() {
+        return bd.getUtilisateurDao().getTrajetsConfirmes(1);
+    }
+
+    @Override
+    public void onRefresh() {
+        adapteur.clear();
+        List<Covoiturage> trajets = getTrajetsData();
+        adapteur.addAll(trajets);
+        if (swipeContainer.isRefreshing()) {
+            swipeContainer.setRefreshing(false);
         }
     }
 }

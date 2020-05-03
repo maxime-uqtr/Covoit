@@ -69,6 +69,16 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
         }
     }
 
+    public void clear() {
+        mCovoiturage.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Covoiturage> list) {
+        mCovoiturage.addAll(list);
+        notifyDataSetChanged();
+    }
+
     public void setCovoiturages(List<Covoiturage> c){
         mCovoiturage = c;
     }

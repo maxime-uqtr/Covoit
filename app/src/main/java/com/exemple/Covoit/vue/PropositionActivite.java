@@ -1,6 +1,7 @@
 package com.exemple.Covoit.vue;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -54,7 +55,9 @@ public class PropositionActivite extends AppCompatActivity implements DatePicker
             @Override
             public void onClick(View v) {
                 CovoiturageBd bd = CovoiturageBd.getInstance(getApplicationContext());
-                bd.getCovoiturageDao().insert(new Covoiturage(dateSelectionnee, depart.getText().toString(), destination.getText().toString(), prix, places, 2));
+                bd.getCovoiturageDao().insert(new Covoiturage(dateSelectionnee, depart.getText().toString(), destination.getText().toString(), prix, places, 1));
+                Intent accueilIntent = new Intent(v.getContext(), AccueilActivite.class);
+                startActivity(accueilIntent);
             }
         });
 
