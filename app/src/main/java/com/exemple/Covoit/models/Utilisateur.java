@@ -15,32 +15,29 @@ public class Utilisateur {
     private String mail;
     private String mdp;
     private String telephone;
-    private String urlPhoto;
     private boolean conducteur;
     private boolean passager;
 
     public Utilisateur(){}
 
     @Ignore
-    public Utilisateur(long id, String nom, String prenom, String mail, String mdp, String telephone, String urlPhoto, boolean conducteur, boolean passager) {
+    public Utilisateur(long id, String nom, String prenom, String mail, String mdp, String telephone, boolean conducteur, boolean passager) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.mdp = mdp;
-        this.urlPhoto = urlPhoto;
         this.telephone = telephone;
         this.conducteur = conducteur;
         this.passager = passager;
     }
 
     @Ignore
-    public Utilisateur(String nom, String prenom, String mail, String mdp, String telephone, String urlPhoto, boolean conducteur, boolean passager) {
+    public Utilisateur(String nom, String prenom, String mail, String mdp, String telephone, boolean conducteur, boolean passager) {
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.mdp = mdp;
-        this.urlPhoto = urlPhoto;
         this.telephone = telephone;
         this.conducteur = conducteur;
         this.passager = passager;
@@ -57,8 +54,6 @@ public class Utilisateur {
     public String getMdp() { return mdp; }
 
     public String getTelephone() { return telephone; }
-
-    public String getUrlPhoto() { return urlPhoto; }
 
     public boolean isConducteur() { return conducteur; }
 
@@ -85,11 +80,7 @@ public class Utilisateur {
     }
 
     public void setTelephone(String telephone) { this.telephone = telephone; }
-
-    public void setUrlPhoto(String urlPhoto) {
-        this.urlPhoto = urlPhoto;
-    }
-
+    
     public void setConducteur(boolean conducteur) {
         this.conducteur = conducteur;
     }

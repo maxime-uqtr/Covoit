@@ -51,8 +51,7 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
 
         rv = view.findViewById(R.id.trajets_recyclerView);
         rv.setLayoutManager(new LinearLayoutManager(rv.getContext()));
-        List<Covoiturage> covs = bd.getCovoiturageDao().getAll();
-        adapteur = new ListAdapteur(covs, this);
+        adapteur = new ListAdapteur(bd.getCovoiturageDao().getAll(), this);
 
         rv.setAdapter(adapteur);
         rv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
@@ -72,7 +71,7 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
     @Override
     public void onResume() {
         super.onResume();
-        //adapteur.setCovoiturages(getTrajetsData());
+        adapteur.addAll(bd.getCovoiturageDao().getAll());
     }
 
     @Override

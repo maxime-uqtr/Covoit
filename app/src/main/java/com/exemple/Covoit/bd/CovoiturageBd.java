@@ -7,7 +7,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.dao.CovoiturageDao;
 import com.exemple.Covoit.bd.dao.TrajetDao;
 import com.exemple.Covoit.bd.dao.UtilisateurDao;
@@ -56,14 +55,12 @@ public abstract class CovoiturageBd extends RoomDatabase {
                 1, "admin",
                 "covoit",
                 "covoit@mail.com",
-                "admin","0708099080",
-                context.getString(R.string.urlLogo), true, true));
+                "admin","0708099080", true, true));
         listC.add(new Utilisateur(
                 2,  "nom2",
                 "prenom2",
                 "mail2",
-                "mdp2", "0102087020",
-                "url2", false, true));
+                "mdp2", "0102087020", false, true));
         Instance.getUtilisateurDao().insert(listC.toArray(new Utilisateur[]{}));
 
         List<Utilisateur> listeU = new ArrayList<>();
@@ -71,14 +68,12 @@ public abstract class CovoiturageBd extends RoomDatabase {
                 "Dromont",
                 "Matt",
                 "mail",
-                "mdp", "0708099080",
-                "url", true, false));
+                "mdp", "0708099080", true, false));
         listeU.add(new Utilisateur(4,
                 "Dion",
                 "Angele",
                 "mail2",
-                "mdp2", "0102087020",
-                "url2", false, true));
+                "mdp2", "0102087020", false, true));
         Instance.getUtilisateurDao().insert(listeU.toArray(new Utilisateur[]{}));
 
         List<Covoiturage> listeC = new ArrayList<>();

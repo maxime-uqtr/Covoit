@@ -38,7 +38,7 @@ public class AccueilActivite extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_accueil);
 
         Stetho.initializeWithDefaults(this); //Ajout de stetho à l'activité
 
@@ -75,7 +75,7 @@ public class AccueilActivite extends AppCompatActivity {
         else if(util.isPassager())
             tvRole.setText(R.string.passager);
 
-        String urlLogo = util.getUrlPhoto();
+        String urlLogo = getApplicationContext().getString(R.string.urlLogo);
         try {
             pp.setImageBitmap(new TelechargerImage().execute(urlLogo).get());
         } catch (ExecutionException e) {
