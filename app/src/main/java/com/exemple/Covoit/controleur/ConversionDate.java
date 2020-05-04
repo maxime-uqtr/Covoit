@@ -22,12 +22,12 @@ public class ConversionDate {
         String day;
         String month;
         if(d < 10){
-            day = "0" + d;
+            day = "0" + String.valueOf(d);
         }
         else
             day = String.valueOf(d);
         if(m < 10){
-            month = "0" + m;
+            month = "0" + String.valueOf(m);
         }
         else
             month = String.valueOf(m);

@@ -13,9 +13,9 @@ import androidx.room.PrimaryKey;
                        childColumns = "covoiturage_id"),
                        @ForeignKey(entity = Utilisateur.class,
                        parentColumns = "id",
-                       childColumns = "passagers_id")},
+                       childColumns = "passager_id")},
         indices = {@Index(value = "covoiturage_id"),
-                   @Index(value = "passagers_id")}
+                   @Index(value = "passager_id")}
         )
 
 public class Trajet {
@@ -24,8 +24,8 @@ public class Trajet {
     private long id;
     @ColumnInfo(name = "covoiturage_id")
     private long covoiturageId;
-    @ColumnInfo(name = "passagers_id")
-    private long passagersId;
+    @ColumnInfo(name = "passager_id")
+    private long passagerId;
     @ColumnInfo(name = "en_attente")
     private boolean enAttente = true;
     private boolean confirme = false;
@@ -33,16 +33,16 @@ public class Trajet {
     public Trajet(){}
 
     @Ignore
-    public Trajet(long id, long covoiturageId, long passagersId) {
+    public Trajet(long id, long covoiturageId, long passagerId) {
         this.id = id;
         this.covoiturageId = covoiturageId;
-        this.passagersId = passagersId;
+        this.passagerId = passagerId;
     }
 
     @Ignore
-    public Trajet(long covoiturageId, long passagersId) {
+    public Trajet(long covoiturageId, long passagerId) {
         this.covoiturageId = covoiturageId;
-        this.passagersId = passagersId;
+        this.passagerId = passagerId;
     }
 
     public long getId() {
@@ -61,12 +61,12 @@ public class Trajet {
         this.covoiturageId = covoiturageId;
     }
 
-    public long getPassagersId() {
-        return passagersId;
+    public long getPassagerId() {
+        return passagerId;
     }
 
-    public void setPassagersId(long passagersId) {
-        this.passagersId = passagersId;
+    public void setPassagerId(long passagerId) {
+        this.passagerId = passagerId;
     }
 
     public boolean isEnAttente() { return enAttente; }

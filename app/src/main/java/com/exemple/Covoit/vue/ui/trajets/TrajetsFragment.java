@@ -57,6 +57,7 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
         rv.setAdapter(adapteur);
         rv.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
+        //On instancie le SwipeRefreshLayout
         swipeContainer = view.findViewById(R.id.trajets_swipeContainer);
         swipeContainer.setOnRefreshListener(this);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -71,7 +72,7 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
     @Override
     public void onResume() {
         super.onResume();
-        adapteur.setCovoiturages(getTrajetsData());
+        //adapteur.setCovoiturages(getTrajetsData());
     }
 
     @Override
@@ -89,14 +90,11 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
         }
     }
 
-    private List<Covoiturage> getTrajetsData() {
-        return bd.getCovoiturageDao().getCovoituragesConfirmes(1);
-    }
-
     @Override
     public void onRefresh() {
         adapteur.clear();
-        List<Covoiturage> trajets = getTrajetsData();
+
+        List<Covoiturage> trajets = bd.getCovoiturageDao().getCovoituragesConfirmes(1);
         adapteur.addAll(trajets);
         if (swipeContainer.isRefreshing()) {
             swipeContainer.setRefreshing(false);

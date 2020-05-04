@@ -85,7 +85,7 @@ public abstract class CovoiturageBd extends RoomDatabase {
         listeC.add(new Covoiturage(new Date(2020, 4,14),
                 "Québec",
                 "Louiseville", 6, 2,
-                Instance.getUtilisateurDao().getAll().get(1).getId()));
+                Instance.getUtilisateurDao().getAll().get(0).getId()));
         listeC.add(new Covoiturage(new Date(2020, 5,15),
                 "Louiseville",
                 "Trois-Rivières", (float) 5, 4,
@@ -101,11 +101,11 @@ public abstract class CovoiturageBd extends RoomDatabase {
         listeC.add(new Covoiturage(new Date(2020, 7,14),
                 "Louiseville",
                 "Montréal", (float) 5, 2,
-                Instance.getUtilisateurDao().getAll().get(1).getId()));
+                Instance.getUtilisateurDao().getAll().get(2).getId()));
         listeC.add(new Covoiturage(new Date(2020, 5,20),
                 "Montréal",
                 "Québec", (float) 5, 2,
-                Instance.getUtilisateurDao().getAll().get(1).getId()));
+                Instance.getUtilisateurDao().getAll().get(3).getId()));
         listeC.add(new Covoiturage(new Date(2020, 6,24),
                 "Québec",
                 "Trois-Rivières", (float) 5, 2,
@@ -117,11 +117,11 @@ public abstract class CovoiturageBd extends RoomDatabase {
         listeC.add(new Covoiturage(new Date(2020, 5,30),
                 "Trois-Rivières",
                 "Montréal", (float) 5, 2,
-                Instance.getUtilisateurDao().getAll().get(1).getId()));
+                Instance.getUtilisateurDao().getAll().get(3).getId()));
         listeC.add(new Covoiturage(new Date(2020, 7,4),
                 "Montréal",
                 "Québec", (float) 5, 2,
-                Instance.getUtilisateurDao().getAll().get(1).getId()));
+                Instance.getUtilisateurDao().getAll().get(2).getId()));
         listeC.add(new Covoiturage(new Date(2020, 7,1),
                 "Québec",
                 "Trois-Rivières", (float) 5, 2,
@@ -129,7 +129,7 @@ public abstract class CovoiturageBd extends RoomDatabase {
         listeC.add(new Covoiturage(new Date(2020, 6,16),
                 "Trois-Rivières",
                 "Québec", (float) 5, 2,
-                Instance.getUtilisateurDao().getAll().get(1).getId()));
+                Instance.getUtilisateurDao().getAll().get(2).getId()));
         for(Covoiturage c : listeC){
             Instance.getCovoiturageDao().insert(c);
         }
@@ -148,7 +148,6 @@ public abstract class CovoiturageBd extends RoomDatabase {
         for(Trajet t : listeT){
             Instance.getTrajetDao().insert(t);
         }
-
     }
 
 }

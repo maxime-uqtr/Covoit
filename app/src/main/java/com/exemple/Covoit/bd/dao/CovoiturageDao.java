@@ -17,9 +17,8 @@ import java.util.List;
 public interface CovoiturageDao { //Room requiert une interface par DAO
 
     //Actions CRUD
-
-    @Query("SELECT * FROM covoiturage WHERE conducteur_id = :conducteurId")
-    Covoiturage get(long conducteurId);
+    @Query("SELECT * FROM covoiturage WHERE id = :covoiturageId")
+    Covoiturage get(long covoiturageId);
 
     @Query("SELECT * FROM covoiturage")
     List<Covoiturage> getAll();
@@ -27,10 +26,10 @@ public interface CovoiturageDao { //Room requiert une interface par DAO
     @Query("SELECT * FROM covoiturage")
     LiveData<List<Covoiturage>> getLiveAll();
 
-    @Query("SELECT DISTINCT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE (passagers_id = :userId OR conducteur_id = :userId) AND confirme = 1) ORDER BY date")
+    @Query("SELECT DISTINCT * FROM covoiturage WHERE (id IN (SELECT covoiturage_id FROM trajet WHERE confirme = 1 and passager_id = :userId)) OR (conducteur_id = :userId AND id IN (SELECT covoiturage_id FROM trajet WHERE confirme = 1)) ORDER BY date")
     List<Covoiturage> getCovoituragesConfirmes(long userId);
 
-    @Query("SELECT DISTINCT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE (passagers_id = :userId OR conducteur_id = :userId) AND en_attente = 1) ORDER BY date")
+    @Query("SELECT DISTINCT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE (passager_id = :userId OR conducteur_id = :userId) AND en_attente = 1) ORDER BY date")
     long getDemandes(long userId);
 
     @TypeConverters(ConversionDate.class)

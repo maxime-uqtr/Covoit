@@ -79,7 +79,4 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
         notifyDataSetChanged();
     }
 
-    public void setCovoiturages(List<Covoiturage> c){
-        mCovoiturage = c;
-    }
 }
