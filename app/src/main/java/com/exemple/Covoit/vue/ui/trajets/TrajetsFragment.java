@@ -93,7 +93,6 @@ public class TrajetsFragment extends Fragment implements OnListClickListener, Sw
     @Override
     public void onRefresh() {
         adapteur.clear();
-
         List<Covoiturage> trajets = bd.getCovoiturageDao().getCovoituragesConfirmes(1);
         adapteur.addAll(trajets);
         if (swipeContainer.isRefreshing()) {
