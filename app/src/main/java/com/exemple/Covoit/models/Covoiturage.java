@@ -10,6 +10,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.exemple.Covoit.controleur.ConversionDate;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
@@ -22,17 +23,24 @@ import java.util.Date;
 
 public class Covoiturage {
 
+    @SerializedName("id")
     @PrimaryKey(autoGenerate = true)
     private long id;
+    @SerializedName("date")
     @TypeConverters(ConversionDate.class) //Conversion car impossible de sauvegarder le type date dans une BD avec Room
     private Date date;
+    @SerializedName("ville_dep")
     @ColumnInfo(name = "ville_dep")
     private String villeDep;
+    @SerializedName("ville_arr")
     @ColumnInfo(name = "ville_arr")
     private String villeArr;
+    @SerializedName("prix")
     private float prix;
+    @SerializedName("nb_passager")
     @ColumnInfo(name = "nb_passager")
     private int nbPassager;
+    @SerializedName("conducteur_id")
     @ColumnInfo(name = "conducteur_id")
     private long conducteurId;
 

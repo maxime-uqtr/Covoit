@@ -4,18 +4,28 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 
 @Entity
 public class Utilisateur {
 
+    @SerializedName("id")
     @PrimaryKey(autoGenerate = true) //Clé primaire = identifiant unique
     private long id;
+    @SerializedName("nom")
     private String nom;
+    @SerializedName("prenom")
     private String prenom;
+    @SerializedName("mail")
     private String mail;
+    @SerializedName("mdp")
     private String mdp;
+    @SerializedName("telephone")
     private String telephone;
+    @SerializedName("conducteur")
     private boolean conducteur;
+    @SerializedName("passager")
     private boolean passager;
 
     public Utilisateur(){}

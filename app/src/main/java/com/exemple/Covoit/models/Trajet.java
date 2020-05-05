@@ -7,6 +7,8 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+
 //Clé étrangère = un Utilisateur
 @Entity(foreignKeys = {@ForeignKey(entity = Covoiturage.class,
                        parentColumns = "id",
@@ -20,14 +22,19 @@ import androidx.room.PrimaryKey;
 
 public class Trajet {
 
+    @SerializedName("id")
     @PrimaryKey(autoGenerate = true)
     private long id;
+    @SerializedName("covoiturage_id")
     @ColumnInfo(name = "covoiturage_id")
     private long covoiturageId;
+    @SerializedName("passager_id")
     @ColumnInfo(name = "passager_id")
     private long passagerId;
+    @SerializedName("en_attente")
     @ColumnInfo(name = "en_attente")
     private boolean enAttente = true;
+    @SerializedName("confirme")
     private boolean confirme = false;
 
     public Trajet(){}
