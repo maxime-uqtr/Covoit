@@ -79,7 +79,6 @@ public class AccueilActivite extends AppCompatActivity {
         call.enqueue(new Callback<List<Utilisateur>>() {
             @Override
             public void onResponse(Call<List<Utilisateur>> call, Response<List<Utilisateur>> response) {
-                Log.i("TAG1", "call");
                 List<Utilisateur> user = response.body();
                 Utilisateur u = user.get(0);
                 String pNom = u.getPrenom() + " " + u.getNom();

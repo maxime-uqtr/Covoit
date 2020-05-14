@@ -4,10 +4,8 @@ import com.exemple.Covoit.models.Utilisateur;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -15,7 +13,7 @@ public interface UtilisateurService {
 
     //create a new user
     @GET("UserOperations.php")
-    void insert(@Field("type") String type, @Field("nom") String nom, @Field("prenom") String prenom, @Field("mail") String mail, @Field("mdp") String mdp, @Field("telephone") String telephone, @Field("conducteur") String conducteur, @Field("passager") String passager, Callback<Response> callback);
+    Call<ResponseBody> insert(@Query("type") String type, @Query("nom") String nom, @Query("prenom") String prenom, @Query("mail") String mail, @Query("mdp") String mdp, @Query("telephone") String telephone, @Query("conducteur") int conducteur, @Query("passager") int passager);
 
     //get all users
     @GET("UserGet.php")

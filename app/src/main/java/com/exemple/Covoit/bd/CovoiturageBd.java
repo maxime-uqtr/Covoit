@@ -31,7 +31,7 @@ public abstract class CovoiturageBd extends RoomDatabase {
     public static synchronized CovoiturageBd getInstance(final Context context){
 
         if(Instance == null){
-            //context.deleteDatabase("database");
+            context.deleteDatabase("database");
             Instance = buildDatabase(context);
         }
         return Instance;

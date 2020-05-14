@@ -1,13 +1,13 @@
 package com.exemple.Covoit.controleur;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.models.Utilisateur;
 import com.exemple.Covoit.retrofit.ApiClient;
 import com.exemple.Covoit.retrofit.UtilisateurService;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,31 +28,20 @@ public class ControleurInscription {
         if(passager){
             p = 1;
         }
-        Log.i("TAG1", nom + prenom + mail + mdp + telephone + c + p);
 
         apiInterface = ApiClient.getApiClient().create(UtilisateurService.class);
-        apiInterface.insert("create", "Covoit", "Admin", "admin@covoit.com", "admin", "8012", "1", "0", new Callback<Response>() {
+        Call<ResponseBody> resp = apiInterface.insert("create", nom, prenom, mail, mdp, telephone, c, p);
+        resp.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<Response> call, Response<Response> response) {
-                Log.i("TAG1", "inse");
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-                Log.i("TAG1", call.toString() + t.toString());
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
             }
         });
-        /*apiInterface.insert("create", nom, prenom, mail, mdp, telephone, c, p, new Callback<Response>() {
-            @Override
-            public void onResponse(Call<Response> call, Response<Response> response) {
-                Log.i("TAG1", "inse");
-            }
 
-            @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-                Log.i("TAG1", call.toString() + t.toString());
-            }
-        });*/
+
         CovoiturageBd.getInstance(context).getUtilisateurDao().insert(utilisateur);
     }
 

@@ -44,6 +44,7 @@
         <activity android:name=".vue.PropositionActivite"
             android:label="@string/title_activity_proposition"
             android:parentActivityName=".vue.AccueilActivite" />
+
         <activity
             android:name=".vue.RechercheActivite"
             android:label="@string/title_activity_recherche"
@@ -52,8 +53,7 @@
         <activity
             android:name=".vue.PopUpConnexion"
             android:theme="@style/AppTheme.PopMe" />
-        <activity android:name=".vue.AccueilActivite">
-        </activity>
+        <activity android:name=".vue.AccueilActivite"/>
         <activity android:name=".vue.InscriptionActivite" />
         <activity android:name=".vue.ConnexionActivite">
             <intent-filter>
