@@ -99,4 +99,6 @@ public class Utilisateur {
         this.passager = passager;
     }
 
+    public Utilisateur getUtilisateur() { return this; }
+
 }

@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".vue.testActivity"
             android:label="@string/title_activity_test"
@@ -52,14 +53,15 @@
             android:name=".vue.PopUpConnexion"
             android:theme="@style/AppTheme.PopMe" />
         <activity android:name=".vue.AccueilActivite">
+        </activity>
+        <activity android:name=".vue.InscriptionActivite" />
+        <activity android:name=".vue.ConnexionActivite">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vue.InscriptionActivite" />
-        <activity android:name=".vue.ConnexionActivite" />
     </application>
 
 </manifest>

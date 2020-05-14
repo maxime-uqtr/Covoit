@@ -6,21 +6,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
-import com.exemple.Covoit.controleur.controleurInscription;
-import com.exemple.Covoit.models.Utilisateur;
+import com.exemple.Covoit.controleur.ControleurInscription;
 
-public class InscriptionActivite extends AppCompatActivity implements controleurInscription {
+public class InscriptionActivite extends AppCompatActivity {
 
     //  Boutton : b; EditText : et; CheckBox : cb;
     private Button bValider, bRetour;
-    private EditText etNom, etPrenom, etMail, etMdp, etVerifMdp;
+    private EditText etNom, etPrenom, etMail, etTelephone, etMdp, etVerifMdp;
     private CheckBox cbPassager, cbConducteur;
-
-    private Utilisateur utilisateur;
 
     private CovoiturageBd bd;
 
@@ -34,6 +33,8 @@ public class InscriptionActivite extends AppCompatActivity implements controleur
         etNom = findViewById(R.id.editTextNom);
         etPrenom = findViewById(R.id.editTextPrenom);
         etMail = findViewById(R.id.editTextMail);
+        etTelephone = findViewById(R.id.inscription_tel);
+
         etMdp = findViewById(R.id.editTextMdp);
         etVerifMdp = findViewById(R.id.editTextVerifMdp);
 
@@ -44,14 +45,12 @@ public class InscriptionActivite extends AppCompatActivity implements controleur
         bValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean test = inscription(etNom.getText().toString(), etPrenom.getText().toString(), etMail.getText().toString(), etMdp.getText().toString(), etVerifMdp.getText().toString(), cbPassager.isChecked(), cbConducteur.isChecked());
-                if (test){
-                    utilisateur = new Utilisateur(etNom.getText().toString(), etPrenom.getText().toString(), etMail.getText().toString(), etMdp.getText().toString(), "null" ,cbPassager.isChecked(), cbConducteur.isChecked());
-                    bd.getUtilisateurDao().insert(utilisateur);
+                if(etNom.getText().toString().isEmpty() || etPrenom.getText().toString().isEmpty() || etMail.getText().toString().isEmpty() || etTelephone.getText().toString().isEmpty() /*|| !etMdp.equals(etVerifMdp)*/ || etMdp.getText().toString().isEmpty() || etVerifMdp.getText().toString().isEmpty() || (cbPassager.isChecked() == false && cbConducteur.isChecked() == false)){
+                    Toast.makeText(getApplicationContext(), "Veuillez remplir tous les champs", Toast.LENGTH_LONG);
+                }
+                else{
+                    ControleurInscription.inscription(etNom.getText().toString(), etPrenom.getText().toString(), etMail.getText().toString(), etMdp.getText().toString(), etTelephone.getText().toString(), cbPassager.isChecked(), cbConducteur.isChecked(), getApplicationContext());
                     Intent i = new Intent(getApplicationContext(), ConnexionActivite.class);
-                    startActivity(i);
-                }else{
-                    Intent i = new Intent(getApplicationContext(), PopUpConnexion.class);
                     startActivity(i);
                 }
             }
@@ -67,13 +66,4 @@ public class InscriptionActivite extends AppCompatActivity implements controleur
         });
     }
 
-
-    @Override
-    public boolean inscription(String nom, String prenom, String mail, String mdp, String verifMdp, boolean passager, boolean conducteur) {
-        if(passager == false && conducteur == false)
-            return false;
-        if (!mdp.equals(verifMdp) || mdp.isEmpty())
-            return false;
-        return !nom.isEmpty() && !prenom.isEmpty() && !mail.isEmpty() && !verifMdp.isEmpty();
-    }
 }

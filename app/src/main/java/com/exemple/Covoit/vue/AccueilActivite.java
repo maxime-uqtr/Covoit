@@ -2,6 +2,7 @@ package com.exemple.Covoit.vue;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,17 +18,25 @@ import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.AnimationBouton;
 import com.exemple.Covoit.controleur.TelechargerImage;
 import com.exemple.Covoit.models.Utilisateur;
+import com.exemple.Covoit.retrofit.ApiClient;
+import com.exemple.Covoit.retrofit.UtilisateurService;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AccueilActivite extends AppCompatActivity {
 
     private boolean isRotate = false;
 
     private CovoiturageBd bd;
+    public static UtilisateurService apiInterface;
     private ImageView pp;
     private TextView tvNoms;
     private TextView tvRole;
@@ -63,17 +72,33 @@ public class AccueilActivite extends AppCompatActivity {
         FABouvrir = findViewById(R.id.accueil_FAB_ouvrir);
 
         bd = CovoiturageBd.getInstance(this);
+        Utilisateur user = new Utilisateur();
 
-        //Essai de l'affichage
-        Utilisateur util = bd.getUtilisateurDao().get(1);
-        String nom = util.getPrenom() + " " + util.getNom();
-        tvNoms.setText(nom);
-        if(util.isConducteur() && util.isPassager())
-            tvRole.setText(R.string.conducteurPassager);
-        else if(util.isConducteur())
-            tvRole.setText(R.string.conducteur);
-        else if(util.isPassager())
-            tvRole.setText(R.string.passager);
+        apiInterface = ApiClient.getApiClient().create(UtilisateurService.class);
+        Call<List<Utilisateur>> call = apiInterface.getMdp("getMdp", "mail", "mdp");
+        call.enqueue(new Callback<List<Utilisateur>>() {
+            @Override
+            public void onResponse(Call<List<Utilisateur>> call, Response<List<Utilisateur>> response) {
+                Log.i("TAG1", "call");
+                List<Utilisateur> user = response.body();
+                Utilisateur u = user.get(0);
+                String pNom = u.getPrenom() + " " + u.getNom();
+                tvNoms.setText(pNom);
+                if(u.isConducteur() && u.isPassager())
+                    tvRole.setText("Conducteur/Passager");
+                else if(u.isConducteur()){
+                    tvRole.setText("Conducteur");
+                }
+                else{
+                    tvRole.setText("Passager");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Utilisateur>> call, Throwable t) {
+                Log.i("TAG1", call.toString() + t.toString());
+            }
+        });
 
         String urlLogo = getApplicationContext().getString(R.string.urlLogo);
         try {

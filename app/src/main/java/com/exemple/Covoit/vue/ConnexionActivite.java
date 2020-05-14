@@ -12,11 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.TelechargerImage;
-import com.exemple.Covoit.controleur.controleurConnexion;
+import com.exemple.Covoit.controleur.ControleurConnexion;
 
 import java.util.concurrent.ExecutionException;
 
-public class ConnexionActivite extends AppCompatActivity implements controleurConnexion {
+public class ConnexionActivite extends AppCompatActivity implements ControleurConnexion {
 
     //  Boutton : b; EditText : et;
     private Button bConnection, bInscription;
