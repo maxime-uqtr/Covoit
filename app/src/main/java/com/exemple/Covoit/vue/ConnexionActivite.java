@@ -12,11 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.TelechargerImage;
-import com.exemple.Covoit.controleur.ControleurConnexion;
 
 import java.util.concurrent.ExecutionException;
 
-public class ConnexionActivite extends AppCompatActivity implements ControleurConnexion {
+public class ConnexionActivite extends AppCompatActivity {
 
     //  Boutton : b; EditText : et;
     private Button bConnection, bInscription;
@@ -30,8 +29,8 @@ public class ConnexionActivite extends AppCompatActivity implements ControleurCo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connexion);
 
-        etMail = findViewById(R.id.editTextMail);
-        etMdp = findViewById(R.id.editTextMdp);
+        etMail = findViewById(R.id.connexion_editTextMail);
+        etMdp = findViewById(R.id.connexion_editTextMail);
 
         logo = findViewById(R.id.connexion_logo);
         bConnection = findViewById(R.id.connexion_btnConnexion);
@@ -39,13 +38,26 @@ public class ConnexionActivite extends AppCompatActivity implements ControleurCo
         bConnection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(connexion(etMail.getText().toString(), etMdp.getText().toString())){
-                    Intent i = new Intent(getApplicationContext(), AccueilActivite.class);
-                    startActivity(i);
-                }else{
+                //ControleurConnexion.connexion(etMail.getText().toString(), etMdp.getText().toString());
+                /*Log.i("TAG1", String.valueOf(UtilisateurActuel.isInst()));
+                Timer timer = new Timer();
+                final int[] secondes = {0};
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        secondes[0] += 1;
+                    }
+                }, 0, 1000);
+                while(secondes[0] <2){}//On attend fin connexion
+                Log.i("TAG1", String.valueOf(UtilisateurActuel.isInst()));
+                if(!UtilisateurActuel.isInst()) { //Mauvais mail et mdp
                     Intent i = new Intent(getApplicationContext(), PopUpConnexion.class);
                     startActivity(i);
                 }
+                else { //On lance l'activité
+                    Intent i = new Intent(getApplicationContext(), AccueilActivite.class);
+                    startActivity(i);
+                }*/
             }
         });
 
@@ -67,13 +79,6 @@ public class ConnexionActivite extends AppCompatActivity implements ControleurCo
             e.printStackTrace();
         }
 
-        bd = CovoiturageBd.getInstance(getApplicationContext());
     }
 
-    @Override
-    public boolean connexion(String mail, String mdp) {
-        long test = -1;
-        test = bd.getUtilisateurDao().getIdConnection(mail, mdp);
-        return test > 0;
-    }
 }

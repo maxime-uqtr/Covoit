@@ -1,9 +1,6 @@
 package com.exemple.Covoit.vue;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,21 +12,15 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
-import com.exemple.Covoit.controleur.AnimationBouton;
 import com.exemple.Covoit.controleur.TelechargerImage;
 import com.exemple.Covoit.models.Utilisateur;
-import com.exemple.Covoit.retrofit.ApiClient;
+import com.exemple.Covoit.models.UtilisateurActuel;
 import com.exemple.Covoit.retrofit.UtilisateurService;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.List;
 import java.util.concurrent.ExecutionException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AccueilActivite extends AppCompatActivity {
 
@@ -64,40 +55,17 @@ public class AccueilActivite extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        FABproposeCovoiturage = findViewById(R.id.accueil_FAB_propose);
-        AnimationBouton.hide(FABproposeCovoiturage);
-        FABrechercheCovoiturage = findViewById(R.id.accueil_FAB_recherche);
-        AnimationBouton.hide(FABrechercheCovoiturage);
-
-        FABouvrir = findViewById(R.id.accueil_FAB_ouvrir);
-
-        bd = CovoiturageBd.getInstance(this);
-        Utilisateur user = new Utilisateur();
-
-        apiInterface = ApiClient.getApiClient().create(UtilisateurService.class);
-        Call<List<Utilisateur>> call = apiInterface.getMdp("getMdp", "mail", "mdp");
-        call.enqueue(new Callback<List<Utilisateur>>() {
-            @Override
-            public void onResponse(Call<List<Utilisateur>> call, Response<List<Utilisateur>> response) {
-                List<Utilisateur> user = response.body();
-                Utilisateur u = user.get(0);
-                String pNom = u.getPrenom() + " " + u.getNom();
-                tvNoms.setText(pNom);
-                if(u.isConducteur() && u.isPassager())
+        Utilisateur user = UtilisateurActuel.getUtilisateur();
+        String pNom = user.getPrenom() + " " + user.getNom();
+        tvNoms.setText(pNom);
+        if(user.isConducteur() && user.isPassager())
                     tvRole.setText("Conducteur/Passager");
-                else if(u.isConducteur()){
-                    tvRole.setText("Conducteur");
-                }
-                else{
-                    tvRole.setText("Passager");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Utilisateur>> call, Throwable t) {
-                Log.i("TAG1", call.toString() + t.toString());
-            }
-        });
+        else if(user.isConducteur()){
+            tvRole.setText("Conducteur");
+        }
+        else{
+            tvRole.setText("Passager");
+        }
 
         String urlLogo = getApplicationContext().getString(R.string.urlLogo);
         try {
@@ -107,6 +75,12 @@ public class AccueilActivite extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        addListeners();
+    }
+
+    private void addListeners() {
+        /*FABouvrir = findViewById(R.id.accueil_FAB_ouvrir);
 
         FABouvrir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,18 +96,31 @@ public class AccueilActivite extends AppCompatActivity {
             }
         });
 
-        FABrechercheCovoiturage.setOnClickListener(v -> {
-            Intent rechercheIntent = new Intent(this, RechercheActivite.class);
-            startActivity(rechercheIntent);
-        });
-
-        FABproposeCovoiturage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent propositionIntent = new Intent(getApplicationContext(), PropositionActivite.class);
-                startActivity(propositionIntent);
-            }
-        });
-
+        if(UtilisateurActuel.getUtilisateur().isPassager()) {
+            FABrechercheCovoiturage = findViewById(R.id.accueil_FAB_recherche);
+            AnimationBouton.hide(FABrechercheCovoiturage);
+            FABrechercheCovoiturage.setOnClickListener(v -> {
+                Intent rechercheIntent = new Intent(this, RechercheActivite.class);
+                startActivity(rechercheIntent);
+            });
+        }
+        if(UtilisateurActuel.getUtilisateur().isConducteur()) {
+            FABproposeCovoiturage = findViewById(R.id.accueil_FAB_propose);
+            AnimationBouton.hide(FABproposeCovoiturage);
+            FABproposeCovoiturage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent propositionIntent = new Intent(getApplicationContext(), PropositionActivite.class);
+                    startActivity(propositionIntent);
+                }
+            });
+        }
+        else{
+            FloatingActionButton bPos = findViewById(R.id.accueil_FAB_propose);
+            FABrechercheCovoiturage.setPadding(bPos.getPaddingLeft(),
+                                               bPos.getPaddingTop(),
+                                               bPos.getPaddingRight(),
+                                               bPos.getPaddingBottom());
+        }*/
     }
 }

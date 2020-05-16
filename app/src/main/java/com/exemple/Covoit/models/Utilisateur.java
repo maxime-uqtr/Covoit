@@ -1,5 +1,7 @@
 package com.exemple.Covoit.models;
 
+import android.util.Log;
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -65,9 +67,9 @@ public class Utilisateur {
 
     public String getTelephone() { return telephone; }
 
-    public boolean isConducteur() { return conducteur; }
+    public boolean isConducteur() { Log.i("TAG1", String.valueOf(passager)); return conducteur; }
 
-    public boolean isPassager() { return passager; }
+    public boolean isPassager() { Log.i("TAG1", String.valueOf(passager)); return passager; }
 
     public void setId(long id) {
         this.id = id;
@@ -91,9 +93,7 @@ public class Utilisateur {
 
     public void setTelephone(String telephone) { this.telephone = telephone; }
     
-    public void setConducteur(boolean conducteur) {
-        this.conducteur = conducteur;
-    }
+    public void setConducteur(boolean conducteur) { this.conducteur = conducteur; }
 
     public void setPassager(boolean passager) {
         this.passager = passager;

@@ -53,7 +53,7 @@
         <activity
             android:name=".vue.PopUpConnexion"
             android:theme="@style/AppTheme.PopMe" />
-        <activity android:name=".vue.AccueilActivite"/>
+        <activity android:name=".vue.AccueilActivite" />
         <activity android:name=".vue.InscriptionActivite" />
         <activity android:name=".vue.ConnexionActivite">
             <intent-filter>

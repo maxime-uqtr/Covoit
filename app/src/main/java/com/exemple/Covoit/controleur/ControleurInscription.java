@@ -17,7 +17,7 @@ public class ControleurInscription {
     public static UtilisateurService apiInterface;
     public static Utilisateur utilisateur;
 
-    public static void inscription(String nom, String prenom, String mail, String telephone, String mdp, boolean passager, boolean conducteur, Context context) {
+    public static void inscription(String nom, String prenom, String mail, String mdp, String telephone, boolean passager, boolean conducteur, Context context) {
         utilisateur = new Utilisateur(nom, prenom, mail, mdp, telephone, passager, conducteur);
         apiInterface = ApiClient.getApiClient().create(UtilisateurService.class);
         int c = 0;
