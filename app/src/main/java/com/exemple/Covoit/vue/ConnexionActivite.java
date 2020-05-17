@@ -2,6 +2,7 @@ package com.exemple.Covoit.vue;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,53 +12,44 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
+import com.exemple.Covoit.controleur.ControleurConnexion;
 import com.exemple.Covoit.controleur.TelechargerImage;
+import com.exemple.Covoit.models.UtilisateurActuel;
+import com.exemple.Covoit.retrofit.ApiClient;
+import com.exemple.Covoit.retrofit.UtilisateurService;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 public class ConnexionActivite extends AppCompatActivity {
 
     //  Boutton : b; EditText : et;
-    private Button bConnection, bInscription;
+    private Button bConnexion, bInscription;
     private EditText etMail, etMdp;
     private ImageView logo;
 
+    public static UtilisateurService apiInterface;
     private CovoiturageBd bd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connexion);
 
+        apiInterface = ApiClient.getApiClient().create(UtilisateurService .class);
+
         etMail = findViewById(R.id.connexion_editTextMail);
-        etMdp = findViewById(R.id.connexion_editTextMail);
+        etMdp = findViewById(R.id.connexion_editTextMdp);
 
         logo = findViewById(R.id.connexion_logo);
-        bConnection = findViewById(R.id.connexion_btnConnexion);
+        bConnexion = findViewById(R.id.connexion_btnConnexion);
 
-        bConnection.setOnClickListener(new View.OnClickListener() {
+        bConnexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ControleurConnexion.connexion(etMail.getText().toString(), etMdp.getText().toString());
-                /*Log.i("TAG1", String.valueOf(UtilisateurActuel.isInst()));
-                Timer timer = new Timer();
-                final int[] secondes = {0};
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        secondes[0] += 1;
-                    }
-                }, 0, 1000);
-                while(secondes[0] <2){}//On attend fin connexion
-                Log.i("TAG1", String.valueOf(UtilisateurActuel.isInst()));
-                if(!UtilisateurActuel.isInst()) { //Mauvais mail et mdp
-                    Intent i = new Intent(getApplicationContext(), PopUpConnexion.class);
-                    startActivity(i);
-                }
-                else { //On lance l'activité
-                    Intent i = new Intent(getApplicationContext(), AccueilActivite.class);
-                    startActivity(i);
-                }*/
+                ControleurConnexion.connexion(etMail.getText().toString(), etMdp.getText().toString(), apiInterface, getApplicationContext());
             }
         });
 

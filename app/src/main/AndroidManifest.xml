@@ -53,15 +53,15 @@
         <activity
             android:name=".vue.PopUpConnexion"
             android:theme="@style/AppTheme.PopMe" />
-        <activity android:name=".vue.AccueilActivite" />
-        <activity android:name=".vue.InscriptionActivite" />
-        <activity android:name=".vue.ConnexionActivite">
+        <activity android:name=".vue.AccueilActivite" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".vue.InscriptionActivite" />
+        <activity android:name=".vue.ConnexionActivite"/>
     </application>
 
 </manifest>

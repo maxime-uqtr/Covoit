@@ -36,7 +36,7 @@
         android:hint="@string/connexion_mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/connexion_editTextMail" />
+        app:layout_constraintTop_toBottomOf="@id/connexion_editTextMail" />
 
     <Button
         android:id="@+id/connexion_btnConnexion"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toStartOf="@+id/connexion_btnInscription"
         app:layout_constraintHorizontal_bias="0.871"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/connexion_editTextMdp" />
+        app:layout_constraintTop_toBottomOf="@id/connexion_editTextMdp" />
 
     <Button
         android:id="@+id/connexion_btnInscription"
@@ -58,5 +58,5 @@
         android:layout_marginRight="88dp"
         android:text="@string/connexion_btnInscription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/connexion_editTextMdp" />
+        app:layout_constraintTop_toBottomOf="@id/connexion_editTextMdp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
