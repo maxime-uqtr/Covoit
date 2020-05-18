@@ -12,15 +12,15 @@ import retrofit2.http.Query;
 public interface UtilisateurService {
 
     //create a new user
-    @GET("UserOperations.php")
-    Call<ResponseBody> insert(@Query("type") String type, @Query("nom") String nom, @Query("prenom") String prenom, @Query("mail") String mail, @Query("mdp") String mdp, @Query("telephone") String telephone, @Query("conducteur") int conducteur, @Query("passager") int passager);
-
-    //get all users
-    @GET("UserGet.php")
-    Call<List<Utilisateur>> getAll();
+    @GET("UserOperations.php?type=create")
+    Call<ResponseBody> insert(@Query("nom") String nom, @Query("prenom") String prenom, @Query("mail") String mail, @Query("mdp") String mdp, @Query("telephone") String telephone, @Query("conducteur") int conducteur, @Query("passager") int passager);
 
     //get a single user
-    @GET("UserOperations.php")
-    Call<List<Utilisateur>> getMdp(@Query("type") String type, @Query("mail") String mail, @Query("mdp") String mdp);
+    @GET("UserOperations.php?type=getMdp")
+    Call<List<Utilisateur>> getMdp(@Query("mail") String mail, @Query("mdp") String mdp);
+
+    //get a single user
+    @GET("UserOperations.php?type=get")
+    Call<List<Utilisateur>> get(@Query("id") long id);
 
 }

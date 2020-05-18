@@ -24,13 +24,13 @@ import java.util.concurrent.ExecutionException;
 
 public class ConnexionActivite extends AppCompatActivity {
 
-    //  Boutton : b; EditText : et;
+    private static UtilisateurService apiInterface;
+    private static CovoiturageBd bd;
+
+    //  Bouton : b; EditText : et;
     private Button bConnexion, bInscription;
     private EditText etMail, etMdp;
     private ImageView logo;
-
-    public static UtilisateurService apiInterface;
-    private CovoiturageBd bd;
 
 
     @Override

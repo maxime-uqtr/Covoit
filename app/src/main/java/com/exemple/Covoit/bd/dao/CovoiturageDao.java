@@ -3,6 +3,7 @@ package com.exemple.Covoit.bd.dao;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.TypeConverters;
 import androidx.room.Update;
@@ -26,17 +27,17 @@ public interface CovoiturageDao { //Room requiert une interface par DAO
     @Query("SELECT * FROM covoiturage")
     LiveData<List<Covoiturage>> getLiveAll();
 
-    @Query("SELECT DISTINCT * FROM covoiturage WHERE (id IN (SELECT covoiturage_id FROM trajet WHERE confirme = 1 and passager_id = :userId)) OR (conducteur_id = :userId AND id IN (SELECT covoiturage_id FROM trajet WHERE confirme = 1)) ORDER BY date")
-    List<Covoiturage> getCovoituragesConfirmes(long userId);
+    @Query("SELECT DISTINCT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE passager_id = :userId) ORDER BY date")
+    List<Covoiturage> getPassager(long userId);
 
-    @Query("SELECT DISTINCT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE (passager_id = :userId OR conducteur_id = :userId) AND en_attente = 1) ORDER BY date")
-    long getDemandes(long userId);
+    @Query("SELECT DISTINCT * FROM covoiturage WHERE id IN (SELECT covoiturage_id FROM trajet WHERE conducteur_id = :conducteurId) ORDER BY date")
+    List<Covoiturage> getConducteur(long conducteurId);
 
     @TypeConverters(ConversionDate.class)
-    @Query("SELECT * FROM covoiturage WHERE ville_dep LIKE '%' || :depart || '%' AND ville_arr LIKE '%' || :destination || '%' AND date > :d ORDER BY date")
-    List<Covoiturage> getLike(String depart, String destination, Date d);
+    @Query("SELECT * FROM covoiturage WHERE ville_dep LIKE '%' || :depart || '%' AND ville_arr LIKE '%' || :destination || '%' ORDER BY date")
+    List<Covoiturage> getLike(String depart, String destination);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Covoiturage... covoiturage);
 
     @Update

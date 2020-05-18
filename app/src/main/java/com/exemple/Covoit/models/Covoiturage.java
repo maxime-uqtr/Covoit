@@ -24,11 +24,10 @@ import java.util.Date;
 public class Covoiturage {
 
     @SerializedName("id")
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private long id;
     @SerializedName("date")
-    @TypeConverters(ConversionDate.class) //Conversion car impossible de sauvegarder le type date dans une BD avec Room
-    private Date date;
+    private String date;
     @SerializedName("ville_dep")
     @ColumnInfo(name = "ville_dep")
     private String villeDep;
@@ -47,7 +46,7 @@ public class Covoiturage {
     public Covoiturage(){}
 
     @Ignore
-    public Covoiturage(long id, Date date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
+    public Covoiturage(long id, String date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
         this.id = id;
         this.date = date;
         this.villeDep = villeDep;
@@ -58,7 +57,7 @@ public class Covoiturage {
     }
 
     @Ignore
-    public Covoiturage(Date date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
+    public Covoiturage(String date, String villeDep, String villeArr, float prix, int nbPassager, long conducteurId) {
         this.date = date;
         this.villeDep = villeDep;
         this.villeArr = villeArr;
@@ -77,9 +76,7 @@ public class Covoiturage {
 
     public long getId() { return id; }
 
-    public Date getDate() { return date; }
-
-    public String getDateString() { return ConversionDate.dateToString(date); }
+    public String getDate() { return date; }
 
     public String getVilleDep() { return villeDep; }
 
@@ -91,7 +88,7 @@ public class Covoiturage {
 
     public long getConducteurId() { return conducteurId; }
 
-    public void setDate(Date date) { this.date = date; }
+    public void setDate(String date) { this.date = date; }
 
     public void setVilleDep(String villeDep) { this.villeDep = villeDep; }
 

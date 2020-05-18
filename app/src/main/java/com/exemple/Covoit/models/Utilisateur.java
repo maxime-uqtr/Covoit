@@ -13,7 +13,7 @@ import com.google.gson.annotations.SerializedName;
 public class Utilisateur {
 
     @SerializedName("id")
-    @PrimaryKey(autoGenerate = true) //Clé primaire = identifiant unique
+    @PrimaryKey //Clé primaire = identifiant unique
     private long id;
     @SerializedName("nom")
     private String nom;
@@ -67,9 +67,9 @@ public class Utilisateur {
 
     public String getTelephone() { return telephone; }
 
-    public boolean isConducteur() { Log.i("TAG1", String.valueOf(passager)); return conducteur; }
+    public boolean isConducteur() { return conducteur; }
 
-    public boolean isPassager() { Log.i("TAG1", String.valueOf(passager)); return passager; }
+    public boolean isPassager() { return passager; }
 
     public void setId(long id) {
         this.id = id;

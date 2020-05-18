@@ -13,6 +13,7 @@ public class ApiClient {
         if(retrofit == null){
             retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
                            .setLenient()
+                           .setDateFormat("dd/MM/yyyy")
                            .create())).build();
         }
         return retrofit;

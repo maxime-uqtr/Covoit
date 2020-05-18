@@ -14,12 +14,9 @@ import retrofit2.Response;
 
 public class ControleurInscription {
 
-    public static UtilisateurService apiInterface;
-    public static Utilisateur utilisateur;
-
     public static void inscription(String nom, String prenom, String mail, String mdp, String telephone, boolean passager, boolean conducteur, Context context) {
-        utilisateur = new Utilisateur(nom, prenom, mail, mdp, telephone, passager, conducteur);
-        apiInterface = ApiClient.getApiClient().create(UtilisateurService.class);
+        Utilisateur utilisateur = new Utilisateur(nom, prenom, mail, mdp, telephone, passager, conducteur);
+        UtilisateurService apiInterface = ApiClient.getApiClient().create(UtilisateurService.class);
         int c = 0;
         int p = 0;
         if(conducteur){
@@ -29,8 +26,7 @@ public class ControleurInscription {
             p = 1;
         }
 
-        apiInterface = ApiClient.getApiClient().create(UtilisateurService.class);
-        Call<ResponseBody> resp = apiInterface.insert("create", nom, prenom, mail, mdp, telephone, c, p);
+        Call<ResponseBody> resp = apiInterface.insert(nom, prenom, mail, mdp, telephone, c, p);
         resp.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

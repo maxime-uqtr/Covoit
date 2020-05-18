@@ -49,4 +49,6 @@
     <string name="title_activity_proposition">Proposition</string>
     <string name="urlLogo">https://covoituragebd-7356.restdb.io/media/5e7a8375cf927e3e0001bc30</string>
     <string name="mauvais_mot_de_passe">Mauvais mot de passe</string>
+    <string name="tvPassager">Votre rôle ne vous permet pas d\'être passager d\'un covoiturage.</string>
+    <string name="tvConducteur">Votre rôle ne vous permet pas d\'être conducteur d\'un covoiturage.</string>
 </resources>

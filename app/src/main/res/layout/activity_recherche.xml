@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".vue.RechercheActivite"
     android:background="@color/appBackground">
@@ -19,14 +20,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="9dp">
 
-                <AutoCompleteTextView
-                    android:id="@+id/recherche_depart"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/actv_depart"
-                    android:imeOptions="actionSearch"
-                    android:inputType="textAutoComplete"
-                    android:completionThreshold="1"/>
+                    android:orientation="horizontal">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/recherche_depart"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/actv_depart"
+                        android:imeOptions="actionSearch"
+                        android:inputType="textAutoComplete"
+                        android:completionThreshold="1"/>
+
+                    <ImageView
+                        android:id="@+id/recherche_img1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_view_agenda_black_24dp"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -35,14 +51,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="9dp">
 
-                <AutoCompleteTextView
-                    android:id="@+id/recherche_destination"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/actv_destination"
-                    android:imeOptions="actionSearch"
-                    android:inputType="textAutoComplete"
-                    android:completionThreshold="1"/>
+                    android:orientation="horizontal">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/recherche_destination"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/actv_destination"
+                        android:imeOptions="actionSearch"
+                        android:inputType="textAutoComplete"
+                        android:completionThreshold="1"/>
+
+                    <ImageView
+                        android:id="@+id/recherche_img2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_view_agenda_black_24dp"
+                        android:layout_gravity="center"/>
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -71,25 +102,9 @@
 
     </LinearLayout>
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recherche_rv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recherche_rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/recherche_vide"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:visibility="gone"
-                android:text="@string/recherche_vide"
-                android:textSize="23sp" />
-
-
-        </LinearLayout>
+            android:layout_height="wrap_content"/>
 
 </LinearLayout>

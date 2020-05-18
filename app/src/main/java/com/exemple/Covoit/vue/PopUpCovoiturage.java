@@ -27,9 +27,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.exemple.Covoit.R;
 import com.exemple.Covoit.bd.CovoiturageBd;
-import com.exemple.Covoit.controleur.OpencageApi;
+import com.exemple.Covoit.controleur.ControleurRecherche;
 import com.exemple.Covoit.models.Covoiturage;
 import com.exemple.Covoit.models.Utilisateur;
+import com.exemple.Covoit.retrofit.CovoiturageService;
+import com.exemple.Covoit.retrofit.TrajetService;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -39,13 +41,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallback{
-    private static View view;
 
+    private static TrajetService apiInterface;
+
+    private static View view;
     private TextView tvDate;
     private TextView tvNbPassager;
     private ImageView imageFermer;
     private TextView tvPNom;
-    private ImageView imageAppel;
+    private ImageView imageAsk;
     private TextView tvTrajet;
     private TextView tvPrix;
     private GoogleMap mMap;
@@ -58,6 +62,11 @@ public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallba
 
     public PopUpCovoiturage(Covoiturage c) {
         covoiturage = c;
+    }
+
+    public PopUpCovoiturage(Covoiturage c, TrajetService covoiturageInterface) {
+        covoiturage = c;
+        apiInterface = covoiturageInterface;
     }
 
     public void onResume() {
@@ -103,7 +112,10 @@ public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallba
         tvPNom = view.findViewById(R.id.popupCovoiturage_P_Nom);
         tvTrajet = view.findViewById(R.id.popupCovoiturage_departArrivee);
         tvPrix = view.findViewById(R.id.popupCovoiturage_prix);
-        imageAppel = view.findViewById(R.id.popupCovoiturage_tel);
+        if(getActivity() instanceof RechercheActivite){ //Affichage demande si recherche
+            imageAsk = view.findViewById(R.id.popupCovoiturage_demander);
+            imageAsk.setVisibility(View.VISIBLE);
+        }
 
         //Ajout du listener sur l'image fermer les détails du covoiturage
         imageFermer.setOnClickListener(new View.OnClickListener() {
@@ -114,12 +126,14 @@ public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallba
         });
 
         //Ajout du listener sur l'image téléphone
-        imageAppel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                appeler();
-            }
-        });
+        if(getActivity() instanceof RechercheActivite) {
+            imageAsk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    adherer();
+                }
+            });
+        }
 
         FragmentManager fm = getChildFragmentManager();
         SupportMapFragment mapFragment = (SupportMapFragment) fm.findFragmentByTag("mapFragment");
@@ -154,8 +168,6 @@ public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallba
         else{
             //Localisation appareil non disponible
         }
-        //placerCurseur(OpencageApi.getLatLng(covoiturage.getVilleDep()));
-        //placerCurseur(OpencageApi.getLatLng(covoiturage.getVilleArr()));
     }
 
     public void setCovoiturage(Covoiturage covoiturage) {
@@ -164,7 +176,7 @@ public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallba
     }
 
     public void setData(){
-        String contenu = covoiturage.getDate().getDay() + "/" + covoiturage.getDate().getMonth() + "/" + covoiturage.getDate().getYear();
+        String contenu = covoiturage.getDate();
         tvDate.setText(contenu);
         contenu = covoiturage.getNbPassager() + " places";
         tvNbPassager.setText(contenu);
@@ -179,13 +191,8 @@ public class PopUpCovoiturage extends DialogFragment implements OnMapReadyCallba
         numeroConducteur = conducteur.getTelephone();
     }
 
-    public void appeler(){
-        if(numeroConducteur.length()>0){
-            Activity activity = getActivity();
-            if(activity instanceof RechercheActivite){
-                ((RechercheActivite) activity).appelerConducteur(numeroConducteur);
-            }
-        }
+    public void adherer(){
+        ControleurRecherche.adherer(this, covoiturage, apiInterface, getActivity().getApplicationContext());
     }
 
     public void placerCurseur(LatLng position) {

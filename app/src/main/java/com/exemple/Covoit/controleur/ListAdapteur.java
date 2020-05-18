@@ -1,6 +1,7 @@
 package com.exemple.Covoit.controleur;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,8 @@ import com.exemple.Covoit.models.Covoiturage;
 import java.util.List;
 
 public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
-    private List<Covoiturage> mCovoiturage;
 
+    private List<Covoiturage> mCovoiturage;
     private OnListClickListener listener;
 
     public ListAdapteur(List<Covoiturage> mCovoiturage, OnListClickListener listener) {
@@ -37,8 +38,7 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
 
         Covoiturage c = mCovoiturage.get(position);
         holder.itineraire.setText(c.getVilleDep() + " - " + c.getVilleArr());
-        holder.date.setText(c.getDateString()
-        );
+        holder.date.setText(c.getDate());
         holder.prix.setText("Prix : $" + c.getPrix());
         holder.nbPassager.setText("Place(s) : " + c.getNbPassager());
 
@@ -69,6 +69,10 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
         }
     }
 
+    public List<Covoiturage> getCovoiturage() {
+        return mCovoiturage;
+    }
+
     public void clear() {
         mCovoiturage.clear();
         notifyDataSetChanged();
@@ -76,6 +80,11 @@ public class ListAdapteur extends RecyclerView.Adapter<ListAdapteur.ViewHolder>{
 
     public void addAll(List<Covoiturage> list) {
         mCovoiturage.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void add(Covoiturage c) {
+        mCovoiturage.add(c);
         notifyDataSetChanged();
     }
 

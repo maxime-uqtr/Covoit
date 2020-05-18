@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName;
 public class Trajet {
 
     @SerializedName("id")
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private long id;
     @SerializedName("covoiturage_id")
     @ColumnInfo(name = "covoiturage_id")
@@ -31,11 +31,6 @@ public class Trajet {
     @SerializedName("passager_id")
     @ColumnInfo(name = "passager_id")
     private long passagerId;
-    @SerializedName("en_attente")
-    @ColumnInfo(name = "en_attente")
-    private boolean enAttente = true;
-    @SerializedName("confirme")
-    private boolean confirme = false;
 
     public Trajet(){}
 
@@ -75,13 +70,4 @@ public class Trajet {
     public void setPassagerId(long passagerId) {
         this.passagerId = passagerId;
     }
-
-    public boolean isEnAttente() { return enAttente; }
-
-    public void setEnAttente(boolean enAttente) { this.enAttente = enAttente; }
-
-    public boolean isConfirme() { return confirme; }
-
-    public void setConfirme(boolean confirme) { enAttente = false; this.confirme = confirme; }
-
 }

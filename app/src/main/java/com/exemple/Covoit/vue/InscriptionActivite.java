@@ -16,7 +16,7 @@ import com.exemple.Covoit.controleur.ControleurInscription;
 
 public class InscriptionActivite extends AppCompatActivity {
 
-    //  Boutton : b; EditText : et; CheckBox : cb;
+    //  Bouton : b; EditText : et; CheckBox : cb;
     private Button bValider, bRetour;
     private EditText etNom, etPrenom, etMail, etTelephone, etMdp, etVerifMdp;
     private CheckBox cbPassager, cbConducteur;
@@ -46,7 +46,7 @@ public class InscriptionActivite extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(etNom.getText().toString().isEmpty() || etPrenom.getText().toString().isEmpty() || etMail.getText().toString().isEmpty() || etTelephone.getText().toString().isEmpty() /*|| !etMdp.equals(etVerifMdp)*/ || etMdp.getText().toString().isEmpty() || etVerifMdp.getText().toString().isEmpty() || (cbPassager.isChecked() == false && cbConducteur.isChecked() == false)){
-                    Toast.makeText(getApplicationContext(), "Veuillez remplir tous les champs", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "Veuillez remplir tous les champs.", Toast.LENGTH_LONG).show();
                 }
                 else{
                     ControleurInscription.inscription(etNom.getText().toString(), etPrenom.getText().toString(), etMail.getText().toString(), etMdp.getText().toString(), etTelephone.getText().toString(), cbPassager.isChecked(), cbConducteur.isChecked(), getApplicationContext());

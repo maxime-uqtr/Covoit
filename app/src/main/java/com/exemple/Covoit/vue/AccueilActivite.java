@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -13,13 +14,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.exemple.Covoit.R;
-import com.exemple.Covoit.bd.CovoiturageBd;
 import com.exemple.Covoit.controleur.AnimationBouton;
 import com.exemple.Covoit.controleur.TelechargerImage;
 import com.exemple.Covoit.models.Utilisateur;
 import com.exemple.Covoit.models.UtilisateurActuel;
+import com.exemple.Covoit.retrofit.ApiClient;
 import com.exemple.Covoit.retrofit.CovoiturageService;
-import com.exemple.Covoit.retrofit.UtilisateurService;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,7 +30,6 @@ public class AccueilActivite extends AppCompatActivity {
 
     private boolean isRotate = false;
 
-    public static CovoiturageService apiInterface;
     private ImageView pp;
     private TextView tvNoms;
     private TextView tvRole;
@@ -41,15 +40,10 @@ public class AccueilActivite extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(UtilisateurActuel.getUtilisateur().isConducteur() && UtilisateurActuel.getUtilisateur().isConducteur()) {
-            setContentView(R.layout.activity_accueil_cp);
-        }
-        else if(UtilisateurActuel.getUtilisateur().isConducteur()){
-            setContentView(R.layout.activity_accueil_c);
-        }
-        else if(UtilisateurActuel.getUtilisateur().isPassager()){
-            setContentView(R.layout.activity_accueil_p);
-        }
+        //On get l'user
+        Utilisateur user = UtilisateurActuel.getUtilisateur();
+        setContentView(R.layout.activity_accueil);
+
         Stetho.initializeWithDefaults(this); //Ajout de stetho à l'activité
 
         pp = findViewById(R.id.accueil_pp);
@@ -58,13 +52,12 @@ public class AccueilActivite extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_trajets, R.id.navigation_propositions, R.id.navigation_notifications)
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_trajets, R.id.navigation_propositions)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        Utilisateur user = UtilisateurActuel.getUtilisateur();
         String pNom = user.getPrenom() + " " + user.getNom();
         tvNoms.setText(pNom);
         if(user.isConducteur() && user.isPassager())
@@ -85,42 +78,50 @@ public class AccueilActivite extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        addListeners();
+        addListeners(user);
     }
 
-    private void addListeners() {
-        if(UtilisateurActuel.getUtilisateur().isConducteur() && UtilisateurActuel.getUtilisateur().isPassager()) {
-            FABouvrir = findViewById(R.id.accueil_FAB_ouvrir);
-            FABouvrir.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    isRotate = AnimationBouton.rotateFab(v, !isRotate);
-                    if (isRotate) {
-                        AnimationBouton.show(FABproposeCovoiturage);
-                        AnimationBouton.show(FABrechercheCovoiturage);
-                    } else {
-                        AnimationBouton.hide(FABproposeCovoiturage);
-                        AnimationBouton.hide(FABrechercheCovoiturage);
-                    }
+    private void addListeners(Utilisateur user) {
+        FABouvrir = findViewById(R.id.accueil_FAB_ouvrir);
+        FABouvrir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isRotate = AnimationBouton.rotateFab(v, !isRotate);
+                if (isRotate) {
+                    AnimationBouton.show(FABproposeCovoiturage);
+                    AnimationBouton.show(FABrechercheCovoiturage);
+                } else {
+                    AnimationBouton.hide(FABproposeCovoiturage);
+                    AnimationBouton.hide(FABrechercheCovoiturage);
                 }
-            });
-        }
+            }
+        });
 
         FABproposeCovoiturage = findViewById(R.id.accueil_FAB_propose);
         AnimationBouton.hide(FABproposeCovoiturage);
         FABproposeCovoiturage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent propositionIntent = new Intent(getApplicationContext(), PropositionActivite.class);
-                startActivity(propositionIntent);
+                if(user.isConducteur()) {
+                    Intent propositionIntent = new Intent(getApplicationContext(), PropositionActivite.class);
+                    startActivity(propositionIntent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Vous devez être conducteur pour proposer des covoiturages.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         FABrechercheCovoiturage = findViewById(R.id.accueil_FAB_recherche);
         AnimationBouton.hide(FABrechercheCovoiturage);
         FABrechercheCovoiturage.setOnClickListener(v -> {
-            Intent rechercheIntent = new Intent(this, RechercheActivite.class);
-            startActivity(rechercheIntent);
+            if(user.isPassager()) {
+                Intent rechercheIntent = new Intent(this, RechercheActivite.class);
+                startActivity(rechercheIntent);
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "Vous devez être passager pour rechercher des covoiturages.", Toast.LENGTH_LONG).show();
+            }
         });
     }
 }

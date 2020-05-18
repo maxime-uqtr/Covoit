@@ -16,10 +16,4 @@
         android:name="com.exemple.Covoit.vue.ui.propositions.PropositionsFragment"
         android:label="@string/title_propositions"
         tools:layout="@layout/fragment_propositions" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.exemple.Covoit.vue.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
 </navigation>
